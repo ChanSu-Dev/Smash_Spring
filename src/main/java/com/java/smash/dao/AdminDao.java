@@ -1,21 +1,38 @@
 package com.java.smash.dao;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
-public class AdminDao{
+import com.java.smash.dto.AdminDto;
+
+@Configuration
+public class AdminDao {
+	
+	@Value("${admin.id}")
 	private String adminId;
+	@Value("${admin.pw}")
 	private String adminPw;
-	public String getAdminId() {
-		return adminId;
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer Properties() {
+		PropertySourcesPlaceholderConfigurer config = new PropertySourcesPlaceholderConfigurer();
+		
+		Resource[] location = new Resource[1];
+		location[0] = new ClassPathResource("admin.properties");	//설정파일 위치
+		config.setLocations(location);
+		return config;
 	}
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	
+	@Bean
+	public AdminDto adminConfig() {
+		AdminDto ad = new AdminDto();
+		ad.setAdminId(adminId);
+		ad.setAdminPw(adminPw);
+		
+		return ad;
 	}
-	public String getAdminPw() {
-		return adminPw;
-	}
-	public void setAdminPw(String adminPw) {
-		this.adminPw = adminPw;
-	}	
 }

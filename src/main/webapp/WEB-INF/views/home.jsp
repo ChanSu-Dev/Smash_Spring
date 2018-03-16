@@ -27,7 +27,7 @@
                </div>
                <div class="row">
                    <div class="col-lg-12 mx-auto box">
-                       <form method="post" action="">
+                       <form method="post" action="loginCheck">
                            <table class="mx-auto">
                                <tr>
                                    <td class="input_name ">USER ID</td>
@@ -36,7 +36,7 @@
                                <tr><td colspan="2" class="space_1"></td></tr>
                                <tr>
                                    <td class="input_name">PASSWORD</td>
-                                   <td><input type="password" name="password" class="form-control"></td>
+                                   <td><input type="password" name="pwd" class="form-control"></td>
                                </tr>
                                <tr><td colspan="2" class="space_2"></td></tr>
                                <tr>
