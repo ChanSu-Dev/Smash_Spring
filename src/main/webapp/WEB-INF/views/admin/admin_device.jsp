@@ -67,53 +67,7 @@
 <body>
 	<div class="wrap" style="width: 100%; height: 100%">
 
-		<!-- Navigation -->
-		<nav class="navbar navbar-expand-lg fixed-top">
-		<div class="container">
-			<!-- 브랜드 로고 -->
-			<div class="navbar-brand">
-				<img
-					src="${pageContext.request.contextPath}/resources/img/nav_brand.png"
-					width="300px">
-			</div>
-			<!-- 메뉴 -->
-			<div class="collapse navbar-collapse">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active">
-						<!-- 홈 링크 --> <a class="nav-link currnet"
-						onclick="location.href='adminMain'">홈으로</a>
-					</li>
-					<li class="nav-item">
-						<!-- 기기 관리 링크 --> <a class="nav-link"
-						onclick="location.href='adminDevice'">기기 관리</a>
-					</li>
-					<li class="nav-item">
-						<!-- 계정 관리 링크 --> <a class="nav-link"
-						onclick="location.href='adminDoctor'">계정 관리</a>
-					</li>
-					<li class="nav-item active">
-						<!-- 기기 개통 링크 --> <a class="nav-link"
-						onclick="location.href='adminConnection'">기기 개통</a>
-					</li>
-				</ul>
-				<!-- 계정 아이디 -->
-				<div class="my-auto profile">
-					<img
-						src="${pageContext.request.contextPath}/resources/img/defualt_profile.png"
-						class="rounded-circle my-auto" width="26px" height="26px">
-					<!-- 관리자 비밀번호 변경 링크 -->
-					<a id="dropdownMenu" data-target="#" data-toggle="dropdown"
-						aria-haspopup="true" class="nav-link my-auto dropdown-toggle"
-						href="#"> <%=session.getAttribute("id")%> <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu"
-						aria-labelledby="dropdownMenu">
-						<li><a href="/adminpass">비밀번호 변경</a></li>
-						<li><a href="/logout">로그아웃</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		</nav>
+		<%@include file="admin_nav.jsp"%>
 
 		<div class="content mx-auto">
 			<div class="container my-auto">
@@ -133,7 +87,7 @@
 					</div>
 					<!-- 등록 -->
 					<div class="col-lg-2">
-						<button class="add_btn" onclick="location.href='/deviceAdd'">+
+						<button class="add_btn" onclick="location.href='DeviceAdd'">+
 							등록하기</button>
 					</div>
 				</div>
@@ -151,7 +105,7 @@
 				</thead>
 				<!-- 테이블 내용 -->
 				<tbody>
-					
+
 					<!-- Sample -->
 				</tbody>
 			</table>

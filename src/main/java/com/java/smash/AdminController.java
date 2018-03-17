@@ -14,7 +14,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 @RequestMapping("/admin")
 public class AdminController {
 	
-	@RequestMapping("adminMain")
+	@RequestMapping("Main")
 	public String adminMain(HttpSession session, HttpServletRequest request, Model model) {
 		//FlashMap으로 넘어온 정보
 		Map<String, ?> map = RequestContextUtils.getInputFlashMap(request);
@@ -29,24 +29,38 @@ public class AdminController {
 		return "admin/admin_main";
 	}
 	
-	@RequestMapping(value = "adminDevice")
+	@RequestMapping(value = "Device")
 	public String adminDevice(HttpServletRequest request, Model model) {
 		
 		// db연결해서 row넘겨주기
 		return "admin/admin_device";
 	}
 	
-	@RequestMapping(value = "adminDoctor")
+	@RequestMapping(value = "Doctor")
 	public String adminDoctor(HttpServletRequest request, Model model) {
 		
 		// db연결해서 row넘겨주기
 		return "admin/admin_doctor";
 	}
 	
-	@RequestMapping(value = "adminConnection")
+	@RequestMapping(value = "Connection")
 	public String adminConnection(HttpServletRequest request, Model model) {
 		
 		// db연결해서 row넘겨주기
 		return "admin/admin_connection";
+	}
+	
+	@RequestMapping(value = "DeviceAdd")
+	public String adminDeviceAdd(HttpServletRequest request, Model model) {
+		
+		// db연결해서 row넘겨주기
+		return "admin/admin_device_add";
+	}
+	
+	@RequestMapping(value = "DoctorAdd")
+	public String adminDoctorAdd(HttpServletRequest request, Model model) {
+		
+		// db연결해서 row넘겨주기
+		return "admin/admin_doctor_add";
 	}
 }

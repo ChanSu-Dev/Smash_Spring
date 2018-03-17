@@ -36,7 +36,7 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-4">
-						<div class="menu_item" onclick="location.href='adminDevice'">
+						<div class="menu_item" onclick="location.href='Device'">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/home_icon1.png"
 								width="230px" height="230px">
@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<div class="col-lg-4">
-						<div class="menu_item" onclick="location.href='adminDoctor'">
+						<div class="menu_item" onclick="location.href='Doctor'">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/home_icon2.png"
 								width="230px" height="230px">
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<div class="col-lg-4">
-						<div class="menu_item" onclick="location.href='adminConnection'">
+						<div class="menu_item" onclick="location.href='Connection'">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/home_icon3.png"
 								width="230px" height="230px">

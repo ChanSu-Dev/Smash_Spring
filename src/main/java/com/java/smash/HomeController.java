@@ -54,7 +54,7 @@ public class HomeController {
 		
 		if (id.equals(adminId) && pwd.equals(adminPwd)) {
 			redirectAttr.addFlashAttribute("id", id).addFlashAttribute("pwd", pwd);
-			return "redirect:admin/adminMain";
+			return "redirect:admin/Main";
 		} 
 		//else if() { db의 사용자와 일치하는 경우	
 		//}

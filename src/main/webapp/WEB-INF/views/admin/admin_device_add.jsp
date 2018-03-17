@@ -14,19 +14,19 @@
 
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/table.css">
-<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/add.css">
 
 <!-- JQuery -->
+<script src="js/jquery-3.2.1.min.js"></script>
 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <script>
+	function formChk() {
+		alert("삭제가 완료되었습니다.");
+	}
 	jQuery(document).ready(
 			function() {
-				/* 개통/정지 설정 */
-
 				/* 검색창 포커스인 포커스 아웃 효과 */
 				$('input').focusin(
 						function() {
@@ -64,45 +64,70 @@
 </head>
 <body>
 	<div class="wrap" style="width: 100%; height: 100%">
-
+		
 		<%@include file="admin_nav.jsp" %>
-
-		<!-- Table -->
+		
+		<!-- Insert -->
 		<div class="content mx-auto">
 			<div class="container my-auto">
-				<!-- Table Head -->
+				<!-- Insert Head -->
 				<div class="row content_head">
 					<!-- 제목 -->
 					<div class="col-lg-3 content_title">
-						<p>기기 개통</p>
-					</div>
-					<!-- 검색 -->
-					<div class="col-lg-7">
-						<div class="search">
-							<input type="text" placeholder="기기 아이디를 입력하세요."> <input
-								type="submit" class="my-auto mx-auto search_btn" id="search_btn"
-								value="">
-						</div>
+						<p>기기 등록</p>
 					</div>
 				</div>
+				<!-- 입력 폼 -->
+				<form method="post">
+					<div class="row content_body">
+						<div class="col-lg-5">
+							<label for="device_id">*기기 아이디</label>
+							<!-- 기기 아이디 입력 -->
+							<input type="text" class="form-control" name="deviceNumber">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							<label for="device_kind">*기기 종류</label>
+							<!-- 기기 종류 선택 -->
+							<select name="sort" class="form-control">
+								<option>포스터 기기</option>
+								<option>환자 식별 기기</option>
+							</select>
+						</div>
+						<div class="col-lg-5">
+							<label for="device_version">*기기 버젼</label>
+							<!-- 기기 버젼 입력 -->
+							<input type="text" class="form-control" name="version">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-5">
+							<label for="device_ip4">*IP_4</label>
+							<!-- IP4 입력 -->
+							<input type="text" class="form-control" name="ipv4_address">
+						</div>
+						<div class="col-lg-5">
+							<label for="device_ip6">*IP_6</label>
+							<!-- IP6 입력 -->
+							<input type="text" class="form-control" name="ipv6_address">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-5">
+							<label for="device_status">*설치 장소</label>
+							<!-- 기기 설치 장소 입력 -->
+							<input type="text" class="form-control" name="place">
+						</div>
+					</div>
+					<div class="row">
+						<div class="offset-10 col-lg-2">
+							<!-- 제출하기 -->
+							<input type="submit" class="submit" value="+ 등록하기">
+						</div>
+					</div>
+				</form>
 			</div>
-
-			<!-- Table Body -->
-			<table class="table device_manage">
-				<thead>
-					<tr>
-						<th>기기 아이디</th>
-						<th>IP 주소</th>
-						<th>기기 상태</th>
-						<th>개통 / 정지</th>
-					</tr>
-				</thead>
-				<!-- 테이블 내용 -->
-				<tbody>
-
-					<!-- Sample -->
-				</tbody>
-			</table>
 		</div>
 
 	</div>
