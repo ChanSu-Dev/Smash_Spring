@@ -26,7 +26,6 @@ public class AdminController {
 			session.setAttribute("id", id);
 			session.setAttribute("pwd", pwd);
 		}		
-		
 		return "admin/admin_main";
 	}
 	
