@@ -1,13 +1,23 @@
 package com.java.smash;
 
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,16 +27,53 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.dao.AdminDao;
 import com.java.smash.dto.AdminDto;
+import com.java.smash.dto.Medic;
+import com.java.smash.util.Constant;
 
 @Controller
+@Repository
 public class HomeController {
 	
-//	public JdbcTemplate template;
+	public JdbcTemplate template;
+	public HomeController() {
+		System.out.println("tq");
+	}
+	@Autowired
+	public void setTemplate(JdbcTemplate template) {
+		System.out.println("SetTemplate() called");
+//		DataSource dataSource =null;
+//		try {
+//			Context context = new InitialContext();
+//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Oracle11g");
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//		try {
+//			Connection connection = dataSource.getConnection();
+//			PreparedStatement preparedStatement = null;
+//			ResultSet resultSet = null;
+//			String query = "select * from medic";
+//			PreparedStatement pstmt = connection.prepareStatement(query);
+//			resultSet = pstmt.executeQuery();
+//			while(resultSet.next()) {
+//				System.out.println(resultSet.getString(1)+" "+resultSet.getString(2));
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		dao가 없
+		String query = "select * from medic;";
+		ArrayList<Medic> medic = (ArrayList<Medic>) template.query(query, new BeanPropertyRowMapper<Medic>(Medic.class));
+		for(Medic i : medic) {
+			System.out.println(i.getName()+" "+i.getId());
+		}
+		this.template = template;
+		Constant.template = this.template;
+	}
 	
-//	@Autowired
-//	public void setTemplate(JdbcTemplate template) {
-//		Constant.template = this.template;
-//	}
 	private String adminId = null;
 	private String adminPwd = null;
 	
