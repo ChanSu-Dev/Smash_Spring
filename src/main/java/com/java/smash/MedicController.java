@@ -37,7 +37,7 @@ public class MedicController {
 	}
 	
 	@RequestMapping("Main")
-	public String adminMain(HttpSession session, HttpServletRequest request, Model model) {
+	public String medicMain(HttpSession session, HttpServletRequest request, Model model) {
 		// FlashMap으로 넘어온 정보
 		Map<String, ?> map = RequestContextUtils.getInputFlashMap(request);
 
@@ -49,5 +49,20 @@ public class MedicController {
 			session.setAttribute("pwd", pwd);
 		}
 		return "medic/medic_main";
+	}
+	
+	@RequestMapping("Patient")
+	public String medicPatient(HttpServletRequest request, Model model) {
+		return "medic/medic_patient";
+	}
+	
+	@RequestMapping("PatientAdd")
+	public String medicPatientAdd(HttpServletRequest requset, Model model) {
+		return "medic/medic_patient_add";
+	}
+	
+	@RequestMapping("Device")
+	public String medicDevice(HttpServletRequest requestm, Model modle) {
+		return "medic/medic_device";
 	}
 }
