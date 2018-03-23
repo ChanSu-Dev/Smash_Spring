@@ -17,11 +17,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/table.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/add.css">
 
 <!-- JQuery -->
-<script src="js/jquery-3.2.1.min.js"></script>
 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
@@ -71,64 +68,61 @@
 
 		<%@include file="admin_nav.jsp"%>
 
+		<!-- Table -->
 		<div class="content mx-auto">
 			<div class="container my-auto">
 				<!-- Table Head -->
 				<div class="row content_head">
 					<!-- 제목 -->
 					<div class="col-lg-3 content_title">
-						<p>기기 관리</p>
+						<p>계정 관리</p>
 					</div>
 					<!-- 검색 -->
 					<div class="col-lg-7">
 						<div class="search">
-							<input type="text" placeholder="기기 아이디를 입력하세요."> <input
+							<input type="text" placeholder="의료진 이름을 입력하세요."> <input
 								type="submit" class="my-auto mx-auto search_btn" id="search_btn"
 								value="">
 						</div>
 					</div>
 					<!-- 등록 -->
 					<div class="col-lg-2">
-						<button class="add_btn" onclick="location.href='DeviceAdd'">+
+						<button class="add_btn" onclick="location.href='DoctorAdd'">+
 							등록하기</button>
 					</div>
 				</div>
 			</div>
 
 			<!-- Table Body -->
-			<table class="table device_manage">
+			<table class="table doctor_manage">
 				<thead>
 					<tr>
-						<th>기기 아이디</th>
-						<th>기기 종류</th>
-						<th>기기 상태</th>
+						<th>의료진 이름</th>
+						<th>담당 부서</th>
+						<th>연락처</th>
 						<th>수정 / 삭제</th>
 					</tr>
 				</thead>
+				<!-- 테이블 내용 -->
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
-							<td>${dto.deviceNumber }</td>
-							<td>${dto.sort}</td>
-							<c:choose>
-								<c:when test="${dto.activated == 0}">
-									<td>비활성화</td>
-								</c:when>
-								<c:otherwise>
-									<td>활성화</td>
-								</c:otherwise>
-							</c:choose>
+							<td>${dto.name }</td>
+							<td>${dto.belong}</td>
+							<td>${dto.contact }</td>
 							<td>
 								<form method="post">
-                                    <input type="hidden" value="${dto.deviceNumber}" name ="deviceNumber">
-                                    <input type="hidden" value="edit" name ="type">
-                                    <input type='submit' class="btn_enable" value="수정하기"/>
-                                </form>
-                                <form id="delete" method="post">
-                                    <input type="hidden" value="${dto.deviceNumber}" name ="deviceNumber">
-                                    <input type="hidden" value="delete" name ="type">
-                                    <input type="submit" class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
-                                </form>
+									<input type="hidden" value="${dto.employeeNumber}"
+										name="deviceNumber"> <input type="hidden" value="edit"
+										name="type"> <input type='submit' class="btn_enable"
+										value="수정하기" />
+								</form>
+								<form id="delete" method="post">
+									<input type="hidden" value="${dto.employeeNumber}"
+										name="deviceNumber"> <input type="hidden"
+										value="delete" name="type"> <input type="submit"
+										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
+								</form>
 							</td>
 						</tr>
 					</c:forEach>

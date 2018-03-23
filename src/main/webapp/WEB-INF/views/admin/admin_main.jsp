@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<div class="col-lg-4">
-						<div class="menu_item" onclick="location.href='Doctor'">
+						<div class="menu_item" onclick="location.href='Medic'">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/home_icon2.png"
 								width="230px" height="230px">

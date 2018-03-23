@@ -3,10 +3,11 @@ package com.java.smash.dto;
 public class DeviceDto {
 	private String deviceNumber;
 	private String version;
-	private int sort;
-	private String activated;
+	private String sort;
+	private int activated;
 	private String ipv4_address;
 	private String ipv6_address;
+	private String place;
 
 	public String getDeviceNumber() {
 		return deviceNumber;
@@ -24,19 +25,19 @@ public class DeviceDto {
 		this.version = version;
 	}
 
-	public int getSort() {
+	public String getSort() {
 		return sort;
 	}
 
-	public void setSort(int sort) {
+	public void setSort(String sort) {
 		this.sort = sort;
 	}
 
-	public String getActivated() {
+	public int getActivated() {
 		return activated;
 	}
 
-	public void setActivated(String activated) {
+	public void setActivated(int activated) {
 		this.activated = activated;
 	}
 
@@ -64,5 +65,4 @@ public class DeviceDto {
 		this.place = place;
 	}
 
-	private String place;
 }

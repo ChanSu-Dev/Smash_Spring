@@ -14,18 +14,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.java.smash.command.SCommand;
+import com.java.smash.command.SDeviceListCommand;
+import com.java.smash.command.SMedicListCommand;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.util.Constant;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+	SCommand command = null;
+	
 	public JdbcTemplate template;
 
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
-		System.out.println("SetTemplate() admin called");
-
 		String query = "select * from medic";
 		ArrayList<MedicDto> medic = (ArrayList<MedicDto>) template.query(query,
 				new BeanPropertyRowMapper<MedicDto>(MedicDto.class));
@@ -52,16 +56,18 @@ public class AdminController {
 
 	@RequestMapping(value = "Device")
 	public String adminDevice(HttpServletRequest request, Model model) {
-
-		// db연결해서 row넘겨주기
+		command = new SDeviceListCommand();
+		command.execute(model);
+		
 		return "admin/admin_device";
 	}
 
-	@RequestMapping(value = "Doctor")
+	@RequestMapping(value = "Medic")
 	public String adminDoctor(HttpServletRequest request, Model model) {
+		command = new SMedicListCommand();
+		command.execute(model);
 
-		// db연결해서 row넘겨주기
-		return "admin/admin_doctor";
+		return "admin/admin_medic";
 	}
 
 	@RequestMapping(value = "Connection")
@@ -78,10 +84,10 @@ public class AdminController {
 		return "admin/admin_device_add";
 	}
 
-	@RequestMapping(value = "DoctorAdd")
+	@RequestMapping(value = "MedicAdd")
 	public String adminDoctorAdd(HttpServletRequest request, Model model) {
 
 		// db연결해서 row넘겨주기
-		return "admin/admin_doctor_add";
+		return "admin/admin_medic_add";
 	}
 }

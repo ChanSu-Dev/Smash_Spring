@@ -22,7 +22,7 @@
 				</li>
 				<li class="nav-item">
 					<!-- 계정 관리 링크 --> <a class="nav-link"
-					onclick="location.href='Doctor'">계정 관리</a>
+					onclick="location.href='Medic'">계정 관리</a>
 				</li>
 				<li class="nav-item active">
 					<!-- 기기 개통 링크 --> <a class="nav-link"

@@ -9,6 +9,9 @@ public class MedicDto {
 	private String password;
 	private String name;
 	private String belong;
+	private String contact;
+	private String address;
+	private String birth;
 
 	public String getEmployeeNumber() {
 		return employeeNumber;
@@ -74,7 +77,4 @@ public class MedicDto {
 		this.birth = birth;
 	}
 
-	private String contact;
-	private String address;
-	private String birth;
 }
