@@ -46,9 +46,6 @@ public class HomeController {
 		String query = "select * from medic;";
 		medic = (ArrayList<MedicDto>) template.query(query,
 				new BeanPropertyRowMapper<MedicDto>(MedicDto.class));
-		for (MedicDto i : medic) {
-			System.out.println(i.getName() + " " + i.getId());
-		}
 		Constant.template = template;
 	}
 

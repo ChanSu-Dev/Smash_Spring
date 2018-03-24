@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,7 +67,7 @@
 <body>
 	<div class="wrap" style="width: 100%; height: 100%">
 
-		<%@include file="admin_nav.jsp" %>
+		<%@include file="admin_nav.jsp"%>
 
 		<!-- Table -->
 		<div class="content mx-auto">
@@ -97,10 +99,52 @@
 						<th>개통 / 정지</th>
 					</tr>
 				</thead>
-				<!-- 테이블 내용 -->
 				<tbody>
-
-					<!-- Sample -->
+					<c:forEach items="${list}" var="dto">
+						<tr>
+							<td>${dto.deviceNumber }</td>
+							<td>${dto.ipv4_address}</td>
+							<c:choose>
+								<c:when test="${dto.activated == 0}">
+									<td><img
+										src="${pageContext.request.contextPath}/resources/img/net_icon.png"
+										width="30px"> 개통됨</td>
+									<td>
+										<form method="post">
+											<input type="hidden" value="${dto.deviceNumber }"
+												name="deviceNumber"> <input type="hidden"
+												value="opening" name="type"> <input type='button'
+												class="btn_disable" value="개통하기" />
+										</form>
+										<form id="delete" method="post">
+											<input type="hidden" value="${dto.deviceNumber }"
+												name="deviceNumber"> <input type="hidden"
+												value="closing" name="type"> <input type="submit"
+												class="btn_enable" value="정지하기">
+										</form>
+									</td>
+								</c:when>
+								<c:otherwise>
+									<td>-</td>
+									<td>
+										<form method="post">
+											<input type="hidden" value="${dto.deviceNumber }"
+												name="deviceNumber"> <input type="hidden"
+												value="opening" name="type"> <input type='submit'
+												class="btn_enable" value="개통하기" />
+										</form>
+										<form id="delete" method="post">
+											<input type="hidden" value="${dto.deviceNumber }"
+												name="deviceNumber"> <input type="hidden"
+												value="closing" name="type"> <input type="button"
+												class="btn_disable" value="정지하기">
+										</form>
+									</td>
+								</c:otherwise>
+							</c:choose>
+							<td></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

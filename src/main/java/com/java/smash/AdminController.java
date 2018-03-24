@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.command.SCommand;
+import com.java.smash.command.SConnectionListCommand;
+import com.java.smash.command.SDeviceAddCommand;
+import com.java.smash.command.SDeviceDeleteCommand;
 import com.java.smash.command.SDeviceListCommand;
 import com.java.smash.command.SMedicListCommand;
 import com.java.smash.dto.MedicDto;
@@ -23,14 +26,15 @@ import com.java.smash.util.Constant;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	SCommand command = null;
-	
+	String query = null;
+
 	public JdbcTemplate template;
 
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
-		String query = "select * from medic";
+		query = "select * from medic";
 		ArrayList<MedicDto> medic = (ArrayList<MedicDto>) template.query(query,
 				new BeanPropertyRowMapper<MedicDto>(MedicDto.class));
 		for (MedicDto i : medic) {
@@ -58,8 +62,40 @@ public class AdminController {
 	public String adminDevice(HttpServletRequest request, Model model) {
 		command = new SDeviceListCommand();
 		command.execute(model);
-		
+
 		return "admin/admin_device";
+	}
+
+	@RequestMapping(value = "DeviceAdd")
+	public String adminDeviceAdd(HttpServletRequest request, Model model) {
+
+		return "admin/admin_device_add";
+	}
+
+	@RequestMapping(value = "DeviceAddOk")
+	public String adminDeviceAddOk(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		
+		command = new SDeviceAddCommand();
+		command.execute(model);
+		return "redirect:Device";
+	}
+
+	@RequestMapping(value = "DeviceEdit")
+	public String adminDeviceEdit(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+
+		// db연결해서 row넘겨주기
+		return "admin/admin_device_edit";
+	}
+
+	@RequestMapping(value = "DeviceDelete")
+	public String adminDeviceDelete(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+
+		command = new SDeviceDeleteCommand();
+		command.execute(model);
+		return "redirect:Device";
 	}
 
 	@RequestMapping(value = "Medic")
@@ -70,24 +106,19 @@ public class AdminController {
 		return "admin/admin_medic";
 	}
 
-	@RequestMapping(value = "Connection")
-	public String adminConnection(HttpServletRequest request, Model model) {
-
-		// db연결해서 row넘겨주기
-		return "admin/admin_connection";
-	}
-
-	@RequestMapping(value = "DeviceAdd")
-	public String adminDeviceAdd(HttpServletRequest request, Model model) {
-
-		// db연결해서 row넘겨주기
-		return "admin/admin_device_add";
-	}
-
 	@RequestMapping(value = "MedicAdd")
 	public String adminDoctorAdd(HttpServletRequest request, Model model) {
 
 		// db연결해서 row넘겨주기
 		return "admin/admin_medic_add";
 	}
+
+	@RequestMapping(value = "Connection")
+	public String adminConnection(HttpServletRequest request, Model model) {
+		command = new SConnectionListCommand();
+		command.execute(model);
+
+		return "admin/admin_connection";
+	}
+
 }

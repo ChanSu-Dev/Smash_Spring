@@ -67,7 +67,7 @@
 </script>
 </head>
 <body>
-	<div class="wrap" style="width: 100%; height: 100%">
+	<div class="wrap" style="width: 100%">
 
 		<%@include file="admin_nav.jsp"%>
 
@@ -119,12 +119,12 @@
 								</c:otherwise>
 							</c:choose>
 							<td>
-								<form method="post">
+								<form method="post" action="DeviceEdit">
                                     <input type="hidden" value="${dto.deviceNumber}" name ="deviceNumber">
                                     <input type="hidden" value="edit" name ="type">
                                     <input type='submit' class="btn_enable" value="수정하기"/>
                                 </form>
-                                <form id="delete" method="post">
+                                <form id="delete" method="post" action="DeviceDelete">
                                     <input type="hidden" value="${dto.deviceNumber}" name ="deviceNumber">
                                     <input type="hidden" value="delete" name ="type">
                                     <input type="submit" class="btn_enable" value="삭제하기" onClick="javascript:formChk()">

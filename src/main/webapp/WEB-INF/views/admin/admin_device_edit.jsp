@@ -74,7 +74,7 @@
 				<div class="row content_head">
 					<!-- 제목 -->
 					<div class="col-lg-3 content_title">
-						<p>기기 등록</p>
+						<p>기기 정보 수정</p>
 					</div>
 				</div>
 				<!-- 입력 폼 -->
@@ -83,7 +83,7 @@
 						<div class="col-lg-5">
 							<label for="device_id">*기기 아이디</label>
 							<!-- 기기 아이디 입력 -->
-							<input type="text" class="form-control" name="deviceNumber">
+							<input type="text" class="form-control" name="deviceNumber" value="${list.deviceNumber }">
 						</div>
 					</div>
 					<div class="row">

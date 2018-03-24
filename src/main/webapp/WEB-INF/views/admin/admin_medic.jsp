@@ -87,7 +87,7 @@
 					</div>
 					<!-- 등록 -->
 					<div class="col-lg-2">
-						<button class="add_btn" onclick="location.href='DoctorAdd'">+
+						<button class="add_btn" onclick="location.href='MedicAdd'">+
 							등록하기</button>
 					</div>
 				</div>
