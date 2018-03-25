@@ -21,7 +21,6 @@
 	href="${pageContext.request.contextPath}/resources/css/add.css">
 
 <!-- JQuery -->
-<script src="js/jquery-3.2.1.min.js"></script>
 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
@@ -108,8 +107,20 @@
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
-							<td>${dto.deviceNumber }</td>
-							<td>${dto.sort}</td>
+							<c:choose>
+								<c:when test="${dto.sort == '포스터 기기'}">
+									<td><img
+										src="${pageContext.request.contextPath}/resources/img/poster_icon.png"
+										width="30px" height="30px">${dto.deviceNumber }</td>
+									<td style="color: rgb(248, 181, 0);">${dto.sort}</td>
+								</c:when>
+								<c:otherwise>
+									<td><img
+										src="${pageContext.request.contextPath}/resources/img/man_icon.png"
+										width="30px" height="30px">${dto.deviceNumber }</td>
+									<td style="color: rgb(127, 190, 38);">${dto.sort}</td>
+								</c:otherwise>
+							</c:choose>
 							<c:choose>
 								<c:when test="${dto.activated == 0}">
 									<td>비활성화</td>
@@ -120,15 +131,17 @@
 							</c:choose>
 							<td>
 								<form method="post" action="DeviceEdit">
-                                    <input type="hidden" value="${dto.deviceNumber}" name ="deviceNumber">
-                                    <input type="hidden" value="edit" name ="type">
-                                    <input type='submit' class="btn_enable" value="수정하기"/>
-                                </form>
-                                <form id="delete" method="post" action="DeviceDelete">
-                                    <input type="hidden" value="${dto.deviceNumber}" name ="deviceNumber">
-                                    <input type="hidden" value="delete" name ="type">
-                                    <input type="submit" class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
-                                </form>
+									<input type="hidden" value="${dto.deviceNumber}"
+										name="deviceNumber"> <input type="hidden" value="edit"
+										name="type"> <input type='submit' class="btn_enable"
+										value="수정하기" />
+								</form>
+								<form id="delete" method="post" action="DeviceDelete">
+									<input type="hidden" value="${dto.deviceNumber}"
+										name="deviceNumber"> <input type="hidden"
+										value="delete" name="type"> <input type="submit"
+										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
+								</form>
 							</td>
 						</tr>
 					</c:forEach>

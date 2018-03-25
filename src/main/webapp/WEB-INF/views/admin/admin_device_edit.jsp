@@ -137,7 +137,7 @@
 						<div class="row">
 							<div class="offset-10 col-lg-2">
 								<!-- 제출하기 -->
-								<input type="submit" class="submit" value="+ 등록하기">
+								<input type="submit" class="submit" value="+ 수정하기">
 							</div>
 						</div>
 					</form>

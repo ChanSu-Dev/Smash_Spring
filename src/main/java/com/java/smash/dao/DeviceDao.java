@@ -50,11 +50,28 @@ public class DeviceDao {
 			}
 		});
 	}
-	
+
 	public ArrayList<DeviceDto> edit(final String deviceNo) {
 		String query = "select * from device where deviceNumber = '" + deviceNo + "'";
 		return (ArrayList<DeviceDto>) template.query(query, new BeanPropertyRowMapper<DeviceDto>(DeviceDto.class));
-		
+	}
+
+	public void editOk(final String deviceNo, final String version, final String sort, final String ipv4,
+			final String ipv6, final String place, final String PdeviceNo) {
+		String query = "update device set deviceNumber = ?, version = ?, sort = ?, ipv4_address = ?, ipv6_address = ?, place = ? where deviceNumber = ?";
+		template.update(query, new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, deviceNo);
+				pstmt.setString(2, version);
+				pstmt.setString(3, sort);
+				pstmt.setString(4, ipv4);
+				pstmt.setString(5, ipv6);
+				pstmt.setString(6, place);
+				pstmt.setString(7, PdeviceNo);
+			}
+		});
 	}
 
 	public void delete(final String deviceNo) {
