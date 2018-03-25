@@ -75,7 +75,6 @@ public class HomeController {
 			return "redirect:admin/Main";
 		} else {			// 관리자가 아닌 경우
 			for (String key : map.keySet()) {
-				System.out.println(key +" : " + map.get(key));
 				if (id.equals(key) && pwd.equals(map.get(key))) {
 					isChecked = true;
 					break;

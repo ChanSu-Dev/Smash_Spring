@@ -18,6 +18,7 @@ import com.java.smash.command.SCommand;
 import com.java.smash.command.SConnectionListCommand;
 import com.java.smash.command.SDeviceAddCommand;
 import com.java.smash.command.SDeviceDeleteCommand;
+import com.java.smash.command.SDeviceEditCommand;
 import com.java.smash.command.SDeviceListCommand;
 import com.java.smash.command.SMedicListCommand;
 import com.java.smash.dto.MedicDto;
@@ -37,9 +38,6 @@ public class AdminController {
 		query = "select * from medic";
 		ArrayList<MedicDto> medic = (ArrayList<MedicDto>) template.query(query,
 				new BeanPropertyRowMapper<MedicDto>(MedicDto.class));
-		for (MedicDto i : medic) {
-			System.out.println(i.getName() + " :::: " + i.getId());
-		}
 		Constant.template = template;
 	}
 
@@ -84,8 +82,10 @@ public class AdminController {
 	@RequestMapping(value = "DeviceEdit")
 	public String adminDeviceEdit(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
+		
+		command = new SDeviceEditCommand();
+		command.execute(model);
 
-		// db연결해서 row넘겨주기
 		return "admin/admin_device_edit";
 	}
 

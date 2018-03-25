@@ -52,7 +52,7 @@ public class DeviceDao {
 	}
 	
 	public ArrayList<DeviceDto> edit(final String deviceNo) {
-		String query = "select * from device where deviceNumber = " + deviceNo;
+		String query = "select * from device where deviceNumber = '" + deviceNo + "'";
 		return (ArrayList<DeviceDto>) template.query(query, new BeanPropertyRowMapper<DeviceDto>(DeviceDto.class));
 		
 	}

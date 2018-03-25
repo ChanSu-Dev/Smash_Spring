@@ -23,6 +23,7 @@ public class SDeviceEditCommand implements SCommand {
 		
 		DeviceDao dao = new DeviceDao();
 		ArrayList<DeviceDto> dtos = dao.edit(deviceNo);
+		
 		model.addAttribute("list", dtos);
 	}
 
