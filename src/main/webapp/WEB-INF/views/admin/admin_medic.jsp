@@ -64,7 +64,7 @@
 </script>
 </head>
 <body>
-	<div class="wrap" style="width: 100%; height: 100%">
+	<div class="wrap" style="width: 100%;">
 
 		<%@include file="admin_nav.jsp"%>
 

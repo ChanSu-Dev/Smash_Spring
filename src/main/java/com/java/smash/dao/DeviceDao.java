@@ -88,4 +88,17 @@ public class DeviceDao {
 
 	}
 
+	public void connectionQuery(final String status, final String deviceNumber) {
+		// TODO Auto-generated method stub
+		String query = "update device set activated = ? where deviceNumber = ?";
+		template.update(query, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement arg0) throws SQLException {
+				arg0.setInt(1, Integer.parseInt(status));
+				arg0.setString(2, deviceNumber);
+			}
+		});
+	}
+
 }

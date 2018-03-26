@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.command.SCommand;
 import com.java.smash.command.SConnectionListCommand;
+import com.java.smash.command.SConnectionQueryCommand;
 import com.java.smash.command.SDeviceAddCommand;
 import com.java.smash.command.SDeviceDeleteCommand;
 import com.java.smash.command.SDeviceEditCommand;
@@ -75,7 +76,7 @@ public class AdminController {
 	@RequestMapping("DeviceAddOk")
 	public String adminDeviceAddOk(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
-		
+
 		command = new SDeviceAddCommand();
 		command.execute(model);
 		return "redirect:Device";
@@ -85,21 +86,21 @@ public class AdminController {
 	public String adminDeviceEdit(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		PdeviceNo = request.getParameter("deviceNumber");
-		
+
 		command = new SDeviceEditCommand();
 		command.execute(model);
 
 		return "admin/admin_device_edit";
 	}
-	
+
 	@RequestMapping("DeviceEditOk")
 	public String adminDeviceEditOk(HttpServletRequest request, Model model) {
-		model.addAttribute("PdeviceNo", PdeviceNo);		
+		model.addAttribute("PdeviceNo", PdeviceNo);
 		model.addAttribute("request", request);
-		
+
 		command = new SDeviceEditOkCommand();
 		command.execute(model);
-		
+
 		return "redirect:Device";
 	}
 
@@ -135,4 +136,23 @@ public class AdminController {
 		return "admin/admin_connection";
 	}
 
+	@RequestMapping("ConnectionStart")
+	public String adminConnectionStart(HttpServletRequest request, Model model) {
+		model.addAttribute("status", "1");
+		model.addAttribute("deviceNumber", request.getParameter("deviceNumber"));
+		
+		command = new SConnectionQueryCommand();
+		command.execute(model);
+		return "redirect:Connection";
+	}
+
+	@RequestMapping("ConnectionStop")
+	public String adminConnectionStop(HttpServletRequest request, Model model) {
+		model.addAttribute("status", "0");
+		model.addAttribute("deviceNumber", request.getParameter("deviceNumber"));
+		
+		command = new SConnectionQueryCommand();
+		command.execute(model);
+		return "redirect:Connection";
+	}
 }

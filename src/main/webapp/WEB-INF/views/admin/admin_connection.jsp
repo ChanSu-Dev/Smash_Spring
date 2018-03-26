@@ -25,6 +25,12 @@
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <script>
+	function connection_start() {
+		alert("개통이 완료되었습니다.");
+	}
+	function connection_stop() {
+		alert("정지되었습니다.");
+	}
 	jQuery(document).ready(
 			function() {
 				/* 개통/정지 설정 */
@@ -65,7 +71,7 @@
 </script>
 </head>
 <body>
-	<div class="wrap" style="width: 100%; height: 100%">
+	<div class="wrap" style="width: 100%;">
 
 		<%@include file="admin_nav.jsp"%>
 
@@ -105,39 +111,43 @@
 							<td>${dto.deviceNumber }</td>
 							<td>${dto.ipv4_address}</td>
 							<c:choose>
-								<c:when test="${dto.activated == 0}">
+								<c:when test="${dto.activated == 1}">
 									<td><img
 										src="${pageContext.request.contextPath}/resources/img/net_icon.png"
 										width="30px"> 개통됨</td>
 									<td>
-										<form method="post">
+										<form method="post" action="ConnectionStart">
 											<input type="hidden" value="${dto.deviceNumber }"
 												name="deviceNumber"> <input type="hidden"
 												value="opening" name="type"> <input type='button'
-												class="btn_disable" value="개통하기" />
+												class="btn_disable" value="개통하기"
+												onClick="javascript:connection_start()" />
 										</form>
-										<form id="delete" method="post">
+										<form id="delete" method="post" action="ConnectionStop">
 											<input type="hidden" value="${dto.deviceNumber }"
 												name="deviceNumber"> <input type="hidden"
 												value="closing" name="type"> <input type="submit"
-												class="btn_enable" value="정지하기">
+												class="btn_enable" value="정지하기"
+												onClick="javascript:connection_stop()">
 										</form>
 									</td>
 								</c:when>
 								<c:otherwise>
-									<td>-</td>
+									<td>비활성화</td>
 									<td>
-										<form method="post">
+										<form method="post" action="ConnectionStart">
 											<input type="hidden" value="${dto.deviceNumber }"
 												name="deviceNumber"> <input type="hidden"
 												value="opening" name="type"> <input type='submit'
-												class="btn_enable" value="개통하기" />
+												class="btn_enable" value="개통하기"
+												onClick="javascript:connection_start()" />
 										</form>
-										<form id="delete" method="post">
+										<form id="delete" method="post" action="ConnectionStop">
 											<input type="hidden" value="${dto.deviceNumber }"
 												name="deviceNumber"> <input type="hidden"
 												value="closing" name="type"> <input type="button"
-												class="btn_disable" value="정지하기">
+												class="btn_disable" value="정지하기"
+												onClick="javascript:connection_stop()">
 										</form>
 									</td>
 								</c:otherwise>

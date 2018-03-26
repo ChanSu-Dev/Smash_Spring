@@ -25,7 +25,7 @@ public class SDeviceAddCommand implements SCommand {
 		String place = request.getParameter("place");
 
 		DeviceDao dao = new DeviceDao();
-		dao.editOk(deviceNo, version, sort, ipv4, ipv6, place);
+		dao.insert(deviceNo, version, sort, ipv4, ipv6, place);
 	}
 
 }

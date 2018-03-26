@@ -126,7 +126,9 @@
 									<td>비활성화</td>
 								</c:when>
 								<c:otherwise>
-									<td>활성화</td>
+									<td><img
+										src="${pageContext.request.contextPath}/resources/img/net_icon.png"
+										width="30px">활성화</td>
 								</c:otherwise>
 							</c:choose>
 							<td>
