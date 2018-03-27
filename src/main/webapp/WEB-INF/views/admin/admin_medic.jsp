@@ -111,15 +111,15 @@
 							<td>${dto.belong}</td>
 							<td>${dto.contact }</td>
 							<td>
-								<form method="post">
+								<form method="post" action="MedicEdit">
 									<input type="hidden" value="${dto.employeeNumber}"
-										name="deviceNumber"> <input type="hidden" value="edit"
+										name="employeeNumber"> <input type="hidden" value="edit"
 										name="type"> <input type='submit' class="btn_enable"
 										value="수정하기" />
 								</form>
-								<form id="delete" method="post">
+								<form id="delete" method="post" action="MedicDelete">
 									<input type="hidden" value="${dto.employeeNumber}"
-										name="deviceNumber"> <input type="hidden"
+										name="employeeNumber"> <input type="hidden"
 										value="delete" name="type"> <input type="submit"
 										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
 								</form>

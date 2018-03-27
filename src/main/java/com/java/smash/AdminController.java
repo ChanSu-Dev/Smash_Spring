@@ -22,7 +22,11 @@ import com.java.smash.command.SDeviceDeleteCommand;
 import com.java.smash.command.SDeviceEditCommand;
 import com.java.smash.command.SDeviceEditOkCommand;
 import com.java.smash.command.SDeviceListCommand;
+import com.java.smash.command.SMedicAddCommand;
+import com.java.smash.command.SMedicDeleteCommand;
 import com.java.smash.command.SMedicListCommand;
+import com.java.smash.command.SMediceEditCommand;
+import com.java.smash.command.SMediceEditOkCommand;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.util.Constant;
 
@@ -33,6 +37,7 @@ public class AdminController {
 	SCommand command = null;
 	String query = null;
 	String PdeviceNo = null;
+	String PmedicNo = null;
 
 	public JdbcTemplate template;
 
@@ -124,10 +129,53 @@ public class AdminController {
 	@RequestMapping("MedicAdd")
 	public String adminDoctorAdd(HttpServletRequest request, Model model) {
 
-		// db연결해서 row넘겨주기
 		return "admin/admin_medic_add";
 	}
 
+	@RequestMapping("MedicAddOk")
+	public String adminDoctorAddOk(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+
+		command = new SMedicAddCommand();
+		command.execute(model);
+		return "redirect:Medic";
+	}
+
+	@RequestMapping("MedicEdit")
+	public String adminMediceEdit(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		PmedicNo = request.getParameter("employeeNumber");
+
+		command = new SMediceEditCommand();
+		command.execute(model);
+
+		return "admin/admin_medic_edit";
+	}
+
+	@RequestMapping("MedicEditOk")
+	public String adminMedicEditOk(HttpServletRequest request, Model model) {
+		model.addAttribute("PmedicNo", PmedicNo);
+		model.addAttribute("request", request);
+
+		command = new SMediceEditOkCommand();
+		command.execute(model);
+
+		return "redirect:Medic";
+	}
+
+	@RequestMapping("MedicDelete")
+	public String adminMedicDelete(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+
+		command = new SMedicDeleteCommand();
+		command.execute(model);
+		return "redirect:Medic";
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("Connection")
 	public String adminConnection(HttpServletRequest request, Model model) {
 		command = new SConnectionListCommand();
@@ -140,7 +188,7 @@ public class AdminController {
 	public String adminConnectionStart(HttpServletRequest request, Model model) {
 		model.addAttribute("status", "1");
 		model.addAttribute("deviceNumber", request.getParameter("deviceNumber"));
-		
+
 		command = new SConnectionQueryCommand();
 		command.execute(model);
 		return "redirect:Connection";
@@ -150,7 +198,7 @@ public class AdminController {
 	public String adminConnectionStop(HttpServletRequest request, Model model) {
 		model.addAttribute("status", "0");
 		model.addAttribute("deviceNumber", request.getParameter("deviceNumber"));
-		
+
 		command = new SConnectionQueryCommand();
 		command.execute(model);
 		return "redirect:Connection";

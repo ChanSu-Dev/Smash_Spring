@@ -76,7 +76,7 @@
 					</div>
 				</div>
 				<!-- 입력 폼 -->
-				<form method="post">
+				<form method="post" action="MedicAddOk">
 					<div class="row content_body">
 						<div class="col-lg-5">
 							<label for="doctor_num">*의료진 번호</label>
