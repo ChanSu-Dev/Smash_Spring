@@ -21,7 +21,7 @@
 					</li>
 					<li class="nav-item active">
 						<!-- 기기 개통 링크 --> <a class="nav-link"
-						onclick="location.href='Device'">기기 개통</a>
+						onclick="location.href='Connection'">기기 개통</a>
 					</li>
 				</ul>
 				<!-- 계정 아이디 -->

@@ -47,7 +47,7 @@
 						</div>
 					</div>
 					<div class="col-lg-4">
-						<div class="menu_item" onclick="location.href='Device'">
+						<div class="menu_item" onclick="location.href='Connection'">
 							<img src="${pageContext.request.contextPath}/resources/img/home_icon3.png" width="230px" height="230px">
 							<p class="item_title">기기 개통</p>
 							<p class="item_sub_title">Device Opening</p>

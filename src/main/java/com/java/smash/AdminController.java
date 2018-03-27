@@ -171,11 +171,7 @@ public class AdminController {
 		command.execute(model);
 		return "redirect:Medic";
 	}
-	
-	
-	
-	
-	
+
 	@RequestMapping("Connection")
 	public String adminConnection(HttpServletRequest request, Model model) {
 		command = new SConnectionListCommand();

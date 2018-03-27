@@ -14,12 +14,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.java.smash.command.SCommand;
+import com.java.smash.command.SConnectionListCommand;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.util.Constant;
 
 @Controller
 @RequestMapping("medic")
 public class MedicController {
+	
+	public SCommand command;
 	
 	public JdbcTemplate template;
 
@@ -59,8 +63,11 @@ public class MedicController {
 		return "medic/medic_patient_add";
 	}
 	
-	@RequestMapping("Device")
-	public String medicDevice(HttpServletRequest requestm, Model modle) {
-		return "medic/medic_device";
+	@RequestMapping("Connection")
+	public String medicDevice(HttpServletRequest requestm, Model model) {
+		command = new SConnectionListCommand();
+		command.execute(model);
+		
+		return "medic/medic_connection";
 	}
 }
