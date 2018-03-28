@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.command.SCommand;
@@ -63,10 +64,17 @@ public class MedicController {
 		return "medic/medic_patient_add";
 	}
 	
-	@RequestMapping("Connection")
-	public String medicDevice(HttpServletRequest requestm, Model model) {
+	@RequestMapping(value = "Connection",method = RequestMethod.GET)
+	public String medicDevice(HttpServletRequest request, Model model) {
 		command = new SConnectionListCommand();
 		command.execute(model);
+		return "medic/medic_connection";
+	}
+	
+	@RequestMapping(value = "Connection",method = RequestMethod.POST)
+	public String medicDeviceOk(HttpServletRequest request, Model model) {
+		System.out.println(request.getParameter("patientNumber"));
+		System.out.println(request.getParameter("deviceNumber"));
 		
 		return "medic/medic_connection";
 	}

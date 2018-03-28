@@ -18,11 +18,37 @@
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <title>SMASH CARE MOVEMENT</title>
+<%
+	int i = 1;
+%>
+<script>
+	function connection_start(deviceNumber) {
+		var pno = prompt("환자 번호를 입력하세요.");
+		if (pno != null) {
+			$.ajax({
+				type : 'post',
+				url : 'http://localhost:8182/smash/medic/Connection',
+				data : {
+					'deviceNumber' : deviceNumber,
+					'patientNumber' : pno
+				},
+				success:function(data){
+					location.reload();
+				}
+			});
+			//document.getElementById("demo").innerHTML = pno;
+		}
+	}
+</script>
 <script>
 	jQuery(document).ready(
 			function() {
 				/* 개통/정지 설정 */
-
+				$('.openForm').submit(function(e) {
+					e.preventDefault();
+					var index = $(this).index();
+					connection_start($($('.deviceNumber')[index]).val());
+				});
 				/* 검색창 포커스인 포커스 아웃 효과 */
 				$('input').focusin(
 						function() {
@@ -104,38 +130,28 @@
 										src="${pageContext.request.contextPath}/resources/img/net_icon.png"
 										width="30px"> 개통됨</td>
 									<td>
-										<form method="post" action="ConnectionStart">
-											<input type="hidden" value="${dto.deviceNumber }"
-												name="deviceNumber"> <input type="hidden"
-												value="opening" name="type"> <input type='button'
-												class="btn_disable" value="개통하기"
-												onClick="javascript:connection_start()" />
+										<form method="post" action="Connection">
+											<input type='button' class="btn_disable" value="개통하기" />
 										</form>
-										<form id="delete" method="post" action="ConnectionStop">
+										<form class="openForm">
 											<input type="hidden" value="${dto.deviceNumber }"
 												name="deviceNumber"> <input type="hidden"
 												value="closing" name="type"> <input type="submit"
-												class="btn_enable" value="정지하기"
-												onClick="javascript:connection_stop()">
+												class="btn_enable" value="정지하기">
 										</form>
 									</td>
 								</c:when>
 								<c:otherwise>
 									<td>비활성화</td>
 									<td>
-										<form method="post" action="ConnectionStart">
-											<input type="hidden" value="${dto.deviceNumber }"
-												name="deviceNumber"> <input type="hidden"
-												value="opening" name="type"> <input type='submit'
-												class="btn_enable" value="개통하기"
-												onClick="javascript:connection_start()" />
+										<form class="openForm">
+											<input class="deviceNumber" type="hidden"
+												value="${dto.deviceNumber }" name="deviceNumber"> 
+												<input type="hidden" value="opening" name="type"> 
+												<input type='submit' class="btn_enable" value="개통하기" />
 										</form>
-										<form id="delete" method="post" action="ConnectionStop">
-											<input type="hidden" value="${dto.deviceNumber }"
-												name="deviceNumber"> <input type="hidden"
-												value="closing" name="type"> <input type="button"
-												class="btn_disable" value="정지하기"
-												onClick="javascript:connection_stop()">
+										<form>
+											<input type="button" class="btn_disable" value="정지하기">
 										</form>
 									</td>
 								</c:otherwise>
