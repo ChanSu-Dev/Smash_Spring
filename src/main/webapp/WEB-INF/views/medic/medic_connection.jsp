@@ -18,9 +18,6 @@
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <title>SMASH CARE MOVEMENT</title>
-<%
-	int i = 1;
-%>
 <script>
 	function connection_start(deviceNumber) {
 		var pno = prompt("환자 번호를 입력하세요.");

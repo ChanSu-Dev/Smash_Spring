@@ -17,6 +17,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/table.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/add.css">
 
 <!-- JQuery -->
 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" /> "></script>
