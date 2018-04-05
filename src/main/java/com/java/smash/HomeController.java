@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -88,6 +89,14 @@ public class HomeController {
 				return "redirect:home";
 			}
 		}
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session, HttpServletRequest request, Model model) {
+		if(session!= null) {
+			session.invalidate();	//session 초기화
+		}
+		return "redirect:/";
 	}
 
 }
