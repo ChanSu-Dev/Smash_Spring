@@ -108,91 +108,14 @@
 					</tr>
 				</thead>
 				<!-- 테이블 내용 -->
+				<tbody>
+					<tr>
+						
+					</tr>
+				</tbody>
 
 			</table>
 		</div>
-		<div class="modal fade" id="Modal" tabindex="-1" role="dialog"
-			aria-labelledby="ModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<!-- 모달 제목으로 환자이름 자동 설정 -->
-						<h5 class="modal-title" id="ModalLabel">
-							<span class="patient_name">Modal title</span>
-						</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<canvas id="myAreaChart" width="100%" height="30"></canvas>
-					</div>
-				</div>
-			</div>
-		</div>
-
 	</div>
-	<script>
-		// Chart.js scripts
-		Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-		Chart.defaults.global.defaultFontColor = '#292b2c';
-		// -- Area Chart Example
-		var ctx = document.getElementById("myAreaChart");
-
-		var myLineChart = new Chart(ctx, {
-			type : 'line',
-			data : {
-				/* x축 항목 */
-				labels : [ "2017-04-20 10:10:10", "2017-04-20 10:10:20",
-						"2017-04-20 10:10:30", "2017-04-20 10:10:40",
-						"2017-04-20 10:10:50" ],
-				datasets : [ {
-					label : "Sessions",
-					lineTension : 0.0,
-					backgroundColor : "rgba(2,117,216,0.2)",
-					borderColor : "rgba(2,117,216,1)",
-					pointRadius : 5,
-					pointBackgroundColor : "rgba(2,117,216,1)",
-					pointBorderColor : "rgba(255,255,255,0.8)",
-					pointHoverRadius : 5,
-					pointHoverBackgroundColor : "rgba(2,117,216,1)",
-					pointHitRadius : 20,
-					pointBorderWidth : 2,
-					/* 데이터 값 */
-					data : [ 3, 2, 6, 5, 6, 7 ],
-				} ],
-			},
-			options : {
-				scales : {
-					xAxes : [ {
-						time : {
-							unit : 'date'
-						},
-						gridLines : {
-							display : false
-						},
-						ticks : {
-							maxTicksLimit : 7
-						}
-					} ],
-					yAxes : [ {
-						ticks : {
-							/* y축 항목 */
-							min : 0,
-							max : 10,
-							maxTicksLimit : 1
-						},
-						gridLines : {
-							color : "rgba(0, 0, 0, .125)",
-						}
-					} ],
-				},
-				legend : {
-					display : false
-				}
-			}
-		});
-	</script>
 </body>
 </html>

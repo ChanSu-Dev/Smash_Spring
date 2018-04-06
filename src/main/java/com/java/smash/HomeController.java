@@ -2,7 +2,6 @@ package com.java.smash;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.java.smash.dao.AdminDao;
 import com.java.smash.dto.AdminDto;
 import com.java.smash.dto.MedicDto;
-import com.java.smash.dto.PatientDto;
 import com.java.smash.util.Constant;
 
 @Controller

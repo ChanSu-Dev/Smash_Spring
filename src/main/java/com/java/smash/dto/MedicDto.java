@@ -1,8 +1,5 @@
 package com.java.smash.dto;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-
 public class MedicDto {
 	private String employeeNumber;
 	private String id;
