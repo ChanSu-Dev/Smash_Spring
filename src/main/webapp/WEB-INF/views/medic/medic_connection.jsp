@@ -29,7 +29,7 @@
 					'deviceNumber' : deviceNumber,
 					'patientNumber' : pno
 				},
-				success:function(data){
+				success : function(data) {
 					location.reload();
 				}
 			});
@@ -143,9 +143,9 @@
 									<td>
 										<form class="openForm">
 											<input class="deviceNumber" type="hidden"
-												value="${dto.deviceNumber }" name="deviceNumber"> 
-												<input type="hidden" value="opening" name="type"> 
-												<input type='submit' class="btn_enable" value="개통하기" />
+												value="${dto.deviceNumber }" name="deviceNumber"> <input
+												type="hidden" value="opening" name="type"> <input
+												type='submit' class="btn_enable" value="개통하기" />
 										</form>
 										<form>
 											<input type="button" class="btn_disable" value="정지하기">

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script>
-	function logout(id){
-		alert(id +" 사용자가 로그아웃되었습니다.");
+	function logout(id) {
+		alert(id + " 사용자가 로그아웃되었습니다.");
 	}
 </script>
 
@@ -42,7 +42,8 @@
 					href="#"> <%=session.getAttribute("id")%> <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 					<li><a href="changepwd">비밀번호 변경</a></li>
-					<li><a href="../logout" onclick="javascript:logout('<%=session.getAttribute("id") %>')">로그아웃</a></li>
+					<li><a href="../logout"
+						onclick="javascript:logout('<%=session.getAttribute("id")%>')">로그아웃</a></li>
 				</ul>
 			</div>
 		</div>

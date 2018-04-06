@@ -115,9 +115,9 @@
 							<td>
 								<form method="post" action="MedicEdit">
 									<input type="hidden" value="${dto.employeeNumber}"
-										name="employeeNumber"> <input type="hidden" value="edit"
-										name="type"> <input type='submit' class="btn_enable"
-										value="수정하기" />
+										name="employeeNumber"> <input type="hidden"
+										value="edit" name="type"> <input type='submit'
+										class="btn_enable" value="수정하기" />
 								</form>
 								<form id="delete" method="post" action="MedicDelete">
 									<input type="hidden" value="${dto.employeeNumber}"
