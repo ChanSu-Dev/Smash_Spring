@@ -89,4 +89,20 @@ public class MedicDao {
 		});
 	}
 
+	public ArrayList<MedicDto> getPwd(final String eId) {
+		String query = "select * from medic where id = '" + eId + "'";
+		return (ArrayList<MedicDto>) template.query(query, new BeanPropertyRowMapper<MedicDto>(MedicDto.class));
+	}
+	
+	public void changePwd(final String pwd, final String eId) {
+		String query = "update medic set password = ? where id = ?";
+		template.update(query, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement arg0) throws SQLException {
+				arg0.setString(1, pwd);
+				arg0.setString(2, eId);
+			}
+		});
+	}
 }
