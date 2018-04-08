@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
 <link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/add.css">
+<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/table.css">
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
@@ -18,6 +20,26 @@
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <title>SMASH CARE MOVEMENT</title>
+<%
+	int status = (Integer) request.getAttribute("status");
+	if (status == 1) {
+%>
+<script>
+	$().ready(function() {
+		alert("현재 비밀번호를 잘못입력하셨습니다.")
+	});
+</script>
+<%
+	} else if (status == 2) {
+%>
+<script>
+	$().ready(function() {
+		alert("변경할 비밀번호를 잘못입력하셨습니다.")
+	});
+</script>
+<%
+	}
+%>
 </head>
 <body>
 	<div class="wrap" style="width: 100%;">
@@ -34,32 +56,30 @@
 					</div>
 				</div>
 				<!-- 입력 폼 -->
-				<form method="post">
+				<form method="post" action="changepwdCheck">
 					<div class="row content_body">
 						<div class="col-lg-5">
 							<label for="patient_num">현재 비밀번호</label>
 							<!-- 새 비밀번호 입력 -->
-							<input type="password" class="form-control" name="check">
+							<input type="password" class="form-control" name="currentpwd">
 						</div>
 					</div>
 					<div class="row content_body">
 						<div class="col-lg-5">
 							<label for="patient_num">새 비밀번호</label>
 							<!-- 새 비밀번호 입력 -->
-							<input type="password" class="form-control" name="password">
+							<input type="password" class="form-control" name="newpwd">
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-lg-5">
 							<label for="patient_disease">비밀번호 확인</label>
 							<!-- 비밀번호 확인 -->
-							<input type="password" class="form-control" name="passwordcheck">
+							<input type="password" class="form-control" name="newpwd_check">
 						</div>
 					</div>
 					<div class="row">
-						<div class="offset-10 col-lg-2">
+						<div class="offset-9 col-lg-3">
 							<!-- 변경하기 -->
-							<input type="submit" class="submit" value="변경 완료">
+							<input type="submit" class="submit" value="변경 하기">
 						</div>
 					</div>
 				</form>
