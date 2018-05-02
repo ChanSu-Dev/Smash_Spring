@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import com.java.smash.command.SCommand;
 import com.java.smash.command.SConnectionListCommand;
 import com.java.smash.command.SMedicChangepwdCommand;
+import com.java.smash.command.SPatientListCommand;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.util.Constant;
 
@@ -57,6 +58,9 @@ public class MedicController {
 
 	@RequestMapping("Patient")
 	public String medicPatient(HttpServletRequest request, Model model) {
+		command = new SPatientListCommand();
+		command.execute(model);
+		
 		return "medic/medic_patient";
 	}
 

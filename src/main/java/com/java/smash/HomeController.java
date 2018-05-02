@@ -69,6 +69,9 @@ public class HomeController {
 			map.put(i.getId(), i.getPassword());
 		}
 		
+		System.out.println(adminId +" " + adminPwd);
+		System.out.println(id + " " + pwd);
+		
 		if (id.equals(adminId) && pwd.equals(adminPwd)) {		//관리자로 로그인할 경우
 			redirectAttr.addFlashAttribute("id", id).addFlashAttribute("pwd", pwd);
 			return "redirect:admin/Main";

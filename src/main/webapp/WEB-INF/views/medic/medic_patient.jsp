@@ -109,11 +109,30 @@
 				</thead>
 				<!-- 테이블 내용 -->
 				<tbody>
-					<tr>
+					<c:forEach items="${list }" var="dto">
+						<tr>
+							<td>${dto.patientNumber }</td>
+							<td>${dto.patientName }</td>
+							<td>${dto.disease }</td>
+							<td>${dto.exercise }</td>
+							<td>
+								<form method="post" action="PatientEdit">
+									<input type="hidden" value="${dto.patientNumber}"
+										name="patientNumber"> <input type="hidden" value="edit"
+										name="type"> <input type='submit' class="btn_enable"
+										value="수정하기" />
+								</form>
+								<form id="delete" method="post" action="PatientDelete">
+									<input type="hidden" value="${dto.patientNumber}"
+										name="patientNumber"> <input type="hidden"
+										value="delete" name="type"> <input type="submit"
+										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
+								</form>
+							</td>
 
-					</tr>
+						</tr>
+					</c:forEach>
 				</tbody>
-
 			</table>
 		</div>
 	</div>
