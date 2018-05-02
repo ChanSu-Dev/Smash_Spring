@@ -31,23 +31,19 @@ public class PatientDao {
 		return (ArrayList<PatientDto>) template.query(query, new BeanPropertyRowMapper<PatientDto>(PatientDto.class));
 	}
 
-	public void insert(final String employeeNumber, final String id, final String password, final String name,
-			final String belong, final String contact, final String address, final String birth) {
-		// TODO Auto-generated method stub
+	public void insert(final String patientNumber, final String patientName, final String patientDisease, final String patientStatus,
+			final String patientExercise, final String patient_deviceNum) {
 		template.update(new PreparedStatementCreator() {
-
 			@Override
 			public PreparedStatement createPreparedStatement(Connection arg0) throws SQLException {
-				String query = "insert into medic values(?, ?, ?, ?, ?, ?, ?, ?)";
+				String query = "insert into patient values(?, ?, ?, ?, ?, ?)";
 				PreparedStatement pstmt = arg0.prepareStatement(query);
-				pstmt.setString(1, employeeNumber);
-				pstmt.setString(2, id);
-				pstmt.setString(3, password);
-				pstmt.setString(4, name);
-				pstmt.setString(5, belong);
-				pstmt.setString(6, contact);
-				pstmt.setString(7, address);
-				pstmt.setString(8, birth);
+				pstmt.setString(1, patientNumber);
+				pstmt.setString(2, patientName);
+				pstmt.setString(3, patientDisease);
+				pstmt.setString(4, patientStatus);
+				pstmt.setString(5, patientExercise);
+				pstmt.setString(6, patient_deviceNum);
 				return pstmt;
 			}
 		});

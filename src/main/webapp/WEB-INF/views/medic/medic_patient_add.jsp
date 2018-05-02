@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<!-- 입력 폼 -->
-				<form method="post">
+				<form method="post" action="PatientAddOK">
 					<div class="row content_body">
 						<div class="col-lg-5">
 							<label for="patient_num">*환자 번호</label>
@@ -50,21 +50,28 @@
 						<div class="col-lg-5">
 							<label for="patient_disease">*병명</label>
 							<!-- 병명 입력 -->
-							<input type="text" class="form-control" name="disease">
+							<input type="text" class="form-control" name="patientDisease">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-10">
 							<label for="patient_status">*상태</label>
 							<!-- 환자 상태 입력 -->
-							<input type="text" class="form-control" name="status">
+							<input type="text" class="form-control" name="patientStatus">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-10">
 							<label for="patient_status">*운동프로그램</label>
 							<!-- 환자 운동프로그램 입력 -->
-							<input type="text" class="form-control" name="exercise">
+							<input type="text" class="form-control" name="patientExercise">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-10">
+							<label for="patient_deviceNum">*장치 번호</label>
+							<!-- 환자 운동프로그램 입력 -->
+							<input type="text" class="form-control" name="patientExercise">
 						</div>
 					</div>
 					<div class="row">

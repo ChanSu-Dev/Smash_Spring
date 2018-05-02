@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.command.SCommand;
@@ -78,7 +79,7 @@ public class AdminController {
 		return "admin/admin_device_add";
 	}
 
-	@RequestMapping("DeviceAddOk")
+	@RequestMapping(value = "DeviceAddOk", method = RequestMethod.POST)
 	public String adminDeviceAddOk(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 
