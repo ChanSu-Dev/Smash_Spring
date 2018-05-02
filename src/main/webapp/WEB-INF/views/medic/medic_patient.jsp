@@ -129,7 +129,6 @@
 										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
 								</form>
 							</td>
-
 						</tr>
 					</c:forEach>
 				</tbody>

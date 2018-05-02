@@ -27,5 +27,4 @@ public class SPatientAddCommand implements SCommand {
 		PatientDao dao = new PatientDao();
 		dao.insert(patientNumber, patientName, patientDisease, patientStatus, patientExercise, patient_deviceNum);
 	}
-
 }

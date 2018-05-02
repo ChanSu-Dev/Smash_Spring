@@ -49,13 +49,12 @@ public class PatientDao {
 		});
 	}
 
-	public void delete(final String eNo) {
-		String query = "delete from medic where employeeNumber = ?";
+	public void delete(final String Pno) {
+		String query = "delete from patient where patientNumber = ?";
 		template.update(query, new PreparedStatementSetter() {
-
 			@Override
 			public void setValues(PreparedStatement arg0) throws SQLException {
-				arg0.setString(1, eNo);
+				arg0.setString(1, Pno);
 			}
 		});
 	}

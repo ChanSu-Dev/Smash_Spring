@@ -40,11 +40,6 @@ public class HomeController {
 
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
-		System.out.println("SetTemplate() Home called");
-
-		String query = "select * from medic;";
-		medic = (ArrayList<MedicDto>) template.query(query,
-				new BeanPropertyRowMapper<MedicDto>(MedicDto.class));
 		Constant.template = template;
 	}
 

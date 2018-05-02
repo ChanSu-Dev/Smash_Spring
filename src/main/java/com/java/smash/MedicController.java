@@ -19,6 +19,7 @@ import com.java.smash.command.SCommand;
 import com.java.smash.command.SConnectionListCommand;
 import com.java.smash.command.SMedicChangepwdCommand;
 import com.java.smash.command.SPatientAddCommand;
+import com.java.smash.command.SPatientDeleteCommand;
 import com.java.smash.command.SPatientDeviceListCommand;
 import com.java.smash.command.SPatientListCommand;
 import com.java.smash.dto.MedicDto;
@@ -34,12 +35,6 @@ public class MedicController {
 
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
-		System.out.println("SetTemplate() admin called");
-
-		String query = "select * from medic";
-		ArrayList<MedicDto> medic = (ArrayList<MedicDto>) template.query(query,
-				new BeanPropertyRowMapper<MedicDto>(MedicDto.class));
-
 		Constant.template = template;
 	}
 
@@ -68,10 +63,10 @@ public class MedicController {
 
 	@RequestMapping("PatientAdd")
 	public String medicPatientAdd(HttpServletRequest requset, Model model) {
-		
+
 		command = new SPatientDeviceListCommand();
 		command.execute(model);
-		
+
 		return "medic/medic_patient_add";
 	}
 
@@ -82,6 +77,22 @@ public class MedicController {
 		command = new SPatientAddCommand();
 		command.execute(model);
 
+		return "redirect:Patient";
+	}
+
+	@RequestMapping("PatientEdit")
+	public String medicPatientEdit(HttpServletRequest request, Model model) {
+		// todo
+		return "medkc/medic_patient_edit";
+	}
+
+	@RequestMapping("PatientDelete")
+	public String medicPatientDelete(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		
+		command = new SPatientDeleteCommand();
+		command.execute(model);
+		
 		return "redirect:Patient";
 	}
 

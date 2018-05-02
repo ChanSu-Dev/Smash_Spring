@@ -44,9 +44,6 @@ public class AdminController {
 
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
-		query = "select * from medic";
-		ArrayList<MedicDto> medic = (ArrayList<MedicDto>) template.query(query,
-				new BeanPropertyRowMapper<MedicDto>(MedicDto.class));
 		Constant.template = template;
 	}
 
