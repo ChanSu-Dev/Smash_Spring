@@ -19,6 +19,7 @@ import com.java.smash.command.SCommand;
 import com.java.smash.command.SConnectionListCommand;
 import com.java.smash.command.SMedicChangepwdCommand;
 import com.java.smash.command.SPatientAddCommand;
+import com.java.smash.command.SPatientDeviceListCommand;
 import com.java.smash.command.SPatientListCommand;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.util.Constant;
@@ -67,6 +68,10 @@ public class MedicController {
 
 	@RequestMapping("PatientAdd")
 	public String medicPatientAdd(HttpServletRequest requset, Model model) {
+		
+		command = new SPatientDeviceListCommand();
+		command.execute(model);
+		
 		return "medic/medic_patient_add";
 	}
 

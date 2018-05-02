@@ -70,9 +70,14 @@
 					<div class="row">
 						<div class="col-lg-10">
 							<label for="patient_deviceNum">*장치 번호</label>
-							<!-- 환자 운동프로그램 입력 -->
-							<input type="text" class="form-control" name="patientExercise">
-						</div>
+							<br>
+							<select name="deviceNumber" class="form-control">
+								<c:forEach items="${deviceNum }" var="Dno">
+									<option value=${Dno.deviceNumber}>${Dno.deviceNumber }</option>
+								</c:forEach>
+							</select>
+						</div>	
+							
 					</div>
 					<div class="row">
 						<div class="offset-10 col-lg-2">

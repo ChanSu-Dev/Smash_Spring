@@ -11,7 +11,6 @@ public class SMedicListCommand implements SCommand {
 
 	@Override
 	public void execute(Model model) {
-		// TODO Auto-generated method stub
 		MedicDao dao = new MedicDao();
 		ArrayList<MedicDto> dtos = dao.list();
 		model.addAttribute("list", dtos);
