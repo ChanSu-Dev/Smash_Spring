@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import com.java.smash.command.SPatientListCommand;
 import com.java.smash.command.SProgramAddCommand;
 import com.java.smash.command.SProgramDeleteCommand;
 import com.java.smash.command.SProgramListCommand;
+import com.java.smash.dao.IProgramDao;
 import com.java.smash.util.Constant;
 
 @Controller
@@ -37,6 +39,9 @@ public class MedicController {
 	public void setTemplate(JdbcTemplate template) {
 		Constant.template = template;
 	}
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	@RequestMapping("Main")
 	public String medicMain(HttpSession session, HttpServletRequest request, Model model) {
@@ -113,8 +118,9 @@ public class MedicController {
 
 	@RequestMapping("Program")
 	public String medicProgram(HttpServletRequest request, Model model) {
-		command = new SProgramListCommand();
-		command.execute(model);
+		
+		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
+		model.addAttribute("list", dao.list());
 
 		return "medic/medic_program";
 	}

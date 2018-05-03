@@ -83,14 +83,14 @@
 					<!-- 검색 -->
 					<div class="col-lg-7">
 						<div class="search">
-							<input type="text" placeholder="프로그 이름을 입력하세요."> <input
+							<input type="text" placeholder="프로그램 이름을 입력하세요."> <input
 								type="submit" class="my-auto mx-auto search_btn" id="search_btn"
 								value="">
 						</div>
 					</div>
 					<!-- 등록 -->
 					<div class="col-lg-2">
-						<button class="add_btn" onclick="location.href='PatientAdd'">+
+						<button class="add_btn" onclick="location.href='ProgramAdd'">+
 							등록하기</button>
 					</div>
 				</div>
@@ -100,9 +100,8 @@
 			<table class="table patient_manage">
 				<thead>
 					<tr>
-						<th>등록 번호</th>
 						<th>운동 이름</th>
-						<th>운동 설명</th>
+						<th style="width: 30%;">운동 설명</th>
 						<th>관련 질병</th>
 						<th>수정 / 삭제</th>
 					</tr>
@@ -111,19 +110,18 @@
 				<tbody>
 					<c:forEach items="${list }" var="dto">
 						<tr>
-							<td>${dto.patientNumber }</td>
-							<td>${dto.patientName }</td>
-							<td>${dto.disease }</td>
-							<td>${dto.exercise }</td>
+							<td>${dto.name }</td>
+							<td>${dto.content }</td>
+							<td>${dto.corrDisease }</td>
 							<td>
-								<form method="post" action="PatientEdit">
-									<input type="hidden" value="${dto.patientNumber}"
+								<form method="post" action="ProgramEdit">
+									<input type="hidden" value="${dto.programNumber}"
 										name="patientNumber"> <input type="hidden" value="edit"
 										name="type"> <input type='submit' class="btn_enable"
 										value="수정하기" />
 								</form>
-								<form id="delete" method="post" action="PatientDelete">
-									<input type="hidden" value="${dto.patientNumber}"
+								<form id="delete" method="post" action="ProgramDelete">
+									<input type="hidden" value="${dto.programNumber}"
 										name="patientNumber"> <input type="hidden"
 										value="delete" name="type"> <input type="submit"
 										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
