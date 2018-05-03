@@ -15,15 +15,14 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.command.SCommand;
 import com.java.smash.command.SConnectionListCommand;
-import com.java.smash.command.SExerciseAddCommand;
-import com.java.smash.command.SExerciseDeleteCommand;
-import com.java.smash.command.SExerciseDeviceListCommand;
-import com.java.smash.command.SExerciseListCommand;
 import com.java.smash.command.SMedicChangepwdCommand;
 import com.java.smash.command.SPatientAddCommand;
 import com.java.smash.command.SPatientDeleteCommand;
 import com.java.smash.command.SPatientDeviceListCommand;
 import com.java.smash.command.SPatientListCommand;
+import com.java.smash.command.SProgramAddCommand;
+import com.java.smash.command.SProgramDeleteCommand;
+import com.java.smash.command.SProgramListCommand;
 import com.java.smash.util.Constant;
 
 @Controller
@@ -90,10 +89,10 @@ public class MedicController {
 	@RequestMapping("PatientDelete")
 	public String medicPatientDelete(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
-		
+
 		command = new SPatientDeleteCommand();
 		command.execute(model);
-		
+
 		return "redirect:Patient";
 	}
 
@@ -111,48 +110,45 @@ public class MedicController {
 
 		return "medic/medic_connection";
 	}
-	
-	@RequestMapping("Exercise")
-	public String medicExercise(HttpServletRequest request, Model model) {
-		command = new SExerciseListCommand();
+
+	@RequestMapping("Program")
+	public String medicProgram(HttpServletRequest request, Model model) {
+		command = new SProgramListCommand();
 		command.execute(model);
 
-		return "medic/medic_exercise";
+		return "medic/medic_program";
 	}
 
-	@RequestMapping("ExerciseAdd")
-	public String medicExerciseAdd(HttpServletRequest requset, Model model) {
+	@RequestMapping("ProgramAdd")
+	public String medicProgramAdd(HttpServletRequest requset, Model model) {
 
-		command = new SExerciseDeviceListCommand();
-		command.execute(model);
-
-		return "medic/medic_exercise_add";
+		return "medic/medic_program_add";
 	}
 
-	@RequestMapping(value = "ExerciseAddOK", method = RequestMethod.POST)
-	public String medicExerciseAddOk(HttpServletRequest request, Model model) {
+	@RequestMapping(value = "ProgramAddOK", method = RequestMethod.POST)
+	public String medicProgramAddOk(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 
-		command = new SExerciseAddCommand();
+		command = new SProgramAddCommand();
 		command.execute(model);
 
-		return "redirect:Exercise";
+		return "redirect:Program";
 	}
 
-	@RequestMapping("ExerciseEdit")
-	public String medicExerciseEdit(HttpServletRequest request, Model model) {
+	@RequestMapping("ProgramEdit")
+	public String mediProgrameEdit(HttpServletRequest request, Model model) {
 		// todo
-		return "medkc/medic_exercise_edit";
+		return "medkc/medic_program_edit";
 	}
 
-	@RequestMapping("ExerciseDelete")
+	@RequestMapping("ProgramDelete")
 	public String medicExerciseDelete(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
-		
-		command = new SExerciseDeleteCommand();
+
+		command = new SProgramDeleteCommand();
 		command.execute(model);
-		
-		return "redirect:Exercise";
+
+		return "redirect:Program";
 	}
 
 	@RequestMapping("changepwd")
