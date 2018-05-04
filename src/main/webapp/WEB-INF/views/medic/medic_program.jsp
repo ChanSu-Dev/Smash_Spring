@@ -78,7 +78,7 @@
 				<div class="row content_head">
 					<!-- 제목 -->
 					<div class="col-lg-3 content_title">
-						<p>운동 관리</p>
+						<p>프로그램 관리</p>
 					</div>
 					<!-- 검색 -->
 					<div class="col-lg-7">
@@ -100,8 +100,8 @@
 			<table class="table patient_manage">
 				<thead>
 					<tr>
-						<th>운동 이름</th>
-						<th style="width: 30%;">운동 설명</th>
+						<th>프로그램 이름</th>
+						<th style="width: 30%;">프로그램 설명</th>
 						<th>관련 질병</th>
 						<th>수정 / 삭제</th>
 					</tr>
@@ -116,13 +116,13 @@
 							<td>
 								<form method="post" action="ProgramEdit">
 									<input type="hidden" value="${dto.programNumber}"
-										name="patientNumber"> <input type="hidden" value="edit"
+										name="programNumber"> <input type="hidden" value="edit"
 										name="type"> <input type='submit' class="btn_enable"
 										value="수정하기" />
 								</form>
 								<form id="delete" method="post" action="ProgramDelete">
 									<input type="hidden" value="${dto.programNumber}"
-										name="patientNumber"> <input type="hidden"
+										name="programNumber"> <input type="hidden"
 										value="delete" name="type"> <input type="submit"
 										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
 								</form>

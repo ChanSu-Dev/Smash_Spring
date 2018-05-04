@@ -120,7 +120,7 @@ public class MedicController {
 	public String medicProgram(HttpServletRequest request, Model model) {
 		
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
-		model.addAttribute("list", dao.list());
+		model.addAttribute("list", dao.listDao());
 
 		return "medic/medic_program";
 	}
@@ -134,9 +134,14 @@ public class MedicController {
 	@RequestMapping(value = "ProgramAddOK", method = RequestMethod.POST)
 	public String medicProgramAddOk(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
+		
+		String programNumber = request.getParameter("programNumber");
+		String programName = request.getParameter("programName");
+		String programContent = request.getParameter("programContent");
+		String programDisease = request.getParameter("programDisease");
 
-		command = new SProgramAddCommand();
-		command.execute(model);
+		IProgramDao dao = sqlSession.getMapper(IProgramDao.class); 
+		dao.insertDao(programNumber, programName, programContent, programDisease);
 
 		return "redirect:Program";
 	}
@@ -151,8 +156,10 @@ public class MedicController {
 	public String medicExerciseDelete(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 
-		command = new SProgramDeleteCommand();
-		command.execute(model);
+		String programNumber = request.getParameter("programNumber");
+		
+		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
+		dao.deleteDao(programNumber);
 
 		return "redirect:Program";
 	}

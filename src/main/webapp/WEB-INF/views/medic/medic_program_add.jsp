@@ -29,55 +29,36 @@
 				<div class="row content_head">
 					<!-- 제목 -->
 					<div class="col-lg-3 content_title">
-						<p>환자 등록</p>
+						<p>프로그램 등록</p>
 					</div>
 				</div>
 				<!-- 입력 폼 -->
-				<form method="post" action="PatientAddOK">
+				<form method="post" action="ProgramAddOK">
 					<div class="row content_body">
 						<div class="col-lg-5">
-							<label for="patient_num">*환자 번호</label>
+							<label for="patient_num">*프로그램 번호</label>
 							<!-- 환자 번호 입력 -->
-							<input type="text" class="form-control" name="patientNumber">
+							<input type="text" class="form-control" name="programNumber">
 						</div>
 						<div class="col-lg-5">
-							<label for="patient_name">*환자 이름</label>
+							<label for="patient_name">*프로그램 이름</label>
 							<!-- 환자 이름 입력 -->
-							<input type="text" class="form-control" name="patientName">
+							<input type="text" class="form-control" name="programName">
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-5">
-							<label for="patient_disease">*병명</label>
+						<div class="col-lg-10">
+							<label for="patient_disease">*프로그램 설명</label>
 							<!-- 병명 입력 -->
-							<input type="text" class="form-control" name="patientDisease">
+							<textarea class="form-control" rows="5" name="programContent"></textarea>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-10">
-							<label for="patient_status">*상태</label>
+							<label for="patient_status">*관련 질병</label>
 							<!-- 환자 상태 입력 -->
-							<input type="text" class="form-control" name="patientStatus">
+							<input type="text" class="form-control" name="programDisease">
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-10">
-							<label for="patient_status">*운동프로그램</label>
-							<!-- 환자 운동프로그램 입력 -->
-							<input type="text" class="form-control" name="patientExercise">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-10">
-							<label for="patient_deviceNum">*장치 번호</label>
-							<br>
-							<select name="deviceNumber" class="form-control">
-								<c:forEach items="${deviceNum }" var="Dno">
-									<option value=${Dno.deviceNumber}>${Dno.deviceNumber }</option>
-								</c:forEach>
-							</select>
-						</div>	
-							
 					</div>
 					<div class="row">
 						<div class="offset-10 col-lg-2">

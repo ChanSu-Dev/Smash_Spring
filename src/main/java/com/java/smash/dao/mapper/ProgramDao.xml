@@ -5,8 +5,15 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.java.smash.dao.IProgramDao">
-	<select id="list" resultType="com.java.smash.dto.ProgramDto">
+	<select id="listDao" resultType="com.java.smash.dto.ProgramDto">
 		SELECT * FROM PROGRAM
 	</select>
+	
+	<insert id="insertDao">
+		INSERT INTO PROGRAM VALUES(#{param1}, #{param2}, #{param3}, #{param4})
+	</insert>
 
+	<delete id="deleteDao">
+		DELETE FROM PROGRAM WHERE programNumber = #{param1}
+	</delete>
 </mapper>

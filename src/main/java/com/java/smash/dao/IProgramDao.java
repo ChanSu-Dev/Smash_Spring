@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.java.smash.dto.ProgramDto;
 
 public interface IProgramDao {
-	public ArrayList<ProgramDto> list();
-	public void insert();
-	public void delete();
+	public ArrayList<ProgramDto> listDao();
+	public void insertDao(String programNumber, String programName, String programContent, String programDisease );
+	public void deleteDao(String programNumber);
 }
