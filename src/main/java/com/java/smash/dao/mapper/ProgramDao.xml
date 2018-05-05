@@ -16,4 +16,12 @@
 	<delete id="deleteDao">
 		DELETE FROM PROGRAM WHERE programNumber = #{param1}
 	</delete>
+	
+	<select id="getDB" resultType="com.java.smash.dto.ProgramDto">
+		SELECT * FROM PROGRAM WHERE programNumber = #{param1}
+	</select>
+	
+	<update id="editDao">
+		UPDATE PROGRAM SET name = #{param1}, content = #{param2}, corrDisease = #{param3} WHERE programNumber = #{param4}
+	</update>
 </mapper>

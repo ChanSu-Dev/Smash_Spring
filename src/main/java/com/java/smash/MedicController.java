@@ -133,8 +133,7 @@ public class MedicController {
 
 	@RequestMapping(value = "ProgramAddOK", method = RequestMethod.POST)
 	public String medicProgramAddOk(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
-		
+
 		String programNumber = request.getParameter("programNumber");
 		String programName = request.getParameter("programName");
 		String programContent = request.getParameter("programContent");
@@ -148,13 +147,31 @@ public class MedicController {
 
 	@RequestMapping("ProgramEdit")
 	public String mediProgrameEdit(HttpServletRequest request, Model model) {
-		// todo
-		return "medkc/medic_program_edit";
+
+		String programNumber = request.getParameter("programNumber");
+
+		IProgramDao dao = sqlSession.getMapper(IProgramDao.class); 
+		model.addAttribute("list", dao.getDB(programNumber));
+		
+		return "medic/medic_program_edit";
+	}
+	
+	@RequestMapping(value = "ProgramEditOK", method = RequestMethod.POST)
+	public String medicProgramEditOk(HttpServletRequest request, Model model) {
+		
+		String programNumber = request.getParameter("programNumber");
+		String programName = request.getParameter("programName");
+		String programContent = request.getParameter("programContent");
+		String programDisease = request.getParameter("programDisease");
+
+		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
+		dao.editDao(programName, programContent, programDisease, programNumber);
+
+		return "redirect:Program";
 	}
 
 	@RequestMapping("ProgramDelete")
 	public String medicExerciseDelete(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
 
 		String programNumber = request.getParameter("programNumber");
 		

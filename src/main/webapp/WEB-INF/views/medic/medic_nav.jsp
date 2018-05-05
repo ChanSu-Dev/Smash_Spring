@@ -31,7 +31,7 @@
 					onclick="location.href='Connection'">기기 개통</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" onclick="location.href='Program'">운동 관리</a>
+					<a class="nav-link" onclick="location.href='Program'">프로그램 관리</a>
 				</li>
 			</ul>
 			<!-- 계정 아이디 -->
