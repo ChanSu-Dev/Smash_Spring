@@ -8,6 +8,15 @@ public class DeviceDto {
 	private String ipv4_address;
 	private String ipv6_address;
 	private String place;
+	private String patientNumber;
+
+	public String getPatientNumber() {
+		return patientNumber;
+	}
+
+	public void setPatientNumber(String patientNumber) {
+		this.patientNumber = patientNumber;
+	}
 
 	public String getDeviceNumber() {
 		return deviceNumber;

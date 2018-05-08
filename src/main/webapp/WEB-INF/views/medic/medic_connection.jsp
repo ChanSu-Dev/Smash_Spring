@@ -111,6 +111,7 @@
 				<thead>
 					<tr>
 						<th>기기 아이디</th>
+						<th>연결 환자</th>
 						<th>IP 주소</th>
 						<th>기기 상태</th>
 						<th>개통 / 정지</th>
@@ -119,7 +120,8 @@
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
-							<td>${dto.deviceNumber }</td>
+							<td style="width: 20%;">${dto.deviceNumber }</td>
+							<td style="width: 20%;">${dto.patientNumber }</td>
 							<td>${dto.ipv4_address}</td>
 							<c:choose>
 								<c:when test="${dto.activated == 1}">
