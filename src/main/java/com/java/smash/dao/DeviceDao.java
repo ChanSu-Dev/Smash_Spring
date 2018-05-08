@@ -38,7 +38,7 @@ public class DeviceDao {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection arg0) throws SQLException {
 				// TODO Auto-generated method stub
-				String query = "insert into device values (?, ?, ?, 0, ?, ?, ?)";
+				String query = "insert into device values (?, ?, ?, 0, ?, ?, ?, NULL)";
 				PreparedStatement pstmt = arg0.prepareStatement(query);
 				pstmt.setString(1, deviceNo);
 				pstmt.setString(2, version);

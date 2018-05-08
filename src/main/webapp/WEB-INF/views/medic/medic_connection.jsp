@@ -24,7 +24,7 @@
 		if (pno != null) {
 			$.ajax({
 				type : 'post',
-				url : 'http://localhost:8182/smash/medic/Connection',
+				url : 'http://localhost:8081/smash/medic/ConnectionStart',
 				data : {
 					'deviceNumber' : deviceNumber,
 					'patientNumber' : pno
@@ -33,11 +33,13 @@
 					location.reload();
 				}
 			});
-			//document.getElementById("demo").innerHTML = pno;
 		}
 	}
 </script>
 <script>
+	function closeForm() {
+		alert("기기 연결이 정지되었습니다.");
+	}
 	jQuery(document).ready(
 			function() {
 				/* 개통/정지 설정 */
@@ -110,8 +112,8 @@
 			<table class="table device_manage">
 				<thead>
 					<tr>
-						<th>기기 아이디</th>
-						<th>연결 환자</th>
+						<th style="width: 20%;">기기 아이디</th>
+						<th style="width: 15%;">연결 환자</th>
 						<th>IP 주소</th>
 						<th>기기 상태</th>
 						<th>개통 / 정지</th>
@@ -120,8 +122,8 @@
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
-							<td style="width: 20%;">${dto.deviceNumber }</td>
-							<td style="width: 20%;">${dto.patientNumber }</td>
+							<td>${dto.deviceNumber }</td>
+							<td>${dto.patientNumber }</td>
 							<td>${dto.ipv4_address}</td>
 							<c:choose>
 								<c:when test="${dto.activated == 1}">
@@ -129,14 +131,14 @@
 										src="${pageContext.request.contextPath}/resources/img/net_icon.png"
 										width="30px"> 개통됨</td>
 									<td>
-										<form method="post" action="Connection">
+										<form>
 											<input type='button' class="btn_disable" value="개통하기" />
 										</form>
-										<form class="openForm">
+										<form method="post" action="ConnectionStop">
 											<input type="hidden" value="${dto.deviceNumber }"
-												name="deviceNumber"> <input type="hidden"
-												value="closing" name="type"> <input type="submit"
-												class="btn_enable" value="정지하기">
+												name="deviceNumber"> <input type="submit"
+												class="btn_enable" value="정지하기"
+												onClick="javascript:closeForm()">
 										</form>
 									</td>
 								</c:when>
@@ -146,7 +148,6 @@
 										<form class="openForm">
 											<input class="deviceNumber" type="hidden"
 												value="${dto.deviceNumber }" name="deviceNumber"> <input
-												type="hidden" value="opening" name="type"> <input
 												type='submit' class="btn_enable" value="개통하기" />
 										</form>
 										<form>

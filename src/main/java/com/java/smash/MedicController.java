@@ -24,6 +24,7 @@ import com.java.smash.command.SPatientListCommand;
 import com.java.smash.command.SProgramAddCommand;
 import com.java.smash.command.SProgramDeleteCommand;
 import com.java.smash.command.SProgramListCommand;
+import com.java.smash.dao.IConnectionDao;
 import com.java.smash.dao.IProgramDao;
 import com.java.smash.util.Constant;
 
@@ -102,18 +103,40 @@ public class MedicController {
 	}
 
 	@RequestMapping(value = "Connection", method = RequestMethod.GET)
-	public String medicDevice(HttpServletRequest request, Model model) {
-		command = new SConnectionListCommand();
-		command.execute(model);
+	public String medicConnection(HttpServletRequest request, Model model) {
+		
+		IConnectionDao dao = sqlSession.getMapper(IConnectionDao.class);
+		model.addAttribute("list", dao.listDao());
+		
 		return "medic/medic_connection";
 	}
 
-	@RequestMapping(value = "Connection", method = RequestMethod.POST)
-	public String medicDeviceOk(HttpServletRequest request, Model model) {
-		System.out.println(request.getParameter("patientNumber"));
-		System.out.println(request.getParameter("deviceNumber"));
+	@RequestMapping(value = "ConnectionStart", method = RequestMethod.POST)
+	public String medicConnectionStart(HttpServletRequest request, Model model) {
+		
+		String patientNumber = request.getParameter("patientNumber");
+		String deviceNumber = request.getParameter("deviceNumber");
+		
+		System.out.println(patientNumber);
+		System.out.println(deviceNumber);
+		
+		IConnectionDao dao = sqlSession.getMapper(IConnectionDao.class);
+		dao.connectionStartDao(patientNumber, deviceNumber);
+		
+		return "redirect:Connection";
+	}
+	
+	@RequestMapping(value = "ConnectionStop", method = RequestMethod.POST)
+	public String medicConnectionStop(HttpServletRequest request, Model model) {
+		
+		String deviceNumber = request.getParameter("deviceNumber");
 
-		return "medic/medic_connection";
+		System.out.println(deviceNumber);
+
+		IConnectionDao dao = sqlSession.getMapper(IConnectionDao.class);
+		dao.connectionStopDao(deviceNumber);
+		
+		return "redirect:Connection";
 	}
 
 	@RequestMapping("Program")

@@ -30,7 +30,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver"></beans:property>
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/SMASH?characterEncoding=UTF-8"></beans:property>
+			value="jdbc:mysql://localhost:3306/SMASH?autoReconnect=true&amp;useSSL=false"></beans:property>
 		<beans:property name="username" value="root"></beans:property>
 		<beans:property name="password" value="root"></beans:property>
 	</beans:bean>
