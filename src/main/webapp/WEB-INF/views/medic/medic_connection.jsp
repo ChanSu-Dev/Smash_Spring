@@ -45,7 +45,7 @@
 				/* 개통/정지 설정 */
 				$('.openForm').submit(function(e) {
 					e.preventDefault();
-					var index = $(this).index();
+					var index = $('.openForm').index(this);
 					connection_start($($('.deviceNumber')[index]).val());
 				});
 				/* 검색창 포커스인 포커스 아웃 효과 */
@@ -148,7 +148,7 @@
 										<form class="openForm">
 											<input class="deviceNumber" type="hidden"
 												value="${dto.deviceNumber }" name="deviceNumber"> <input
-												type='submit' class="btn_enable" value="개통하기" />
+												type="submit" class="btn_enable" value="개통하기" />
 										</form>
 										<form>
 											<input type="button" class="btn_disable" value="정지하기">
