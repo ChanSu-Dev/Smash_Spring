@@ -22,9 +22,8 @@ public class SPatientAddCommand implements SCommand {
 		String patientDisease = request.getParameter("patientDisease");
 		String patientStatus = request.getParameter("patientStatus");
 		String patientExercise = request.getParameter("patientExercise");
-		String patient_deviceNum = request.getParameter("deviceNumber");
 		
 		PatientDao dao = new PatientDao();
-		dao.insert(patientNumber, patientName, patientDisease, patientStatus, patientExercise, patient_deviceNum);
+		dao.insert(patientNumber, patientName, patientDisease, patientStatus, patientExercise);
 	}
 }

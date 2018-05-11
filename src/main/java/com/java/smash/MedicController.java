@@ -70,8 +70,8 @@ public class MedicController {
 	@RequestMapping("PatientAdd")
 	public String medicPatientAdd(HttpServletRequest requset, Model model) {
 
-		command = new SPatientDeviceListCommand();
-		command.execute(model);
+		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
+		model.addAttribute("list", dao.listDao());
 
 		return "medic/medic_patient_add";
 	}

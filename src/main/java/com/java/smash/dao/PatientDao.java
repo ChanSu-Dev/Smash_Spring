@@ -32,18 +32,17 @@ public class PatientDao {
 	}
 
 	public void insert(final String patientNumber, final String patientName, final String patientDisease, final String patientStatus,
-			final String patientExercise, final String patient_deviceNum) {
+			final String patientExercise) {
 		template.update(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection arg0) throws SQLException {
-				String query = "insert into patient values(?, ?, ?, ?, ?, ?)";
+				String query = "insert into patient values(?, ?, ?, ?, ?)";
 				PreparedStatement pstmt = arg0.prepareStatement(query);
 				pstmt.setString(1, patientNumber);
 				pstmt.setString(2, patientName);
 				pstmt.setString(3, patientDisease);
 				pstmt.setString(4, patientStatus);
 				pstmt.setString(5, patientExercise);
-				pstmt.setString(6, patient_deviceNum);
 				return pstmt;
 			}
 		});

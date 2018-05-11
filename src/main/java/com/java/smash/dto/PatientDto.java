@@ -6,7 +6,6 @@ public class PatientDto {
 	private String disease;
 	private String status;
 	private String exercise;
-	private String deviceNumber;
 
 	public String getPatientNumber() {
 		return patientNumber;
@@ -46,13 +45,5 @@ public class PatientDto {
 
 	public void setExercise(String exercise) {
 		this.exercise = exercise;
-	}
-
-	public String getDeviceNumber() {
-		return deviceNumber;
-	}
-
-	public void setDeviceNumber(String deviceNumber) {
-		this.deviceNumber = deviceNumber;
 	}
 }
