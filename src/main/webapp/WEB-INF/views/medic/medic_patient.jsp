@@ -103,7 +103,7 @@
 						<th>환자 번호</th>
 						<th>환자 이름</th>
 						<th>병명</th>
-						<th>운동 프로그램</th>
+						<th>상태</th>
 						<th>수정 / 삭제</th>
 					</tr>
 				</thead>
@@ -113,8 +113,8 @@
 						<tr>
 							<td>${dto.patientNumber }</td>
 							<td>${dto.patientName }</td>
-							<td>${dto.disease }</td>
-							<td>${dto.exercise }</td>
+							<td>${dto.patientDisease }</td>
+							<td>${dto.patientStatus }</td>
 							<td>
 								<form method="post" action="PatientEdit">
 									<input type="hidden" value="${dto.patientNumber}"

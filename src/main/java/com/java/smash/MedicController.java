@@ -1,5 +1,6 @@
 package com.java.smash;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,17 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.command.SCommand;
-import com.java.smash.command.SConnectionListCommand;
 import com.java.smash.command.SMedicChangepwdCommand;
-import com.java.smash.command.SPatientAddCommand;
 import com.java.smash.command.SPatientDeleteCommand;
-import com.java.smash.command.SPatientDeviceListCommand;
-import com.java.smash.command.SPatientListCommand;
-import com.java.smash.command.SProgramAddCommand;
-import com.java.smash.command.SProgramDeleteCommand;
-import com.java.smash.command.SProgramListCommand;
 import com.java.smash.dao.IConnectionDao;
+import com.java.smash.dao.IPatientDao;
 import com.java.smash.dao.IProgramDao;
+import com.java.smash.dto.PatientDto;
 import com.java.smash.util.Constant;
 
 @Controller
@@ -40,7 +36,7 @@ public class MedicController {
 	public void setTemplate(JdbcTemplate template) {
 		Constant.template = template;
 	}
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -61,8 +57,9 @@ public class MedicController {
 
 	@RequestMapping("Patient")
 	public String medicPatient(HttpServletRequest request, Model model) {
-		command = new SPatientListCommand();
-		command.execute(model);
+		
+		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
+		model.addAttribute("list", dao.listDao());
 
 		return "medic/medic_patient";
 	}
@@ -78,18 +75,51 @@ public class MedicController {
 
 	@RequestMapping(value = "PatientAddOK", method = RequestMethod.POST)
 	public String medicPatientAddOk(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
 
-		command = new SPatientAddCommand();
-		command.execute(model);
+		String patientNumber = request.getParameter("patientNumber");
+		String patientName = request.getParameter("patientName");
+		String patientDisease = request.getParameter("patientDisease");
+		String patientStatus = request.getParameter("patientStatus");
+		String patientProgram_1 = request.getParameter("program_1");
+		String patientProgram_2 = request.getParameter("program_2");
+		String patientProgram_3 = request.getParameter("program_3");
+
+		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
+		dao.insertDao(patientNumber, patientName, patientDisease, patientStatus, patientProgram_1, patientProgram_2,
+				patientProgram_3);
 
 		return "redirect:Patient";
 	}
 
 	@RequestMapping("PatientEdit")
 	public String medicPatientEdit(HttpServletRequest request, Model model) {
-		// todo
-		return "medkc/medic_patient_edit";
+		
+		String patientNumber = request.getParameter("patientNumber");
+
+		IProgramDao Pdao = sqlSession.getMapper(IProgramDao.class);
+		model.addAttribute("Plist", Pdao.listDao());
+		
+		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
+		model.addAttribute("list", dao.editListDao(patientNumber));
+//		dao.updateDao(dtos.get(1), )
+		
+		return "medic/medic_patient_edit";
+	}
+	
+	@RequestMapping(value="PatientEditOk", method = RequestMethod.POST)
+	public String medicPatientEditOk(HttpServletRequest request, Model model) {
+		
+		String patientNumber = request.getParameter("patientNumber");
+		String patientName = request.getParameter("patientName");
+		String patientDisease = request.getParameter("patientDisease");
+		String patientStatus = request.getParameter("patientStatus");
+		String patientProgram_1 = request.getParameter("program_1");
+		String patientProgram_2 = request.getParameter("program_2");
+		String patientProgram_3 = request.getParameter("program_3");
+		
+		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
+		dao.updateDao(patientName, patientDisease, patientStatus, patientProgram_1, patientProgram_2, patientProgram_3, patientNumber);
+		return "redirect:Patient";
 	}
 
 	@RequestMapping("PatientDelete")
@@ -104,44 +134,39 @@ public class MedicController {
 
 	@RequestMapping(value = "Connection", method = RequestMethod.GET)
 	public String medicConnection(HttpServletRequest request, Model model) {
-		
+
 		IConnectionDao dao = sqlSession.getMapper(IConnectionDao.class);
 		model.addAttribute("list", dao.listDao());
-		
+
 		return "medic/medic_connection";
 	}
 
 	@RequestMapping(value = "ConnectionStart", method = RequestMethod.POST)
 	public String medicConnectionStart(HttpServletRequest request, Model model) {
-		
+
 		String patientNumber = request.getParameter("patientNumber");
 		String deviceNumber = request.getParameter("deviceNumber");
-		
-		System.out.println(patientNumber);
-		System.out.println(deviceNumber);
-		
+
 		IConnectionDao dao = sqlSession.getMapper(IConnectionDao.class);
 		dao.connectionStartDao(patientNumber, deviceNumber);
-		
+
 		return "redirect:Connection";
 	}
-	
+
 	@RequestMapping(value = "ConnectionStop", method = RequestMethod.POST)
 	public String medicConnectionStop(HttpServletRequest request, Model model) {
-		
-		String deviceNumber = request.getParameter("deviceNumber");
 
-		System.out.println(deviceNumber);
+		String deviceNumber = request.getParameter("deviceNumber");
 
 		IConnectionDao dao = sqlSession.getMapper(IConnectionDao.class);
 		dao.connectionStopDao(deviceNumber);
-		
+
 		return "redirect:Connection";
 	}
 
 	@RequestMapping("Program")
 	public String medicProgram(HttpServletRequest request, Model model) {
-		
+
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
 		model.addAttribute("list", dao.listDao());
 
@@ -162,7 +187,7 @@ public class MedicController {
 		String programContent = request.getParameter("programContent");
 		String programDisease = request.getParameter("programDisease");
 
-		IProgramDao dao = sqlSession.getMapper(IProgramDao.class); 
+		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
 		dao.insertDao(programNumber, programName, programContent, programDisease);
 
 		return "redirect:Program";
@@ -173,15 +198,15 @@ public class MedicController {
 
 		String programNumber = request.getParameter("programNumber");
 
-		IProgramDao dao = sqlSession.getMapper(IProgramDao.class); 
+		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
 		model.addAttribute("list", dao.getDB(programNumber));
-		
+
 		return "medic/medic_program_edit";
 	}
-	
+
 	@RequestMapping(value = "ProgramEditOK", method = RequestMethod.POST)
 	public String medicProgramEditOk(HttpServletRequest request, Model model) {
-		
+
 		String programNumber = request.getParameter("programNumber");
 		String programName = request.getParameter("programName");
 		String programContent = request.getParameter("programContent");
@@ -197,7 +222,7 @@ public class MedicController {
 	public String medicExerciseDelete(HttpServletRequest request, Model model) {
 
 		String programNumber = request.getParameter("programNumber");
-		
+
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
 		dao.deleteDao(programNumber);
 

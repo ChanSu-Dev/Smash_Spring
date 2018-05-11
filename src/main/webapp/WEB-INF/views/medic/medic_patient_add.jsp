@@ -40,7 +40,7 @@
 							<!-- 환자 번호 입력 -->
 							<input type="text" class="form-control" name="patientNumber">
 						</div>
-						<div class="col-lg-5">
+						<div class="col-lg-5 col-lg-offset-1">
 							<label for="patient_name">*환자 이름</label>
 							<!-- 환자 이름 입력 -->
 							<input type="text" class="form-control" name="patientName">
@@ -61,23 +61,33 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-10">
-							<label for="patient_status">*운동프로그램</label>
+						<div class="col-lg-4">
+							<label for="patient_status">*1번 프로그램</label>
 							<!-- 환자 운동프로그램 입력 -->
-							<input type="text" class="form-control" name="patientExercise">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-10">
-							<label for="patient_deviceNum">*장치 번호</label>
-							<br>
-							<select name="deviceNumber" class="form-control">
-								<c:forEach items="${deviceNum }" var="Dno">
-									<option value=${Dno.deviceNumber}>${Dno.deviceNumber }</option>
+							<select name="program_1" class="form-control">
+								<c:forEach items="${list }" var="Pno">
+									<option value=${Pno.programNumber}>${Pno.name }</option>
 								</c:forEach>
 							</select>
-						</div>	
-							
+						</div>
+						<div class="col-lg-4">
+							<label for="patient_status">*2번 프로그램</label>
+							<!-- 환자 운동프로그램 입력 -->
+							<select name="program_2" class="form-control">
+								<c:forEach items="${list }" var="Pno">
+									<option value=${Pno.programNumber}>${Pno.name }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-lg-4">
+							<label for="patient_status">*3번 프로그램</label>
+							<!-- 환자 운동프로그램 입력 -->
+							<select name="program_3" class="form-control">
+								<c:forEach items="${list }" var="Pno">
+									<option value=${Pno.programNumber}>${Pno.name }</option>
+								</c:forEach>
+							</select>
+						</div>
 					</div>
 					<div class="row">
 						<div class="offset-10 col-lg-2">

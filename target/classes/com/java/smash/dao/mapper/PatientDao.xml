@@ -5,8 +5,16 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.java.smash.dao.IPatientDao">
-	<select id="ProgramlistDao" resultType="com.java.smash.dto.ProgramDto">
-		SELECT * FROM PROGRAM
+	<select id="listDao" resultType="com.java.smash.dto.PatientDto">
+		SELECT * FROM PATIENT
 	</select>
 	
+	<select id="editListDao" resultType="com.java.smash.dto.PatientDto">
+		SELECT * FROM PATIENT WHERE patientNumber = #{param1}
+	</select>
+
+	<insert id="insertDao">
+		INSERT INTO PATIENT VALUES ( #{param1}, #{param2},
+		#{param3}, #{param4}, #{param5}, #{param6}, #{param7})
+	</insert>
 </mapper>

@@ -3,9 +3,11 @@ package com.java.smash.dto;
 public class PatientDto {
 	private String patientNumber;
 	private String patientName;
-	private String disease;
-	private String status;
-	private String exercise;
+	private String patientDisease;
+	private String patientStatus;
+	private String program_1;
+	private String program_2;
+	private String program_3;
 
 	public String getPatientNumber() {
 		return patientNumber;
@@ -23,27 +25,43 @@ public class PatientDto {
 		this.patientName = patientName;
 	}
 
-	public String getDisease() {
-		return disease;
+	public String getPatientDisease() {
+		return patientDisease;
 	}
 
-	public void setDisease(String disease) {
-		this.disease = disease;
+	public void setPatientDisease(String patientDisease) {
+		this.patientDisease = patientDisease;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getPatientStatus() {
+		return patientStatus;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setPatientStatus(String patientStatus) {
+		this.patientStatus = patientStatus;
 	}
 
-	public String getExercise() {
-		return exercise;
+	public String getProgram_1() {
+		return program_1;
 	}
 
-	public void setExercise(String exercise) {
-		this.exercise = exercise;
+	public void setProgram_1(String program_1) {
+		this.program_1 = program_1;
+	}
+
+	public String getProgram_2() {
+		return program_2;
+	}
+
+	public void setProgram_2(String program_2) {
+		this.program_2 = program_2;
+	}
+
+	public String getProgram_3() {
+		return program_3;
+	}
+
+	public void setProgram_3(String program_3) {
+		this.program_3 = program_3;
 	}
 }
