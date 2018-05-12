@@ -124,10 +124,11 @@ public class MedicController {
 
 	@RequestMapping("PatientDelete")
 	public String medicPatientDelete(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
 
-		command = new SPatientDeleteCommand();
-		command.execute(model);
+		String patientNumber = request.getParameter("patientNumber");
+		
+		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
+		dao.deleteDao(patientNumber);
 
 		return "redirect:Patient";
 	}

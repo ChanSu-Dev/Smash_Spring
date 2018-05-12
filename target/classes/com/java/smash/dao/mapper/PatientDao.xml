@@ -8,13 +8,25 @@
 	<select id="listDao" resultType="com.java.smash.dto.PatientDto">
 		SELECT * FROM PATIENT
 	</select>
-	
+
 	<select id="editListDao" resultType="com.java.smash.dto.PatientDto">
-		SELECT * FROM PATIENT WHERE patientNumber = #{param1}
+		SELECT * FROM PATIENT WHERE
+		patientNumber = #{param1}
 	</select>
 
 	<insert id="insertDao">
 		INSERT INTO PATIENT VALUES ( #{param1}, #{param2},
 		#{param3}, #{param4}, #{param5}, #{param6}, #{param7})
 	</insert>
+
+	<update id="updateDao">
+		UPDATE PATIENT SET patientName = #{param1},
+		patientDisease = #{param2}, patientStatus = #{param3}, program_1 =
+		#{param4}, program_2 = #{param5}, program_3 = #{param6} WHERE
+		patientNumber = #{param7}
+	</update>
+	
+	<delete id="deleteDao">
+		DELETE FROM PATIENT WHERE patientNumber = #{param1}
+	</delete>
 </mapper>

@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<!-- 입력 폼 -->
-				<form method="post" action="PatientAddOK">
+				<form method="post" action="PatientEditOk">
 					<c:forEach items="${list}" var="dto">
 						<div class="row content_body">
 							<div class="col-lg-5">
@@ -87,6 +87,7 @@
 								<label for="patient_status">*2번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_2" class="form-control">
+									<option value="NULL">미선택</option>
 									<c:forEach items="${Plist }" var="Pdto">
 										<c:choose>
 											<c:when test="${Pdto.programNumber eq dto.program_2}">
@@ -104,6 +105,7 @@
 								<label for="patient_status">*3번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_3" class="form-control">
+									<option value="NULL">미선택</option>
 									<c:forEach items="${Plist }" var="Pdto">
 										<c:choose>
 											<c:when test="${Pdto.programNumber eq dto.program_3}">
@@ -121,7 +123,7 @@
 						<div class="row">
 							<div class="offset-10 col-lg-2">
 								<!-- 제출하기 -->
-								<input type="submit" class="submit" value="+ 등록하기">
+								<input type="submit" class="submit" value="+ 수정하기">
 							</div>
 						</div>
 					</c:forEach>
