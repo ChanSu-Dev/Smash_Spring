@@ -70,6 +70,7 @@
 								<label for="patient_status">*1번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_1" class="form-control">
+									<option value="0">미선택</option>
 									<c:forEach items="${Plist }" var="Pdto">
 										<c:choose>
 											<c:when test="${Pdto.programNumber eq dto.program_1}">
@@ -87,7 +88,7 @@
 								<label for="patient_status">*2번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_2" class="form-control">
-									<option value="NULL">미선택</option>
+									<option value="0">미선택</option>
 									<c:forEach items="${Plist }" var="Pdto">
 										<c:choose>
 											<c:when test="${Pdto.programNumber eq dto.program_2}">
@@ -105,7 +106,7 @@
 								<label for="patient_status">*3번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_3" class="form-control">
-									<option value="NULL">미선택</option>
+									<option value="0">미선택</option>
 									<c:forEach items="${Plist }" var="Pdto">
 										<c:choose>
 											<c:when test="${Pdto.programNumber eq dto.program_3}">

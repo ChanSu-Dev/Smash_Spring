@@ -6,7 +6,7 @@
 
 <mapper namespace="com.java.smash.dao.IProgramDao">
 	<select id="listDao" resultType="com.java.smash.dto.ProgramDto">
-		SELECT * FROM PROGRAM
+		SELECT * FROM PROGRAM WHERE programNumber NOT IN ("0")
 	</select>
 	
 	<insert id="insertDao">
