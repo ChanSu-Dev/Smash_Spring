@@ -132,6 +132,13 @@ public class MedicController {
 
 		return "redirect:Patient";
 	}
+	
+	@RequestMapping(value = "PatientInfo")
+	public String medicPatientInfo(HttpServletRequest request, Model model) {
+		
+		
+		return "medic/medic_patient_info";
+	}
 
 	@RequestMapping(value = "Connection", method = RequestMethod.GET)
 	public String medicConnection(HttpServletRequest request, Model model) {

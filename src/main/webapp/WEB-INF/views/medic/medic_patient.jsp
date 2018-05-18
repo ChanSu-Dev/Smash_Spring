@@ -112,7 +112,7 @@
 					<c:forEach items="${list }" var="dto">
 						<tr>
 							<td>${dto.patientNumber }</td>
-							<td>${dto.patientName }</td>
+							<td><a href="PatientInfo">${dto.patientName }</a></td>
 							<td>${dto.patientDisease }</td>
 							<td>${dto.patientStatus }</td>
 							<td>
