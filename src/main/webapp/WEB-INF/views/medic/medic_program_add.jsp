@@ -19,7 +19,7 @@
 <title>SMASH CARE MOVEMENT</title>
 </head>
 <body>
-	<div class="wrap" style="width: 100%; height: 100%">
+	<div class="wrap" style="width: 100%;">
 
 		<%@include file="medic_nav.jsp"%>
 
@@ -61,15 +61,41 @@
 						</div>
 					</div>
 					<div class="row">
+						<input type="file" name="selectImage" id="selectImageInput"
+							accept="image/png, image/jpeg" class="col-lg-3"> <img
+							class="thumb_img col-lg-7"
+							style="width: auto; height: auto; max-width: 350px; max-height: 300px;"></img>
+					</div>
+					<div class="row">
 						<div class="offset-10 col-lg-2">
-							<!-- 제출하기 -->
 							<input type="submit" class="submit" value="+ 등록하기">
 						</div>
 					</div>
+
 				</form>
 			</div>
 		</div>
 
 	</div>
 </body>
+<script>
+	function validImageType(image) {
+		const result = ([ 'image/jpeg', 'image/png', 'image/jpg' ]
+				.indexOf(image.type) > -1);
+		return result;
+	}
+
+	const elImage = document.querySelector("#selectImageInput");
+	elImage.addEventListener("change", function(evt) {
+		const image = evt.target.files[0];
+		if (!validImageType(image)) {
+			console.warn("invalide image file type");
+			return;
+		}
+
+		const elImage = document.querySelector(".thumb_img");
+		elImage.style.display = "inline-block";
+		elImage.src = window.URL.createObjectURL(image);
+	})
+</script>
 </html>

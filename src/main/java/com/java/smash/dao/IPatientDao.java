@@ -16,4 +16,6 @@ public interface IPatientDao {
 			String patientProgram_1, String patientProgram_2, String patientProgram_3, String patientNumber);
 
 	public void deleteDao(String patientNumber);
+	
+	public void patientInfoDao();
 }

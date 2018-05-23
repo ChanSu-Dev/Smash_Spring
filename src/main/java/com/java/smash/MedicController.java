@@ -1,6 +1,5 @@
 package com.java.smash;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +16,9 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.command.SCommand;
 import com.java.smash.command.SMedicChangepwdCommand;
-import com.java.smash.command.SPatientDeleteCommand;
 import com.java.smash.dao.IConnectionDao;
 import com.java.smash.dao.IPatientDao;
 import com.java.smash.dao.IProgramDao;
-import com.java.smash.dto.PatientDto;
 import com.java.smash.util.Constant;
 
 @Controller
@@ -135,7 +132,9 @@ public class MedicController {
 	
 	@RequestMapping(value = "PatientInfo")
 	public String medicPatientInfo(HttpServletRequest request, Model model) {
-		
+
+//		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
+//		model.addAttribute("list");
 		
 		return "medic/medic_patient_info";
 	}
