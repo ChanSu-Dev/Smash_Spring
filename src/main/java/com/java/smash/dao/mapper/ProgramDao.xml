@@ -9,6 +9,10 @@
 		SELECT * FROM PROGRAM WHERE programNumber NOT IN ("0")
 	</select>
 	
+	<select id="getProgramName" resultType="String">
+		SELECT NAME FROM PROGRAM RIGHT JOIN PATIENT ON PROGRAM.programNumber = PATIENT.PROGRAM_#{param1} WHERE programNumber = #{param2}
+	</select>
+	
 	<insert id="insertDao">
 		INSERT INTO PROGRAM VALUES(#{param1}, #{param2}, #{param3}, #{param4})
 	</insert>

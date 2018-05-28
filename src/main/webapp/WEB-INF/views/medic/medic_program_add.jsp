@@ -17,6 +17,11 @@
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <title>SMASH CARE MOVEMENT</title>
+<style type="text/css">
+img {
+	border: 0
+}
+</style>
 </head>
 <body>
 	<div class="wrap" style="width: 100%;">

@@ -30,42 +30,52 @@
 				<!-- Profile Head -->
 				<div class="row content_head">
 					<!-- 환자 이름 -->
-					<div class="col-lg-12 content_title">
-						<p>patient.patientName</p>
-					</div>
-					<!-- 환자 정보 -->
-					<div class="col-lg-3 content_detail">
-						<p>환자 번호</p>
-						<p>patient.patientNumber</p>
-					</div>
-					<div class="col-lg-3 content_detail">
-						<p>병명</p>
-						<p>patient.patientDisease</p>
-					</div>
-					<div class="col-lg-3 content_detail">
-						<p>식별기기 아이디</p>
-						<p>device.deviceNumber</p>
-					</div>
-					<div class="col-lg-12 content_detail">
-						<p>환자 상태</p>
-						<hr>
-						<p>patient.patientStatus</p>
-					</div>
-					<div class="col-lg-4 content_detail">
-						<p>1번 프로그램</p>
-						<hr>
-						<p>patient.program_1</p>
-					</div>
-					<div class="col-lg-4 content_detail">
-						<p>2번 프로그램</p>
-						<hr>
-						<p>patient.program_2</p>
-					</div>
-					<div class="col-lg-4 content_detail">
-						<p>3번 프로그램</p>
-						<hr>
-						<p>patient.program_3</p>
-					</div>
+					<c:forEach items="${patientList}" var="patientDto">
+
+						<div class="col-lg-12 content_title">
+							<p>${patientDto.patientName } 환자</p>
+						</div>
+						<!-- 환자 정보 -->
+						<div class="col-lg-3 content_detail">
+							<p>환자 번호</p>
+							<p>${patientDto.patientNumber }</p>
+						</div>
+						<div class="col-lg-3 content_detail">
+							<p>병명</p>
+							<p>${patientDto.patientDisease }</p>
+						</div>
+						<div class="col-lg-3 content_detail">
+							<p>식별기기 아이디</p>
+								<c:choose>
+									<c:when test="${deviceNum eq NULL }">
+										<p>연결기기 없음</p>
+									</c:when>
+									<c:otherwise>
+										<p>${deviceNum }</p>
+									</c:otherwise>
+								</c:choose>
+						</div>
+						<div class="col-lg-12 content_detail">
+							<p>환자 상태</p>
+							<hr>
+							<p>${patientDto.patientStatus }</p>
+						</div>
+						<div class="col-lg-4 content_detail">
+							<p>1번 프로그램</p>
+							<hr>
+							<p>${patientDto.program_1 }</p>
+						</div>
+						<div class="col-lg-4 content_detail">
+							<p>2번 프로그램</p>
+							<hr>
+							<p>${patientDto.program_2 }</p>
+						</div>
+						<div class="col-lg-4 content_detail">
+							<p>3번 프로그램</p>
+							<hr>
+							<p>${patientDto.program_3 }</p>
+						</div>
+					</c:forEach>
 				</div>
 				<div class="row content_body">
 					<!-- 운동 진행 프로그래스바 -->
