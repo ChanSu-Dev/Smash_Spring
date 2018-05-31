@@ -63,17 +63,17 @@
 						<div class="col-lg-4 content_detail">
 							<p>1번 프로그램</p>
 							<hr>
-							<p>${patientDto.program_1 }</p>
+							<p>${program_1 }</p>
 						</div>
 						<div class="col-lg-4 content_detail">
 							<p>2번 프로그램</p>
 							<hr>
-							<p>${patientDto.program_2 }</p>
+							<p>${program_2 }</p>
 						</div>
 						<div class="col-lg-4 content_detail">
 							<p>3번 프로그램</p>
 							<hr>
-							<p>${patientDto.program_3 }</p>
+							<p>${program_3 }</p>
 						</div>
 					</c:forEach>
 				</div>

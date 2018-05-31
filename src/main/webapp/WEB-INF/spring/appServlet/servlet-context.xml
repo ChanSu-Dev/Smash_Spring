@@ -25,7 +25,7 @@
 		<beans:property name="contentType" value="text/html' charset=UTF-8"></beans:property>
 	</beans:bean>
 
-	<context:component-scan base-package="com.java.smash" />
+	<context:component-scan base-package="com.java.smash.controller" />
 
 	<beans:bean name="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -45,7 +45,7 @@
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 		<beans:property name="mapperLocations"
-			value="classpath:com/java/smash/dao/mapper/*.xml"></beans:property>
+			value="classpath*:com/java/smash/dao/mapper/*.xml"></beans:property>
 	</beans:bean>
 
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

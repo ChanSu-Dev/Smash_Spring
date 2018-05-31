@@ -24,13 +24,16 @@
 		if (pno != null) {
 			$.ajax({
 				type : 'post',
-				url : 'http://localhost:8081/smash/medic/ConnectionStart',
+				url : './ConnectionStart',
 				data : {
 					'deviceNumber' : deviceNumber,
 					'patientNumber' : pno
 				},
 				success : function(data) {
 					location.reload();
+				},
+				error : function(xhr, status, error) {
+					alert("환자번호를 다시 확인해주세요.");
 				}
 			});
 		}

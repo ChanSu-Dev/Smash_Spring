@@ -38,7 +38,7 @@ img {
 					</div>
 				</div>
 				<!-- 입력 폼 -->
-				<form method="post" action="ProgramAddOK">
+				<form method="post" action="ProgramAddOK" enctype="multipart/form-data">
 					<div class="row content_body">
 						<div class="col-lg-5">
 							<label for="patient_num">*프로그램 번호</label>

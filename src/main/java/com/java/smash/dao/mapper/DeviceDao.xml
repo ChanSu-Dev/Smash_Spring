@@ -6,6 +6,43 @@
 
 <mapper namespace="com.java.smash.dao.IDeviceDao">
 	<select id="getPatientDevice" resultType="String">
-		SELECT deviceNumber FROM DEVICE WHERE patientNumber = #{param1}
+		SELECT deviceNumber
+		FROM DEVICE WHERE patientNumber = #{param1}
 	</select>
+
+	<select id="deviceList" resultType="com.java.smash.dto.DeviceDto">
+		SELECT * FROM DEVICE
+	</select>
+
+	<insert id="deviceInsert">
+		INSERT INTO DEVICE VALUES (#{param1}, #{param2}, #{param3}, 0,
+		#{param4}, #{param5}, #{param6}, NULL)
+	</insert>
+
+	<select id="deviceEdit" resultType="com.java.smash.dto.DeviceDto">
+		SELECT * FROM DEVICE WHERE
+		deviceNumber = #{param1}
+	</select>
+
+	<update id="deviceEditOk">
+		UPDATE DEVICE SET deviceNumber = #{param1}, version =
+		#{param2}, sort
+		= #{param3}, ipv4_address = #{param4}, ipv6_address =
+		#{param5}, place = #{param6} WHERE deviceNumber
+		= #{param7}
+	</update>
+
+	<delete id="deviceDelete">
+		DELETE FROM DEVICE WHERE deviceNumber = #{param1}
+	</delete>
+
+	<update id="connectionStartDao">
+		UPDATE DEVICE SET patientNumber = #{param1},
+		activated = 1 WHERE deviceNumber = #{param2}
+	</update>
+
+	<update id="connectionStopDao">
+		UPDATE DEVICE SET patientNumber = NULL, activated = 0
+		WHERE deviceNumber = #{param1}
+	</update>
 </mapper>

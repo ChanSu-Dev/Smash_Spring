@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import com.java.smash.dto.ProgramDto;
 
 public interface IProgramDao {
-	public ArrayList<ProgramDto> listDao();
+	public ArrayList<ProgramDto> programList();
 
 	public String getProgramName(int index, String programNumber);
 
-	public void insertDao(String programNumber, String programName, String programContent, String programDisease);
+	public void programInsert(String programNumber, String programName, String programContent, String programDisease);
 
-	public void deleteDao(String programNumber);
+	public void programDelete(String programNumber);
+
+	public void programEdit(String programName, String programContent, String programDisease, String programNumber);
 
 	public ArrayList<ProgramDto> getDB(String programNumber);
-
-	public void editDao(String programName, String programContent, String programDisease, String programNumber);
 }

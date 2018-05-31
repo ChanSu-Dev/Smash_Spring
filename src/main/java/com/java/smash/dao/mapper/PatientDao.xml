@@ -5,28 +5,29 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.java.smash.dao.IPatientDao">
-	<select id="listDao" resultType="com.java.smash.dto.PatientDto">
+	<select id="patientList" resultType="com.java.smash.dto.PatientDto">
 		SELECT * FROM PATIENT
 	</select>
 
-	<select id="editListDao" resultType="com.java.smash.dto.PatientDto">
+	<select id="patientEditList" resultType="com.java.smash.dto.PatientDto">
 		SELECT * FROM PATIENT WHERE
 		patientNumber = #{param1}
 	</select>
 
-	<insert id="insertDao">
+	<insert id="patientInsert">
 		INSERT INTO PATIENT VALUES ( #{param1}, #{param2},
 		#{param3}, #{param4}, #{param5}, #{param6}, #{param7})
 	</insert>
 
-	<update id="updateDao">
+	<update id="patientUpdate">
 		UPDATE PATIENT SET patientName = #{param1},
 		patientDisease = #{param2}, patientStatus = #{param3}, program_1 =
 		#{param4}, program_2 = #{param5}, program_3 = #{param6} WHERE
 		patientNumber = #{param7}
 	</update>
 	
-	<delete id="deleteDao">
+	<delete id="patientDelete">
 		DELETE FROM PATIENT WHERE patientNumber = #{param1}
 	</delete>
+
 </mapper>
