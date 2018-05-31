@@ -23,7 +23,7 @@
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <script>
 	function isPwdEquals(pwd1, pwd2) {
-		if (pwd1 == pwd2) {
+		if (pwd1 == pwd2 && pwd1 != "" && pwd2 != "") {
 			$.ajax({
 				type : 'POST',
 				url : './MedicAddOk',
@@ -41,7 +41,7 @@
 					window.location.href = "./Medic"
 				},
 				error : function(xhr, status, error) {
-					alert("오류가 발생했습니다.");
+					alert("입력한 정보를 다시한번 확인해주세요!");
 				}
 			});
 		} else {
@@ -55,7 +55,7 @@
 	}
 	jQuery(document).ready(
 			function() {
-				$('.openForm').submit(function(e) {
+				$('.addForm').submit(function(e) {
 					e.preventDefault();
 					var pwd1 = $('input[name=password]').val();
 					var pwd2 = $('input[name=password2]').val();
@@ -110,8 +110,8 @@
 						<p>계정 등록</p>
 					</div>
 				</div>
-				<!-- 입력 폼 method="post" action="MedicAddOk" -->
-				<form class="openForm">
+				<!-- 입력 폼 -->
+				<form class="addForm">
 					<div class="row content_body">
 						<div class="col-lg-5">
 							<label for="doctor_num">*의료진 번호</label>

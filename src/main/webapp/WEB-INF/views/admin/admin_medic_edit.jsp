@@ -23,11 +23,49 @@
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <script>
+	function isPwdEquals(pwd1, pwd2) {
+		if (pwd1 == pwd2 && pwd1 != "" && pwd2 != "") {
+			$.ajax({
+				type : 'POST',
+				url : './MedicEditOk',
+				data : {
+					'employeeNumber' : $('input[name=employeeNumber]').val(),
+					'id' : $('input[name=id]').val(),
+					'password' : $('input[name=password]').val(),
+					'name' : $('input[name=name]').val(),
+					'belong' : $('input[name=belong]').val(),
+					'contact' : $('input[name=contact]').val(),
+					'address' : $('input[name=address]').val(),
+					'birth' : $('input[name=birth]').val()
+				},
+				success : function(data) {
+					window.location.href = "./Medic"
+				},
+				error : function(xhr, status, error) {
+					alert("입력한 정보를 다시한번 확인해주세요!");
+				}
+			});
+		} else {
+			alert("입력한 정보를 다시한번 확인해주세요!");
+			location.reload();
+		}
+	}
+</script>
+<script>
 	function formChk() {
 		alert("삭제가 완료되었습니다.");
 	}
 	jQuery(document).ready(
 			function() {
+				$('.editForm').submit(function(e) {
+					e.preventDefault();
+					var pwd1 = $('input[name=password]').val();
+					var pwd2 = $('input[name=password2]').val();
+					console.log(pwd1);
+					debugger;
+					isPwdEquals(pwd1, pwd2);
+				});
+				
 				/* 검색창 포커스인 포커스 아웃 효과 */
 				$('input').focusin(
 						function() {
@@ -80,7 +118,7 @@
 				<!-- 입력 폼 -->
 				<c:forEach items="${list}" var="dto">
 
-					<form method="post" action="MedicEditOk">
+					<form class="editForm">
 						<div class="row content_body">
 							<div class="col-lg-5">
 								<label for="doctor_num">*의료진 번호</label>
