@@ -99,6 +99,7 @@
 			<table class="table doctor_manage">
 				<thead>
 					<tr>
+						<th>의료진 번호</th>
 						<th>의료진 이름</th>
 						<th>담당 부서</th>
 						<th>연락처</th>
@@ -109,6 +110,7 @@
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
+							<td>${dto.employeeNumber }</td>
 							<td>${dto.name }</td>
 							<td>${dto.belong}</td>
 							<td>${dto.contact }</td>

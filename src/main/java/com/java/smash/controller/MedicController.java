@@ -1,5 +1,6 @@
 package com.java.smash.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -93,10 +95,12 @@ public class MedicController {
 		String patientProgram_1 = request.getParameter("program_1");
 		String patientProgram_2 = request.getParameter("program_2");
 		String patientProgram_3 = request.getParameter("program_3");
+		String patientProgram_4 = request.getParameter("program_4");
+		String patientProgram_5 = request.getParameter("program_5");
 
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		dao.patientInsert(patientNumber, patientName, patientDisease, patientStatus, patientProgram_1, patientProgram_2,
-				patientProgram_3);
+				patientProgram_3, patientProgram_4, patientProgram_5);
 
 		return "redirect:Patient";
 	}
@@ -126,10 +130,12 @@ public class MedicController {
 		String patientProgram_1 = request.getParameter("program_1");
 		String patientProgram_2 = request.getParameter("program_2");
 		String patientProgram_3 = request.getParameter("program_3");
-
+		String patientProgram_4 = request.getParameter("program_4");
+		String patientProgram_5 = request.getParameter("program_5");
+		
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		dao.patientUpdate(patientName, patientDisease, patientStatus, patientProgram_1, patientProgram_2,
-				patientProgram_3, patientNumber);
+				patientProgram_3, patientProgram_4, patientProgram_5, patientNumber);
 		return "redirect:Patient";
 	}
 
@@ -230,16 +236,16 @@ public class MedicController {
 
 		// 파일 이름 변경
 		String getFileName[] = file.getOriginalFilename().split("\\.");
-		String reName = "programImg_" + programNumber + "." + getFileName[1];
+		String reName = "programImg_" + programNumber + "." + getFileName[getFileName.length - 1];
+		String path = "/Users/sophia/Desktop/workspace/java_eclipsse/SMASH_Spring/src/main/webapp/resources/img/programimg/";
 
-		try (FileOutputStream fos = new FileOutputStream("/tmp/" + reName); InputStream is = file.getInputStream();) {
+		try (FileOutputStream fos = new FileOutputStream(path + reName); InputStream is = file.getInputStream();) {
 			int readCount = 0;
 			byte[] buffer = new byte[1024];
 			while ((readCount = is.read(buffer)) != -1) {
 				fos.write(buffer, 0, readCount);
 			}
 		} catch (Exception ex) {
-			System.out.println("File Save Error");
 			throw new RuntimeException("file Save Error");
 		}
 

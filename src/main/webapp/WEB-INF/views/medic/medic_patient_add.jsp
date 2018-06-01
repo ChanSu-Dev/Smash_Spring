@@ -93,6 +93,28 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-lg-4">
+							<label for="patient_status">*4번 프로그램</label>
+							<!-- 환자 운동프로그램 입력 -->
+							<select name="program_4" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach items="${list }" var="Pno">
+									<option value=${Pno.programNumber}>${Pno.name }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-lg-4">
+							<label for="patient_status">*5번 프로그램</label>
+							<!-- 환자 운동프로그램 입력 -->
+							<select name="program_5" class="form-control">
+								<option value="0">미선택</option>
+								<c:forEach items="${list }" var="Pno">
+									<option value=${Pno.programNumber}>${Pno.name }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="row">
 						<div class="offset-10 col-lg-2">
 							<!-- 제출하기 -->
 							<input type="submit" class="submit" value="+ 등록하기">
