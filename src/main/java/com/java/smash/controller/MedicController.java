@@ -1,9 +1,14 @@
 package com.java.smash.controller;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -24,9 +28,11 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.java.smash.dao.IDeviceDao;
+import com.java.smash.dao.IExerciseDao;
 import com.java.smash.dao.IMedicDao;
 import com.java.smash.dao.IPatientDao;
 import com.java.smash.dao.IProgramDao;
+import com.java.smash.dto.ExerciseDto;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.dto.PatientDto;
 import com.java.smash.util.Constant;
@@ -34,14 +40,6 @@ import com.java.smash.util.Constant;
 @Controller
 @RequestMapping("medic")
 public class MedicController {
-
-	public JdbcTemplate template;
-
-	@Autowired
-	public void setTemplate(JdbcTemplate template) {
-		Constant.template = template;
-	}
-
 	@Bean
 	public MultipartResolver multipartResolver() {
 		org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
@@ -132,7 +130,7 @@ public class MedicController {
 		String patientProgram_3 = request.getParameter("program_3");
 		String patientProgram_4 = request.getParameter("program_4");
 		String patientProgram_5 = request.getParameter("program_5");
-		
+
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		dao.patientUpdate(patientName, patientDisease, patientStatus, patientProgram_1, patientProgram_2,
 				patientProgram_3, patientProgram_4, patientProgram_5, patientNumber);
@@ -160,7 +158,7 @@ public class MedicController {
 		model.addAttribute("patientList", patientList);
 
 		IDeviceDao deviceNum = sqlSession.getMapper(IDeviceDao.class);
-		try {
+		try { // 연결 되어있는 장치 넘기기
 			String dno = deviceNum.getPatientDevice(pNum);
 			model.addAttribute("deviceNum", dno);
 		} catch (Exception e) {
@@ -168,11 +166,77 @@ public class MedicController {
 		}
 
 		IProgramDao programList = sqlSession.getMapper(IProgramDao.class);
-		for (int i = 1; i < 4; i++) { // 프로그램 이름 넘기
+		for (int i = 1; i < 6; i++) { // 프로그램 이름 넘기기
 			model.addAttribute("program_" + i, programList.getProgramName(i, pNum));
 		}
 
+		// Total 운동 진행상황
+		Calendar cal = Calendar.getInstance();
+
+		IExerciseDao exerciseList = sqlSession.getMapper(IExerciseDao.class);
+		ArrayList<ExerciseDto> exerDto = exerciseList.getTotalExer(pNum);
+		Date d = cal.getTime(); // 제일 오래된 운동 데이터 날짜
+		for (int i = 0; i < exerDto.size(); i++) {
+			if (d.compareTo(exerDto.get(i).getExerciseTime()) > 0) {
+				d = exerDto.get(i).getExerciseTime();
+			}
+		}
+
+		ArrayList<PatientDto> patientDto = patientDao.patientSelectList(pNum);
+		int cnt = 0;
+		if (!patientDto.get(0).getProgram_1().equals("0")) cnt++;
+		if (!patientDto.get(0).getProgram_2().equals("0")) cnt++;
+		if (!patientDto.get(0).getProgram_3().equals("0")) cnt++;
+		if (!patientDto.get(0).getProgram_4().equals("0")) cnt++;
+		if (!patientDto.get(0).getProgram_5().equals("0")) cnt++;
+		model.addAttribute("cnt", cnt);
+		
+		long d1 = cal.getTime().getTime();
+		long d2 = d.getTime();
+		int totalExer = (int) ((d1 - d2 + 1) / (1000 * 60 * 60 * 24)) * cnt; // 운동 시작 후 요일 수
+
+		model.addAttribute("totalExer", String.valueOf(totalExer));
+		model.addAttribute("doExer", String.valueOf(exerDto.size()));
+
+		// 지난 주간의 운동
+		HashMap<String, Integer> map = new HashMap();
+		ArrayList<String> agoDays = new ArrayList<String>();
+		for (int i = 0; i < 7; i++) {
+			agoDays.add(getPastDate(i)); // 오늘 날짜 - 7일까지 가져옴
+			map.put(agoDays.get(i), 0); // HashMap 저장
+		}
+
+		for (int i = 0; i < exerDto.size(); i++) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String date = transFormat.format(exerDto.get(i).getExerciseTime());
+			if (map.containsKey(date)) {
+				map.put(date, map.get(date) + 1);
+			}
+		}
+
+		for (String key : map.keySet()) {
+			System.out.println(String.format("키 : %s, 값 : %s", key, map.get(key)));
+		}
+		model.addAttribute("map", map);
+
 		return "medic/medic_patient_info";
+	}
+
+	private String getPastDate(int i) {
+
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(cal.YEAR);
+		int month = cal.get(cal.MONTH) + 1;
+		int day = cal.get(cal.DATE);
+
+		cal.set(year, month - 1, day);
+		cal.add(Calendar.DATE, -i);
+
+		Date agoDate = cal.getTime();
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+		System.out.println(formatter.format(agoDate));
+		return formatter.format(agoDate);
 	}
 
 	@RequestMapping(value = "Connection", method = RequestMethod.GET)
@@ -306,7 +370,7 @@ public class MedicController {
 		model.addAttribute("current_id", current_id);
 
 		IMedicDao dao = sqlSession.getMapper(IMedicDao.class);
-		ArrayList<MedicDto> dtos = dao.getPwd(current_id);
+		ArrayList<MedicDto> dtos = dao.getMedic(current_id);
 		String db_pwd = dtos.get(0).getPassword();
 
 		if (!current_pwd.equals(db_pwd)) { // 현재 비밀번호랑 다르면

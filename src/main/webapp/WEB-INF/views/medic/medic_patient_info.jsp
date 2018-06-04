@@ -33,7 +33,7 @@
 					<c:forEach items="${patientList}" var="patientDto">
 
 						<div class="col-lg-12 content_title">
-							<p>${patientDto.patientName } 환자</p>
+							<p>${patientDto.patientName }환자</p>
 						</div>
 						<!-- 환자 정보 -->
 						<div class="col-lg-3 content_detail">
@@ -46,14 +46,14 @@
 						</div>
 						<div class="col-lg-3 content_detail">
 							<p>식별기기 아이디</p>
-								<c:choose>
-									<c:when test="${deviceNum eq NULL }">
-										<p>연결기기 없음</p>
-									</c:when>
-									<c:otherwise>
-										<p>${deviceNum }</p>
-									</c:otherwise>
-								</c:choose>
+							<c:choose>
+								<c:when test="${deviceNum eq NULL }">
+									<p>연결기기 없음</p>
+								</c:when>
+								<c:otherwise>
+									<p>${deviceNum }</p>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div class="col-lg-12 content_detail">
 							<p>환자 상태</p>
@@ -74,6 +74,16 @@
 							<p>3번 프로그램</p>
 							<hr>
 							<p>${program_3 }</p>
+						</div>
+						<div class="col-lg-4 content_detail">
+							<p>4번 프로그램</p>
+							<hr>
+							<p>${program_4 }</p>
+						</div>
+						<div class="col-lg-4 content_detail">
+							<p>5번 프로그램</p>
+							<hr>
+							<p>${program_5 }</p>
 						</div>
 					</c:forEach>
 				</div>
@@ -108,25 +118,17 @@
 
 	<script>
 		// 데이터 추출
-		var data1 = 20;
-		var data2 = 40;
-		var data3 = 60;
-		var data4 = 50;
-		var data5 = 80;
-		var data6 = 100;
-		var data7 = 70;
-		var dataList = [ data1, data2, data3, data4, data5, data6, data7 ];
+		var dataList = new Array();
+		var labelsList = new Array();
+		
+		<c:forEach var="map" items="${map}">
+		labelsList.push("${map.key}");	
+		dataList.push("${map.value}");
+		</c:forEach>
 
-		var label1 = "05-13";
-		var label2 = "05-14";
-		var label3 = "05-15";
-		var label4 = "05-16";
-		var label5 = "05-17";
-		var label6 = "05-18";
-		var label7 = "05-19";
-		var labelsList = [ label1, label2, label3, label4, label5, label6,
-				label7 ];
-		var ex = 50 // 운동량
+		
+		var tot = ${totalExer };	// 총 운동량
+		var ex = ${doExer} // 실행한 운동량
 
 		Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 		Chart.defaults.global.defaultFontColor = '#292b2c';
@@ -135,9 +137,9 @@
 		var myPieChart = new Chart(ctx, {
 			type : 'pie',
 			data : {
-				labels : [ "현재 운동량", "전체 운동량" ],
+				labels : [ "현재 운동량", "부족 운동량" ],
 				datasets : [ {
-					data : [ ex, 100 - ex ],
+					data : [ ex, tot - ex ],
 					backgroundColor : [ '#004593', 'rgba(2,117,216,0.2)' ],
 				} ],
 			},
@@ -168,7 +170,7 @@
 					yAxes : [ {
 						ticks : {
 							min : 0,
-							max : 100
+							max : ${cnt }
 						},
 						gridLines : {
 							color : "rgba(0, 0, 0, .125)",

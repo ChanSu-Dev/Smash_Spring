@@ -16,8 +16,8 @@ public interface IMedicDao {
 
 	public void medicEditOk(String employeeNumber, String name, String id, String password, String belong,
 			String contact, String address, String birth, String PmedicNo);
-
-	public ArrayList<MedicDto> getPwd(String eId);
+	
+	public ArrayList<MedicDto> getMedic(String eId);
 
 	public void changePwd(String pwd, String eId);
 }

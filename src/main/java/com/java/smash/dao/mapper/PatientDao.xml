@@ -33,4 +33,8 @@
 		DELETE FROM PATIENT WHERE patientNumber = #{param1}
 	</delete>
 
+	<select id="patientSelectList" resultType="com.java.smash.dto.PatientDto">
+		SELECT * FROM PATIENT WHERE patientNumber = #{param1}
+	</select>
+
 </mapper>

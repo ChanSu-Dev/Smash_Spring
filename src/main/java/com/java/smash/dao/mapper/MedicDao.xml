@@ -31,7 +31,7 @@
 		employeeNumber = #{param9}
 	</update>
 
-	<select id="getPwd" resultType="com.java.smash.dto.MedicDto">
+	<select id="getMedic" resultType="com.java.smash.dto.MedicDto">
 		SELECT * FROM MEDIC WHERE ID =
 		#{param1}
 	</select>

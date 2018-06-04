@@ -18,4 +18,6 @@ public interface IPatientDao {
 			String patientNumber);
 
 	public void patientDelete(String patientNumber);
+	
+	public ArrayList<PatientDto> patientSelectList(String patientNumber);
 }

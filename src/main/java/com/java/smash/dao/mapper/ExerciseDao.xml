@@ -6,10 +6,10 @@
 
 <mapper namespace="com.java.smash.dao.IExerciseDao">
 	<select id="getTotalExer" resultType="com.java.smash.dto.ExerciseDto">
-		SELECT * FROM EXERCISE WHERE patientNumber = #{param1}
+		SELECT * FROM EXERCISE WHERE patientNum = #{param1}
 	</select>
 	
 	<select id="getWeekExer" resultType="com.java.smash.dto.ExerciseDto">
-		SELECT * FROM EXERCISE WHERE patientNumber = #{param1}
+		SELECT * FROM EXERCISE WHERE patientNum = #{param1}
 	</select>
 </mapper>
