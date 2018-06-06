@@ -129,6 +129,9 @@
 		
 		var tot = ${totalExer };	// 총 운동량
 		var ex = ${doExer} // 실행한 운동량
+		if (tot == 0) {
+			tot = 1;
+		}
 
 		Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 		Chart.defaults.global.defaultFontColor = '#292b2c';
