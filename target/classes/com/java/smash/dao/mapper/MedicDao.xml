@@ -40,4 +40,8 @@
 		UPDATE MEDIC SET PASSWORD = #{param1} where id =
 		#{param2}
 	</update>
+	
+	<select id="getEmployeeNum" resultType="String">
+		Select employeeNumber from Medic where id = #{param1}
+	</select>
 </mapper>

@@ -6,7 +6,7 @@
 
 <mapper namespace="com.java.smash.dao.IPatientDao">
 	<select id="patientList" resultType="com.java.smash.dto.PatientDto">
-		SELECT * FROM PATIENT
+		SELECT * FROM PATIENT WHERE employeeNumber = #{param1}
 	</select>
 
 	<select id="patientEditList" resultType="com.java.smash.dto.PatientDto">
@@ -18,7 +18,7 @@
 	<insert id="patientInsert">
 		INSERT INTO PATIENT VALUES ( #{param1}, #{param2},
 		#{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8},
-		#{param9})
+		#{param9}, #{param10})
 	</insert>
 
 	<update id="patientUpdate">

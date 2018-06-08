@@ -20,4 +20,6 @@ public interface IMedicDao {
 	public ArrayList<MedicDto> getMedic(String eId);
 
 	public void changePwd(String pwd, String eId);
+
+	public String getEmployeeNum(String id);
 }

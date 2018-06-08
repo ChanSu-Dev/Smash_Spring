@@ -58,25 +58,31 @@ public class MedicController {
 		if (map != null) {
 			String id = (String) map.get("id");
 			String pwd = (String) map.get("pwd");
+			
+			IMedicDao dao = sqlSession.getMapper(IMedicDao.class);
+			String employeeNumber = dao.getEmployeeNum(id);
 
 			session.setAttribute("id", id);
 			session.setAttribute("pwd", pwd);
+			session.setAttribute("eNum", employeeNumber);
 		}
 		return "medic/medic_main";
 	}
 
 	@RequestMapping("Patient")
-	public String medicPatient(HttpServletRequest request, Model model) {
-
+	public String medicPatient(HttpSession session, HttpServletRequest request, Model model) {
+		String eNum = (String) session.getAttribute("eNum");
+		System.out.println(eNum);
+		
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		model.addAttribute("list", dao.patientList());
+		model.addAttribute("list", dao.patientList(eNum));
 
 		return "medic/medic_patient";
 	}
 
 	@RequestMapping("PatientAdd")
 	public String medicPatientAdd(HttpServletRequest requset, Model model) {
-
+		
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
 		model.addAttribute("list", dao.programList());
 
@@ -84,8 +90,10 @@ public class MedicController {
 	}
 
 	@RequestMapping(value = "PatientAddOK", method = RequestMethod.POST)
-	public String medicPatientAddOk(HttpServletRequest request, Model model) {
-
+	public String medicPatientAddOk(HttpSession session, HttpServletRequest request, Model model) {
+		
+		String eNum = (String) session.getAttribute("eNum");
+		
 		String patientNumber = request.getParameter("patientNumber");
 		String patientName = request.getParameter("patientName");
 		String patientDisease = request.getParameter("patientDisease");
@@ -98,7 +106,7 @@ public class MedicController {
 
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		dao.patientInsert(patientNumber, patientName, patientDisease, patientStatus, patientProgram_1, patientProgram_2,
-				patientProgram_3, patientProgram_4, patientProgram_5);
+				patientProgram_3, patientProgram_4, patientProgram_5, eNum);
 
 		return "redirect:Patient";
 	}
