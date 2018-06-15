@@ -60,31 +60,33 @@
 							<hr>
 							<p>${patientDto.patientStatus }</p>
 						</div>
-						<div class="col-lg-4 content_detail">
-							<p>1번 프로그램</p>
-							<hr>
-							<p>${program_1 }</p>
-						</div>
-						<div class="col-lg-4 content_detail">
-							<p>2번 프로그램</p>
-							<hr>
-							<p>${program_2 }</p>
-						</div>
-						<div class="col-lg-4 content_detail">
-							<p>3번 프로그램</p>
-							<hr>
-							<p>${program_3 }</p>
-						</div>
-						<div class="col-lg-4 content_detail">
-							<p>4번 프로그램</p>
-							<hr>
-							<p>${program_4 }</p>
-						</div>
-						<div class="col-lg-4 content_detail">
-							<p>5번 프로그램</p>
-							<hr>
-							<p>${program_5 }</p>
-						</div>
+						<c:forEach items="${PEdto }" var="PEdto">
+							<div class="col-lg-4 content_detail">
+								<p>1번 프로그램</p>
+								<hr>
+								<p>${PEdto.program_1 }</p>
+							</div>
+							<div class="col-lg-4 content_detail">
+								<p>2번 프로그램</p>
+								<hr>
+								<p>${PEdto.program_2 }</p>
+							</div>
+							<div class="col-lg-4 content_detail">
+								<p>3번 프로그램</p>
+								<hr>
+								<p>${PEdto.program_3 }</p>
+							</div>
+							<div class="col-lg-4 content_detail">
+								<p>4번 프로그램</p>
+								<hr>
+								<p>${PEdto.program_4 }</p>
+							</div>
+							<div class="col-lg-4 content_detail">
+								<p>5번 프로그램</p>
+								<hr>
+								<p>${PEdto.program_5 }</p>
+							</div>
+						</c:forEach>
 					</c:forEach>
 				</div>
 				<div class="row content_body">
@@ -100,8 +102,8 @@
 					</div>
 
 					<!-- 그래프 -->
-					<div class="col-lg-6 exercise_amount">
-						<p class="body_title">지난 한주간의 운동량</p>
+					<div class="col-lg-7 exercise_amount">
+						<p class="body_title">지난 한주간의 걸음수</p>
 						<hr>
 						<canvas id="myAreaChart" width="100%" height="40"> </canvas>
 						<div class="data">
@@ -154,7 +156,7 @@
 			data : {
 				labels : labelsList,
 				datasets : [ {
-					label : '운동량',
+					label : '걸음 수',
 					data : dataList,
 					lineTension : 0.0,
 					backgroundColor : "rgba(2,117,216,0.2)",
@@ -173,8 +175,8 @@
 					yAxes : [ {
 						ticks : {
 							min : 0,
-							max : ${cnt }
-						},
+							max : 10000
+						}, 
 						gridLines : {
 							color : "rgba(0, 0, 0, .125)",
 						}

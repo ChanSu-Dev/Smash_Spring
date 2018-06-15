@@ -12,8 +12,7 @@
 
 	<select id="getProgramName" resultType="String">
 		SELECT NAME FROM PROGRAM
-		LEFT JOIN PATIENT ON PROGRAM.programNumber = PATIENT.PROGRAM_#{param1}
-		WHERE patientNumber = #{param2}
+		WHERE programNumber = #{param1}
 	</select>
 
 	<insert id="programInsert">

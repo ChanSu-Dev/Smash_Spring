@@ -7,7 +7,7 @@ import com.java.smash.dto.ProgramDto;
 public interface IProgramDao {
 	public ArrayList<ProgramDto> programList();
 
-	public String getProgramName(int index, String programNumber);
+	public String getProgramName(String programNumber);
 
 	public void programInsert(String programNumber, String programName, String programContent, String programDisease);
 

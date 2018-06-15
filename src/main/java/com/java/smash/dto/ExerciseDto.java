@@ -7,6 +7,7 @@ public class ExerciseDto {
 	private String patientNum;
 	private String programNum;
 	private Date exerciseTime;
+	private int DailyStep;
 
 	public String getExerciseNum() {
 		return exerciseNum;
@@ -38,6 +39,14 @@ public class ExerciseDto {
 
 	public void setExerciseTime(Date exerciseTime) {
 		this.exerciseTime = exerciseTime;
+	}
+
+	public int getDailyStep() {
+		return DailyStep;
+	}
+
+	public void setDailyStep(int dailyStep) {
+		DailyStep = dailyStep;
 	}
 
 }

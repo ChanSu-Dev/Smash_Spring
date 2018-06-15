@@ -8,10 +8,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Queue;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +37,7 @@ import com.java.smash.dao.IProgramDao;
 import com.java.smash.dto.ExerciseDto;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.dto.PatientDto;
-import com.java.smash.dto.PatientExerciseDto;
-import com.java.smash.util.Constant;
+import com.java.smash.dto.PatientProgramDto;
 
 @Controller
 @RequestMapping("medic")
@@ -80,7 +79,6 @@ public class MedicController {
 	@RequestMapping("Patient")
 	public String medicPatient(HttpSession session, HttpServletRequest request, Model model) {
 		String eNum = (String) session.getAttribute("eNum");
-		System.out.println(eNum);
 
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		model.addAttribute("list", dao.patientList(eNum));
@@ -129,20 +127,20 @@ public class MedicController {
 		model.addAttribute("Plist", Pdao.programList());
 
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		ArrayList<PatientDto> dtos =  dao.patientEditList(patientNumber);
-		
+		ArrayList<PatientDto> dtos = dao.patientEditList(patientNumber);
+
 		String patientProgram = dtos.get(0).getPatientProgram();
-		ArrayList<PatientExerciseDto> PEdto = new ArrayList<>();
-		
-		PatientExerciseDto strtmp = new PatientExerciseDto();
+		ArrayList<PatientProgramDto> PEdto = new ArrayList<>();
+
+		PatientProgramDto strtmp = new PatientProgramDto();
 		strtmp.setProgram_1(patientProgram.split(",")[0]);
 		strtmp.setProgram_2(patientProgram.split(",")[1]);
 		strtmp.setProgram_3(patientProgram.split(",")[2]);
 		strtmp.setProgram_4(patientProgram.split(",")[3]);
 		strtmp.setProgram_5(patientProgram.split(",")[4]);
-		
+
 		PEdto.add(strtmp);
-		
+
 		model.addAttribute("list", dtos);
 		model.addAttribute("PEdto", PEdto);
 
@@ -163,7 +161,7 @@ public class MedicController {
 		String patientProgram_5 = request.getParameter("program_5");
 		String patientProgram = patientProgram_1 + "," + patientProgram_2 + "," + patientProgram_3 + ","
 				+ patientProgram_4 + "," + patientProgram_5;
-		
+
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		dao.patientUpdate(patientName, patientDisease, patientStatus, patientProgram, patientNumber);
 		return "redirect:Patient";
@@ -197,10 +195,36 @@ public class MedicController {
 			model.addAttribute("deviceNum", "NULL");
 		}
 
-		IProgramDao programList = sqlSession.getMapper(IProgramDao.class);
-		for (int i = 1; i < 6; i++) { // 프로그램 이름 넘기기
-			model.addAttribute("program_" + i, programList.getProgramName(i, pNum));
+		IProgramDao programDao = sqlSession.getMapper(IProgramDao.class);
+
+		String patientNumber = request.getParameter("pNum");
+		ArrayList<PatientDto> dtos = patientDao.patientEditList(patientNumber);
+
+		String patientProgram = dtos.get(0).getPatientProgram();
+		ArrayList<PatientProgramDto> PEdto = new ArrayList<>();
+
+		// 객체 생성
+		PatientProgramDto strtmp = new PatientProgramDto();
+
+		String[] patientProgramNum = { patientProgram.split(",")[0], patientProgram.split(",")[1],
+				patientProgram.split(",")[2], patientProgram.split(",")[3], patientProgram.split(",")[4] };
+		
+		int cnt = 0;
+		for (int i = 0; i < patientProgramNum.length; i++) {
+			if (!patientProgramNum[i].equals("0")) {
+				cnt += 1;
+			}
 		}
+		
+		strtmp.setProgram_1(programDao.getProgramName(patientProgramNum[0]));
+		strtmp.setProgram_2(programDao.getProgramName(patientProgramNum[1]));
+		strtmp.setProgram_3(programDao.getProgramName(patientProgramNum[2]));
+		strtmp.setProgram_4(programDao.getProgramName(patientProgramNum[3]));
+		strtmp.setProgram_5(programDao.getProgramName(patientProgramNum[4]));
+
+		PEdto.add(strtmp);
+
+		model.addAttribute("PEdto", PEdto);
 
 		// Total 운동 진행상황
 		Calendar cal = Calendar.getInstance();
@@ -215,7 +239,7 @@ public class MedicController {
 		}
 
 		ArrayList<PatientDto> patientDto = patientDao.patientSelectList(pNum);
-		int cnt = 0;
+//		int cnt = 0;
 		// if (!patientDto.get(0).getProgram_1().equals("0"))
 		// cnt++;
 		// if (!patientDto.get(0).getProgram_2().equals("0"))
@@ -225,8 +249,8 @@ public class MedicController {
 		// if (!patientDto.get(0).getProgram_4().equals("0"))
 		// cnt++;
 		// if (!patientDto.get(0).getProgram_5().equals("0"))
-		cnt++;
-		model.addAttribute("cnt", cnt);
+//		cnt++;
+//		model.addAttribute("cnt", cnt);
 
 		long d1 = cal.getTime().getTime();
 		long d2 = d.getTime();
@@ -235,27 +259,29 @@ public class MedicController {
 		model.addAttribute("totalExer", String.valueOf(totalExer));
 		model.addAttribute("doExer", String.valueOf(exerDto.size()));
 
+		
+		/////////////////////
 		// 지난 주간의 운동
-		HashMap<String, Integer> map = new HashMap();
+		LinkedHashMap<String, Integer> map = new LinkedHashMap<String, Integer>();
 		ArrayList<String> agoDays = new ArrayList<String>();
+		ArrayList<ExerciseDto> exerweekDto = exerciseList.getWeekExer(pNum);
+
 		for (int i = 0; i < 7; i++) {
-			agoDays.add(getPastDate(i)); // 오늘 날짜 - 7일까지 가져옴
-			map.put(agoDays.get(i), 0); // HashMap 저장
+			agoDays.add(getPastDate(6-i)); // 오늘 날짜 - 7일까지 가져옴
+			map.put(agoDays.get(i), 0); // HashMap 저장 ( 날짜 , 걸음수)
 		}
 
-		for (int i = 0; i < exerDto.size(); i++) {
+		for (int i = 0; i < exerweekDto.size(); i++) {
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String date = transFormat.format(exerDto.get(i).getExerciseTime());
-			if (map.containsKey(date)) {
-				map.put(date, map.get(date) + 1);
+			String date = transFormat.format(exerweekDto.get(i).getExerciseTime());
+			
+			if (exerweekDto.get(i).getProgramNum() == null) { 	// 해당 요일에 걷기 운동을 했다면
+				map.put(date, exerweekDto.get(i).getDailyStep());		// map의 값 업데이트
 			}
-		}
-
-		for (String key : map.keySet()) {
-			System.out.println(String.format("키 : %s, 값 : %s", key, map.get(key)));
+			
 		}
 		model.addAttribute("map", map);
-
+		
 		return "medic/medic_patient_info";
 	}
 
@@ -267,12 +293,12 @@ public class MedicController {
 		int day = cal.get(cal.DATE);
 
 		cal.set(year, month - 1, day);
-		cal.add(Calendar.DATE, -i);
+		cal.add(cal.DATE, -i);
 
 		Date agoDate = cal.getTime();
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-		System.out.println(formatter.format(agoDate));
+//		System.out.println(formatter.format(agoDate));
 		return formatter.format(agoDate);
 	}
 
