@@ -65,7 +65,7 @@
 <body>
 	<div class="wrap" style="width: 100%; height: 100%">
 
-		<%@include file="admin_nav.jsp"%>
+		<%@include file="medic_nav.jsp"%>
 
 		<!-- Insert -->
 		<div class="content mx-auto">
@@ -91,8 +91,8 @@
 							<label for="device_kind">*기기 종류</label>
 							<!-- 기기 종류 선택 -->
 							<select name="sort" class="form-control">
-								<option>포스터 기기</option>
-								<!-- <option>환자 식별 기기</option> -->
+								<!-- <option>포스터 기기</option> -->
+								<option>환자 식별 기기</option>
 							</select>
 						</div>
 						<div class="col-lg-5">

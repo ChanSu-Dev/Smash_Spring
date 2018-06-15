@@ -36,6 +36,16 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-4">
+						<div class="menu_item" onclick="location.href='Medic'">
+							<img
+								src="${pageContext.request.contextPath}/resources/img/home_icon2.png"
+								width="230px" height="230px">
+							<p class="item_title">계정 관리</p>
+							<p class="item_sub_title">Account Management</p>
+							<p class="item_contents">의료진의 계정을 등록, 수정 삭제, 검색합니다.</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
 						<div class="menu_item" onclick="location.href='Device'">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/home_icon1.png"
@@ -45,16 +55,6 @@
 							<p class="item_contents">
 								환자 식별 기기, 포스터 기기를<br>등록, 수정, 삭제, 검색합니다.
 							</p>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="menu_item" onclick="location.href='Medic'">
-							<img
-								src="${pageContext.request.contextPath}/resources/img/home_icon2.png"
-								width="230px" height="230px">
-							<p class="item_title">계정 관리</p>
-							<p class="item_sub_title">Account Management</p>
-							<p class="item_contents">의료진의 계정을 등록, 수정 삭제, 검색합니다.</p>
 						</div>
 					</div>
 					<div class="col-lg-4">

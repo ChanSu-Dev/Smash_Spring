@@ -25,32 +25,11 @@
 <script src="<c:url value="/resources/js/bootstrap.js" /> "></script>
 <script src="<c:url value="/resources/js/bootstrap.bundle.js" /> "></script>
 <script>
-	function connection_start(deviceNumber) {
-		$.ajax({
-			type : 'post',
-			url : 'http://localhost:8081/smash/admin/ConnectionStart',
-			data : {
-				'deviceNumber' : deviceNumber
-			},
-			success : function(data) {
-				alert("기기 개통이 성공적으로 완료되었습니다.")
-				location.reload();
-			}
-		});
-	}
-</script>
-<script>
-	function connection_stop() {
-		alert("기기 연결이 정지되었습니다.");
+	function formChk() {
+		alert("삭제가 완료되었습니다.");
 	}
 	jQuery(document).ready(
 			function() {
-				/* 개통/정지 설정 */
-				$('.openForm').submit(function(e) {
-					e.preventDefault();
-					var index = $('.openForm').index(this);
-					connection_start($($('.deviceNumber')[index]).val());
-				});
 				/* 검색창 포커스인 포커스 아웃 효과 */
 				$('input').focusin(
 						function() {
@@ -87,18 +66,17 @@
 </script>
 </head>
 <body>
-	<div class="wrap" style="width: 100%;">
+	<div class="wrap" style="width: 100%">
 
-		<%@include file="admin_nav.jsp"%>
+		<%@include file="medic_nav.jsp"%>
 
-		<!-- Table -->
 		<div class="content mx-auto">
 			<div class="container my-auto">
 				<!-- Table Head -->
 				<div class="row content_head">
 					<!-- 제목 -->
 					<div class="col-lg-3 content_title">
-						<p>기기 개통</p>
+						<p>기기 관리</p>
 					</div>
 					<!-- 검색 -->
 					<div class="col-lg-7">
@@ -108,6 +86,11 @@
 								value="">
 						</div>
 					</div>
+					<!-- 등록 -->
+					<div class="col-lg-2">
+						<button class="add_btn" onclick="location.href='DeviceAdd'">+
+							등록하기</button>
+					</div>
 				</div>
 			</div>
 
@@ -115,51 +98,53 @@
 			<table class="table device_manage">
 				<thead>
 					<tr>
-						<th style="width: 20%;">포스터 기기 아이디</th>
-						<th>IP 주소</th>
+						<th>식별 기기 아이디</th>
+						<th>기기 종류</th>
 						<th>기기 상태</th>
-						<th>개통 / 정지</th>
+						<th>수정 / 삭제</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
-							<td style="color: rgb(248, 181, 0);"><img
-								src="${pageContext.request.contextPath}/resources/img/poster_icon.png"
-								width="30px" height="30px">${dto.deviceNumber }</td>
-							<td>${dto.ipv4_address}</td>
 							<c:choose>
-								<c:when test="${dto.activated == 1}">
+								<c:when test="${dto.sort == '포스터 기기'}">
 									<td><img
-										src="${pageContext.request.contextPath}/resources/img/net_icon.png"
-										width="30px"> 개통됨</td>
-									<td>
-										<form>
-											<input type='button' class="btn_disable" value="개통하기" />
-										</form>
-										<form method="post" action="ConnectionStop">
-											<input type="hidden" value="${dto.deviceNumber }"
-												name="deviceNumber"> <input type="submit"
-												class="btn_enable" value="정지하기"
-												onClick="javascript:connection_stop()">
-										</form>
-									</td>
+										src="${pageContext.request.contextPath}/resources/img/poster_icon.png"
+										width="30px" height="30px">${dto.deviceNumber }</td>
+									<td style="color: rgb(248, 181, 0);">${dto.sort}</td>
 								</c:when>
 								<c:otherwise>
-									<td>비활성화</td>
-									<td>
-										<form class="openForm">
-											<input class="deviceNumber" type="hidden"
-												value="${dto.deviceNumber }" name="deviceNumber"> <input
-												type="submit" class="btn_enable" value="개통하기" />
-										</form>
-										<form>
-											<input type="button" class="btn_disable" value="정지하기">
-										</form>
-									</td>
+									<td><img
+										src="${pageContext.request.contextPath}/resources/img/man_icon.png"
+										width="30px" height="30px">${dto.deviceNumber }</td>
+									<td style="color: rgb(127, 190, 38);">${dto.sort}</td>
 								</c:otherwise>
 							</c:choose>
-							<td></td>
+							<c:choose>
+								<c:when test="${dto.activated == 0}">
+									<td>비활성화</td>
+								</c:when>
+								<c:otherwise>
+									<td><img
+										src="${pageContext.request.contextPath}/resources/img/net_icon.png"
+										width="30px">활성화</td>
+								</c:otherwise>
+							</c:choose>
+							<td>
+								<form method="post" action="DeviceEdit">
+									<input type="hidden" value="${dto.deviceNumber}"
+										name="deviceNumber"> <input type="hidden" value="edit"
+										name="type"> <input type='submit' class="btn_enable"
+										value="수정하기" />
+								</form>
+								<form id="delete" method="post" action="DeviceDelete">
+									<input type="hidden" value="${dto.deviceNumber}"
+										name="deviceNumber"> <input type="hidden"
+										value="delete" name="type"> <input type="submit"
+										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
+								</form>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

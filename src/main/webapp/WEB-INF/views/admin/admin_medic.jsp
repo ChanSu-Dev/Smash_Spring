@@ -82,7 +82,7 @@
 					<!-- 검색 -->
 					<div class="col-lg-7">
 						<div class="search">
-							<input type="text" placeholder="의료진 이름을 입력하세요."> <input
+							<input type="text" placeholder="의료진 번호를 입력하세요."> <input
 								type="submit" class="my-auto mx-auto search_btn" id="search_btn"
 								value="">
 						</div>

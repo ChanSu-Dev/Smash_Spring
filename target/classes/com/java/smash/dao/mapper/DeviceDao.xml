@@ -10,12 +10,19 @@
 		FROM DEVICE WHERE patientNumber = #{param1}
 	</select>
 
-	<select id="deviceList" resultType="com.java.smash.dto.DeviceDto">
+	<select id="adminDeviceList" resultType="com.java.smash.dto.DeviceDto">
 		SELECT * FROM DEVICE
+		WHERE sort = "포스터 기기"
+	</select>
+
+	<select id="medicDeviceList" resultType="com.java.smash.dto.DeviceDto">
+		SELECT * FROM DEVICE
+		WHERE sort = "환자 식별 기기"
 	</select>
 
 	<insert id="deviceInsert">
-		INSERT INTO DEVICE VALUES (#{param1}, #{param2}, #{param3}, 0,
+		INSERT INTO DEVICE VALUES (#{param1}, #{param2},
+		#{param3}, 0,
 		#{param4}, #{param5}, #{param6}, NULL)
 	</insert>
 
@@ -35,8 +42,12 @@
 	<delete id="deviceDelete">
 		DELETE FROM DEVICE WHERE deviceNumber = #{param1}
 	</delete>
-
-	<update id="connectionStartDao">
+	
+	<update id="adminConnectionStartDao">
+		UPDATE DEVICE SET activated = 1 WHERE deviceNumber = #{param1}
+	</update>
+	
+	<update id="medicConnectionStartDao">
 		UPDATE DEVICE SET patientNumber = #{param1},
 		activated = 1 WHERE deviceNumber = #{param2}
 	</update>

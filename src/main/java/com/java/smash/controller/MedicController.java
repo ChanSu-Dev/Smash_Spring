@@ -49,6 +49,8 @@ public class MedicController {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	String PdeviceNo = null;
 
 	@RequestMapping("Main")
 	public String medicMain(HttpSession session, HttpServletRequest request, Model model) {
@@ -58,7 +60,7 @@ public class MedicController {
 		if (map != null) {
 			String id = (String) map.get("id");
 			String pwd = (String) map.get("pwd");
-			
+
 			IMedicDao dao = sqlSession.getMapper(IMedicDao.class);
 			String employeeNumber = dao.getEmployeeNum(id);
 
@@ -73,7 +75,7 @@ public class MedicController {
 	public String medicPatient(HttpSession session, HttpServletRequest request, Model model) {
 		String eNum = (String) session.getAttribute("eNum");
 		System.out.println(eNum);
-		
+
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		model.addAttribute("list", dao.patientList(eNum));
 
@@ -82,7 +84,7 @@ public class MedicController {
 
 	@RequestMapping("PatientAdd")
 	public String medicPatientAdd(HttpServletRequest requset, Model model) {
-		
+
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
 		model.addAttribute("list", dao.programList());
 
@@ -91,9 +93,9 @@ public class MedicController {
 
 	@RequestMapping(value = "PatientAddOK", method = RequestMethod.POST)
 	public String medicPatientAddOk(HttpSession session, HttpServletRequest request, Model model) {
-		
+
 		String eNum = (String) session.getAttribute("eNum");
-		
+
 		String patientNumber = request.getParameter("patientNumber");
 		String patientName = request.getParameter("patientName");
 		String patientDisease = request.getParameter("patientDisease");
@@ -192,13 +194,18 @@ public class MedicController {
 
 		ArrayList<PatientDto> patientDto = patientDao.patientSelectList(pNum);
 		int cnt = 0;
-		if (!patientDto.get(0).getProgram_1().equals("0")) cnt++;
-		if (!patientDto.get(0).getProgram_2().equals("0")) cnt++;
-		if (!patientDto.get(0).getProgram_3().equals("0")) cnt++;
-		if (!patientDto.get(0).getProgram_4().equals("0")) cnt++;
-		if (!patientDto.get(0).getProgram_5().equals("0")) cnt++;
+		if (!patientDto.get(0).getProgram_1().equals("0"))
+			cnt++;
+		if (!patientDto.get(0).getProgram_2().equals("0"))
+			cnt++;
+		if (!patientDto.get(0).getProgram_3().equals("0"))
+			cnt++;
+		if (!patientDto.get(0).getProgram_4().equals("0"))
+			cnt++;
+		if (!patientDto.get(0).getProgram_5().equals("0"))
+			cnt++;
 		model.addAttribute("cnt", cnt);
-		
+
 		long d1 = cal.getTime().getTime();
 		long d2 = d.getTime();
 		int totalExer = (int) ((d1 - d2 + 1) / (1000 * 60 * 60 * 24)) * cnt; // 운동 시작 후 요일 수
@@ -247,23 +254,93 @@ public class MedicController {
 		return formatter.format(agoDate);
 	}
 
+	@RequestMapping(value = "Device")
+	public String medicDevice(HttpServletRequest request, Model model) {
+
+		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
+		model.addAttribute("list", dao.medicDeviceList());
+
+		return "medic/medic_device";
+	}
+
+	@RequestMapping("DeviceAdd")
+	public String medicDeviceAdd(HttpServletRequest request, Model model) {
+
+		return "medic/medic_device_add";
+	}
+
+	@RequestMapping(value = "DeviceAddOk", method = RequestMethod.POST)
+	public String medicDeviceAddOk(HttpServletRequest request, Model model) {
+
+		String deviceNo = request.getParameter("deviceNumber");
+		String sort = request.getParameter("sort");
+		String version = request.getParameter("version");
+		String ipv4 = request.getParameter("ipv4_address");
+		String ipv6 = request.getParameter("ipv6_address");
+		String place = request.getParameter("place");
+
+		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
+		dao.deviceInsert(deviceNo, version, sort, ipv4, ipv6, place);
+
+		return "redirect:Device";
+	}
+
+	@RequestMapping("DeviceEdit")
+	public String medicDeviceEdit(HttpServletRequest request, Model model) {
+		PdeviceNo = request.getParameter("deviceNumber");
+
+		String deviceNum = request.getParameter("deviceNumber");
+
+		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
+		model.addAttribute("list", dao.deviceEdit(deviceNum));
+
+		return "medic/medic_device_edit";
+	}
+
+	@RequestMapping("DeviceEditOk")
+	public String medicDeviceEditOk(HttpServletRequest request, Model model) {
+
+		String deviceNo = request.getParameter("deviceNumber");
+		String sort = request.getParameter("sort");
+		String version = request.getParameter("version");
+		String ipv4 = request.getParameter("ipv4_address");
+		String ipv6 = request.getParameter("ipv6_address");
+		String place = request.getParameter("place");
+
+		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
+		dao.deviceEditOk(deviceNo, version, sort, ipv4, ipv6, place, PdeviceNo);
+
+		return "redirect:Device";
+	}
+
+	@RequestMapping("DeviceDelete")
+	public String medicDeviceDelete(HttpServletRequest request, Model model) {
+		String deviceNum = request.getParameter("deviceNumber");
+
+		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
+		dao.deviceDelete(deviceNum);
+
+		return "redirect:Device";
+	}
+
 	@RequestMapping(value = "Connection", method = RequestMethod.GET)
 	public String medicConnection(HttpServletRequest request, Model model) {
 
 		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		model.addAttribute("list", dao.deviceList());
+		model.addAttribute("list", dao.medicDeviceList());
 
 		return "medic/medic_connection";
 	}
 
 	@RequestMapping(value = "ConnectionStart", method = RequestMethod.POST)
-	public String medicConnectionStart(HttpServletRequest request, Model model) {
-
+	public String medicConnectionStart(HttpSession session, HttpServletRequest request, Model model) {
+		
+		String medicNumber = (String) session.getAttribute("id");
 		String patientNumber = request.getParameter("patientNumber");
 		String deviceNumber = request.getParameter("deviceNumber");
 
 		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		dao.connectionStartDao(patientNumber, deviceNumber);
+		dao.medicConnectionStartDao(patientNumber, deviceNumber);
 
 		return "redirect:Connection";
 	}

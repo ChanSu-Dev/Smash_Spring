@@ -65,7 +65,7 @@
 <body>
 	<div class="wrap" style="width: 100%; height: 100%">
 
-		<%@include file="admin_nav.jsp"%>
+		<%@include file="medic_nav.jsp"%>
 
 		<!-- Insert -->
 		<div class="content mx-auto">
@@ -74,59 +74,74 @@
 				<div class="row content_head">
 					<!-- 제목 -->
 					<div class="col-lg-3 content_title">
-						<p>기기 등록</p>
+						<p>기기 정보 수정</p>
 					</div>
 				</div>
 				<!-- 입력 폼 -->
-				<form method="post" action="DeviceAddOk">
-					<div class="row content_body">
-						<div class="col-lg-5">
-							<label for="device_id">*기기 아이디</label>
-							<!-- 기기 아이디 입력 -->
-							<input type="text" class="form-control" name="deviceNumber">
+				<c:forEach items="${list}" var="dto">
+					<form method="post" action="DeviceEditOk">
+						<div class="row content_body">
+							<div class="col-lg-5">
+								<label for="device_id">*기기 아이디</label>
+								<!-- 기기 아이디 입력 -->
+								<input type="text" class="form-control" name="deviceNumber"
+									value="${dto.deviceNumber }">
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-3">
-							<label for="device_kind">*기기 종류</label>
-							<!-- 기기 종류 선택 -->
-							<select name="sort" class="form-control">
-								<option>포스터 기기</option>
-								<!-- <option>환자 식별 기기</option> -->
-							</select>
+						<div class="row">
+							<div class="col-lg-3">
+								<label for="device_kind">*기기 종류</label>
+								<!-- 기기 종류 선택 -->
+								<select name="sort" class="form-control">
+									<c:choose>
+										<c:when test="${dto.sort == '포스터 기기'}">
+											<option selected="selected">포스터 기기</option>
+											<option>환자 식별 기기</option>
+										</c:when>
+										<c:otherwise>
+											<option>포스터 기기</option>
+											<option selected="selected">환자 식별 기기</option>
+										</c:otherwise>
+									</c:choose>
+								</select>
+							</div>
+							<div class="col-lg-5">
+								<label for="device_version">*기기 버젼</label>
+								<!-- 기기 버젼 입력 -->
+								<input type="text" class="form-control" name="version"
+									value="${dto.version }">
+							</div>
 						</div>
-						<div class="col-lg-5">
-							<label for="device_version">*기기 버젼</label>
-							<!-- 기기 버젼 입력 -->
-							<input type="text" class="form-control" name="version">
+						<div class="row">
+							<div class="col-lg-5">
+								<label for="device_ip4">*IP_4</label>
+								<!-- IP4 입력 -->
+								<input type="text" class="form-control" name="ipv4_address"
+									value="${dto.ipv4_address }">
+							</div>
+							<div class="col-lg-5">
+								<label for="device_ip6">*IP_6</label>
+								<!-- IP6 입력 -->
+								<input type="text" class="form-control" name="ipv6_address"
+									value="${dto.ipv6_address }">
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-5">
-							<label for="device_ip4">*IP_4</label>
-							<!-- IP4 입력 -->
-							<input type="text" class="form-control" name="ipv4_address">
+						<div class="row">
+							<div class="col-lg-5">
+								<label for="device_status">*설치 장소</label>
+								<!-- 기기 설치 장소 입력 -->
+								<input type="text" class="form-control" name="place"
+									value="${dto.place }">
+							</div>
 						</div>
-						<div class="col-lg-5">
-							<label for="device_ip6">*IP_6</label>
-							<!-- IP6 입력 -->
-							<input type="text" class="form-control" name="ipv6_address">
+						<div class="row">
+							<div class="offset-10 col-lg-2">
+								<!-- 제출하기 -->
+								<input type="submit" class="submit" value="+ 수정하기">
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-5">
-							<label for="device_status">*설치 장소</label>
-							<!-- 기기 설치 장소 입력 -->
-							<input type="text" class="form-control" name="place">
-						</div>
-					</div>
-					<div class="row">
-						<div class="offset-10 col-lg-2">
-							<!-- 제출하기 -->
-							<input type="submit" class="submit" value="+ 등록하기">
-						</div>
-					</div>
-				</form>
+					</form>
+				</c:forEach>
 			</div>
 		</div>
 

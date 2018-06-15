@@ -30,6 +30,7 @@
 					'patientNumber' : pno
 				},
 				success : function(data) {
+					alert("환자와의 기기 연결이 성공하였습니다.")
 					location.reload();
 				},
 				error : function(xhr, status, error) {
@@ -115,9 +116,8 @@
 			<table class="table device_manage">
 				<thead>
 					<tr>
-						<th style="width: 20%;">기기 아이디</th>
-						<th style="width: 15%;">연결 환자</th>
-						<th>IP 주소</th>
+						<th>식별 기기 아이디</th>
+						<th>연결 환자</th>
 						<th>기기 상태</th>
 						<th>개통 / 정지</th>
 					</tr>
@@ -125,9 +125,10 @@
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
-							<td>${dto.deviceNumber }</td>
+							<td style="color: rgb(127, 190, 38);"><img
+										src="${pageContext.request.contextPath}/resources/img/man_icon.png"
+										width="30px" height="30px">${dto.deviceNumber }</td>
 							<td>${dto.patientNumber }</td>
-							<td>${dto.ipv4_address}</td>
 							<c:choose>
 								<c:when test="${dto.activated == 1}">
 									<td><img

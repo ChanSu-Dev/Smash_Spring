@@ -21,12 +21,12 @@
 					onclick="location.href='Main'">홈으로</a>
 				</li>
 				<li class="nav-item">
-					<!-- 기기 관리 링크 --> <a class="nav-link"
-					onclick="location.href='Device'">기기 관리</a>
-				</li>
-				<li class="nav-item">
 					<!-- 계정 관리 링크 --> <a class="nav-link"
 					onclick="location.href='Medic'">계정 관리</a>
+				</li>
+				<li class="nav-item">
+					<!-- 기기 관리 링크 --> <a class="nav-link"
+					onclick="location.href='Device'">기기 관리</a>
 				</li>
 				<li class="nav-item active">
 					<!-- 기기 개통 링크 --> <a class="nav-link"
@@ -43,7 +43,6 @@
 					aria-haspopup="true" class="nav-link my-auto dropdown-toggle"
 					href="#"> <%=session.getAttribute("id")%> <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-					<li><a href="changepwd">비밀번호 변경</a></li>
 					<li><a href="../logout"
 						onclick="javascript:logout('<%=session.getAttribute("id")%>')">로그아웃</a></li>
 				</ul>

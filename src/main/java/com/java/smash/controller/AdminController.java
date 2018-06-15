@@ -53,7 +53,7 @@ public class AdminController {
 	public String adminDevice(HttpServletRequest request, Model model) {
 
 		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		model.addAttribute("list", dao.deviceList());
+		model.addAttribute("list", dao.adminDeviceList());
 
 		return "admin/admin_device";
 	}
@@ -195,7 +195,7 @@ public class AdminController {
 	public String adminConnection(HttpServletRequest request, Model model) {
 
 		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		model.addAttribute("list", dao.deviceList());
+		model.addAttribute("list", dao.adminDeviceList());
 
 		return "admin/admin_connection";
 	}
@@ -203,11 +203,10 @@ public class AdminController {
 	@RequestMapping("ConnectionStart")
 	public String adminConnectionStart(HttpServletRequest request, Model model) {
 
-		String patientNumber = request.getParameter("patientNumber");
 		String deviceNumber = request.getParameter("deviceNumber");
 
 		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		dao.connectionStartDao(patientNumber, deviceNumber);
+		dao.adminConnectionStartDao(deviceNumber);
 
 		return "redirect:Connection";
 	}

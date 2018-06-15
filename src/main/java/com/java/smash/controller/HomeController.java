@@ -64,9 +64,14 @@ public class HomeController {
 			redirectAttr.addFlashAttribute("id", id).addFlashAttribute("pwd", pwd);
 			return "redirect:admin/Main";
 		} else {			// 관리자가 아닌 경우
-			if (pwd.equals(dto.get(0).getPassword())) {
-				isChecked = true;
+			try {
+				if (pwd.equals(dto.get(0).getPassword())) {
+					isChecked = true;
+				}
+			} catch (Exception e) {
+				return "redirect:/";
 			}
+			
 		}
 
 		if (isChecked) {		//로그인 성공시에 medic으로 경로이동 

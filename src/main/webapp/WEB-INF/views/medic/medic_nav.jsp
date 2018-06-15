@@ -26,6 +26,10 @@
 					<!-- 계정 관리 링크 --> <a class="nav-link"
 					onclick="location.href='Patient'">환자 관리</a>
 				</li>
+				<li class="nav-item">
+					<!-- 계정 관리 링크 --> <a class="nav-link"
+					onclick="location.href='Device'">기기 관리</a>
+				</li>
 				<li class="nav-item active">
 					<!-- 기기 개통 링크 --> <a class="nav-link"
 					onclick="location.href='Connection'">기기 개통</a>
