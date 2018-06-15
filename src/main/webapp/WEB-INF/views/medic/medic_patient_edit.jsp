@@ -71,16 +71,18 @@
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_1" class="form-control">
 									<option value="0">미선택</option>
-									<c:forEach items="${Plist }" var="Pdto">
-										<c:choose>
-											<c:when test="${Pdto.programNumber eq dto.program_1}">
-												<option value=${Pdto.programNumber } selected>${Pdto.name }
-												</option>
-											</c:when>
-											<c:otherwise>
-												<option value=${Pdto.programNumber }>${Pdto.name }</option>
-											</c:otherwise>
-										</c:choose>
+									<c:forEach items="${PEdto }" var="PEdto">
+										<c:forEach items="${Plist }" var="Pdto">
+											<c:choose>
+												<c:when test="${Pdto.programNumber eq PEdto.program_1}">
+													<option value=${Pdto.programNumber } selected>${Pdto.name }
+													</option>
+												</c:when>
+												<c:otherwise>
+													<option value=${Pdto.programNumber }>${Pdto.name }</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 									</c:forEach>
 								</select>
 							</div>
@@ -89,16 +91,18 @@
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_2" class="form-control">
 									<option value="0">미선택</option>
-									<c:forEach items="${Plist }" var="Pdto">
-										<c:choose>
-											<c:when test="${Pdto.programNumber eq dto.program_2}">
-												<option value=${Pdto.programNumber } selected>${Pdto.name }
-												</option>
-											</c:when>
-											<c:otherwise>
-												<option value=${Pdto.programNumber }>${Pdto.name }</option>
-											</c:otherwise>
-										</c:choose>
+									<c:forEach items="${PEdto }" var="PEdto">
+										<c:forEach items="${Plist }" var="Pdto">
+											<c:choose>
+												<c:when test="${Pdto.programNumber eq PEdto.program_2}">
+													<option value=${Pdto.programNumber } selected>${Pdto.name }
+													</option>
+												</c:when>
+												<c:otherwise>
+													<option value=${Pdto.programNumber }>${Pdto.name }</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 									</c:forEach>
 								</select>
 							</div>
@@ -107,16 +111,18 @@
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_3" class="form-control">
 									<option value="0">미선택</option>
-									<c:forEach items="${Plist }" var="Pdto">
-										<c:choose>
-											<c:when test="${Pdto.programNumber eq dto.program_3}">
-												<option value=${Pdto.programNumber } selected>${Pdto.name }
-												</option>
-											</c:when>
-											<c:otherwise>
-												<option value=${Pdto.programNumber }>${Pdto.name }</option>
-											</c:otherwise>
-										</c:choose>
+									<c:forEach items="${PEdto }" var="PEdto">
+										<c:forEach items="${Plist }" var="Pdto">
+											<c:choose>
+												<c:when test="${Pdto.programNumber eq PEdto.program_3}">
+													<option value=${Pdto.programNumber } selected>${Pdto.name }
+													</option>
+												</c:when>
+												<c:otherwise>
+													<option value=${Pdto.programNumber }>${Pdto.name }</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 									</c:forEach>
 								</select>
 							</div>
@@ -127,16 +133,18 @@
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_4" class="form-control">
 									<option value="0">미선택</option>
-									<c:forEach items="${Plist }" var="Pdto">
-										<c:choose>
-											<c:when test="${Pdto.programNumber eq dto.program_4}">
-												<option value=${Pdto.programNumber } selected>${Pdto.name }
-												</option>
-											</c:when>
-											<c:otherwise>
-												<option value=${Pdto.programNumber }>${Pdto.name }</option>
-											</c:otherwise>
-										</c:choose>
+									<c:forEach items="${PEdto }" var="PEdto">
+										<c:forEach items="${Plist }" var="Pdto">
+											<c:choose>
+												<c:when test="${Pdto.programNumber eq PEdto.program_4}">
+													<option value=${Pdto.programNumber } selected>${Pdto.name }
+													</option>
+												</c:when>
+												<c:otherwise>
+													<option value=${Pdto.programNumber }>${Pdto.name }</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 									</c:forEach>
 								</select>
 							</div>
@@ -145,21 +153,23 @@
 								<!-- 환자 운동프로그램 입력 -->
 								<select name="program_5" class="form-control">
 									<option value="0">미선택</option>
-									<c:forEach items="${Plist }" var="Pdto">
-										<c:choose>
-											<c:when test="${Pdto.programNumber eq dto.program_5}">
-												<option value=${Pdto.programNumber } selected>${Pdto.name }
-												</option>
-											</c:when>
-											<c:otherwise>
-												<option value=${Pdto.programNumber }>${Pdto.name }</option>
-											</c:otherwise>
-										</c:choose>
+									<c:forEach items="${PEdto }" var="PEdto">
+										<c:forEach items="${Plist }" var="Pdto">
+											<c:choose>
+												<c:when test="${Pdto.programNumber eq PEdto.program_5}">
+													<option value=${Pdto.programNumber } selected>${Pdto.name }
+													</option>
+												</c:when>
+												<c:otherwise>
+													<option value=${Pdto.programNumber }>${Pdto.name }</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
 									</c:forEach>
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="offset-10 col-lg-2">
 								<!-- 제출하기 -->

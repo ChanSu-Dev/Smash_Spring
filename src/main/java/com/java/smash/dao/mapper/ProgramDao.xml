@@ -17,7 +17,9 @@
 	</select>
 
 	<insert id="programInsert">
-		INSERT INTO PROGRAM VALUES(#{param1}, #{param2},
+		INSERT INTO
+		PROGRAM(programNumber,name,content,corrDisease) VALUES(#{param1},
+		#{param2},
 		#{param3}, #{param4})
 	</insert>
 
@@ -29,7 +31,7 @@
 		UPDATE PROGRAM SET name = #{param1}, content =
 		#{param2}, corrDisease = #{param3} WHERE programNumber = #{param4}
 	</update>
-	
+
 	<select id="getDB" resultType="com.java.smash.dto.ProgramDto">
 		SELECT * FROM PROGRAM WHERE
 		programNumber = #{param1}

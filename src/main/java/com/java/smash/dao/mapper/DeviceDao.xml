@@ -49,7 +49,7 @@
 	
 	<update id="medicConnectionStartDao">
 		UPDATE DEVICE SET patientNumber = #{param1},
-		activated = 1 WHERE deviceNumber = #{param2}
+		activated = 1 WHERE deviceNumber = #{param2} 
 	</update>
 
 	<update id="connectionStopDao">

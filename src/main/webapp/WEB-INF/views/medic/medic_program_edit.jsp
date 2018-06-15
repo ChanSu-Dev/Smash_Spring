@@ -35,16 +35,28 @@
 				<!-- 입력 폼 -->
 				<form method="post" action="ProgramEditOK">
 					<c:forEach items="${list}" var="dto">
+
+						<div class="row">
+							<div class="col-lg-5">
+								<label for="program_name">*프로그램 종류</label> <select name="select"
+									class="form-control">
+									<option>걷기 프로그램</option>
+									<option>운동 프로그램</option>
+								</select>
+							</div>
+						</div>
 						<div class="row content_body">
 							<div class="col-lg-5">
 								<label for="patient_num">*프로그램 번호</label>
 								<!-- 환자 번호 입력 -->
-								<input type="text" class="form-control" name="programNumber" value="${dto.programNumber }">
+								<input type="text" class="form-control" name="programNumber"
+									value="${dto.programNumber }">
 							</div>
 							<div class="col-lg-5">
 								<label for="patient_name">*프로그램 이름</label>
 								<!-- 환자 이름 입력 -->
-								<input type="text" class="form-control" name="programName" value="${dto.name }">
+								<input type="text" class="form-control" name="programName"
+									value="${dto.name }">
 							</div>
 						</div>
 						<div class="row">
@@ -58,7 +70,8 @@
 							<div class="col-lg-10">
 								<label for="patient_status">*관련 질병</label>
 								<!-- 환자 상태 입력 -->
-								<input type="text" class="form-control" name="programDisease" value="${dto.corrDisease }">
+								<input type="text" class="form-control" name="programDisease"
+									value="${dto.corrDisease }">
 							</div>
 						</div>
 						<div class="row">

@@ -39,6 +39,17 @@ img {
 				</div>
 				<!-- 입력 폼 -->
 				<form method="post" action="ProgramAddOK" enctype="multipart/form-data">
+					
+					<div class="row">
+						<div class="col-lg-5">
+							<label for="program_name">*프로그램 종류</label>
+							<select name="select" class="form-control">
+								<option>걷기 프로그램</option>
+								<option>운동 프로그램</option>
+							</select>
+						</div>
+					</div>
+					
 					<div class="row content_body">
 						<div class="col-lg-5">
 							<label for="patient_num">*프로그램 번호</label>
@@ -65,6 +76,7 @@ img {
 							<input type="text" class="form-control" name="programDisease">
 						</div>
 					</div>
+					
 					<div class="row">
 						<input type="file" name="selectImage" id="selectImageInput"
 							accept="image/png, image/jpeg" class="col-lg-3"> <img

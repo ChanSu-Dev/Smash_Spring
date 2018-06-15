@@ -8,8 +8,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Queue;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,6 +37,7 @@ import com.java.smash.dao.IProgramDao;
 import com.java.smash.dto.ExerciseDto;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.dto.PatientDto;
+import com.java.smash.dto.PatientExerciseDto;
 import com.java.smash.util.Constant;
 
 @Controller
@@ -49,7 +52,10 @@ public class MedicController {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
+	@Autowired
+	private HttpSession session;
+
 	String PdeviceNo = null;
 
 	@RequestMapping("Main")
@@ -105,10 +111,11 @@ public class MedicController {
 		String patientProgram_3 = request.getParameter("program_3");
 		String patientProgram_4 = request.getParameter("program_4");
 		String patientProgram_5 = request.getParameter("program_5");
+		String patientProgram = patientProgram_1 + "," + patientProgram_2 + "," + patientProgram_3 + ","
+				+ patientProgram_4 + "," + patientProgram_5;
 
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		dao.patientInsert(patientNumber, patientName, patientDisease, patientStatus, patientProgram_1, patientProgram_2,
-				patientProgram_3, patientProgram_4, patientProgram_5, eNum);
+		dao.patientInsert(patientNumber, patientName, patientDisease, patientStatus, patientProgram, eNum);
 
 		return "redirect:Patient";
 	}
@@ -122,8 +129,22 @@ public class MedicController {
 		model.addAttribute("Plist", Pdao.programList());
 
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		model.addAttribute("list", dao.patientEditList(patientNumber));
-		// dao.updateDao(dtos.get(1), )
+		ArrayList<PatientDto> dtos =  dao.patientEditList(patientNumber);
+		
+		String patientProgram = dtos.get(0).getPatientProgram();
+		ArrayList<PatientExerciseDto> PEdto = new ArrayList<>();
+		
+		PatientExerciseDto strtmp = new PatientExerciseDto();
+		strtmp.setProgram_1(patientProgram.split(",")[0]);
+		strtmp.setProgram_2(patientProgram.split(",")[1]);
+		strtmp.setProgram_3(patientProgram.split(",")[2]);
+		strtmp.setProgram_4(patientProgram.split(",")[3]);
+		strtmp.setProgram_5(patientProgram.split(",")[4]);
+		
+		PEdto.add(strtmp);
+		
+		model.addAttribute("list", dtos);
+		model.addAttribute("PEdto", PEdto);
 
 		return "medic/medic_patient_edit";
 	}
@@ -140,10 +161,11 @@ public class MedicController {
 		String patientProgram_3 = request.getParameter("program_3");
 		String patientProgram_4 = request.getParameter("program_4");
 		String patientProgram_5 = request.getParameter("program_5");
-
+		String patientProgram = patientProgram_1 + "," + patientProgram_2 + "," + patientProgram_3 + ","
+				+ patientProgram_4 + "," + patientProgram_5;
+		
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		dao.patientUpdate(patientName, patientDisease, patientStatus, patientProgram_1, patientProgram_2,
-				patientProgram_3, patientProgram_4, patientProgram_5, patientNumber);
+		dao.patientUpdate(patientName, patientDisease, patientStatus, patientProgram, patientNumber);
 		return "redirect:Patient";
 	}
 
@@ -194,16 +216,16 @@ public class MedicController {
 
 		ArrayList<PatientDto> patientDto = patientDao.patientSelectList(pNum);
 		int cnt = 0;
-		if (!patientDto.get(0).getProgram_1().equals("0"))
-			cnt++;
-		if (!patientDto.get(0).getProgram_2().equals("0"))
-			cnt++;
-		if (!patientDto.get(0).getProgram_3().equals("0"))
-			cnt++;
-		if (!patientDto.get(0).getProgram_4().equals("0"))
-			cnt++;
-		if (!patientDto.get(0).getProgram_5().equals("0"))
-			cnt++;
+		// if (!patientDto.get(0).getProgram_1().equals("0"))
+		// cnt++;
+		// if (!patientDto.get(0).getProgram_2().equals("0"))
+		// cnt++;
+		// if (!patientDto.get(0).getProgram_3().equals("0"))
+		// cnt++;
+		// if (!patientDto.get(0).getProgram_4().equals("0"))
+		// cnt++;
+		// if (!patientDto.get(0).getProgram_5().equals("0"))
+		cnt++;
 		model.addAttribute("cnt", cnt);
 
 		long d1 = cal.getTime().getTime();
@@ -264,7 +286,11 @@ public class MedicController {
 	}
 
 	@RequestMapping("DeviceAdd")
-	public String medicDeviceAdd(HttpServletRequest request, Model model) {
+	public String medicDeviceAdd(HttpSession session, HttpServletRequest request, Model model) {
+
+		// String employeeId = (String) session.getAttribute("id");
+		// IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
+		// model.addAttribute("list", dao.patientListbyId(employeeId));
 
 		return "medic/medic_device_add";
 	}
@@ -334,7 +360,7 @@ public class MedicController {
 
 	@RequestMapping(value = "ConnectionStart", method = RequestMethod.POST)
 	public String medicConnectionStart(HttpSession session, HttpServletRequest request, Model model) {
-		
+
 		String medicNumber = (String) session.getAttribute("id");
 		String patientNumber = request.getParameter("patientNumber");
 		String deviceNumber = request.getParameter("deviceNumber");

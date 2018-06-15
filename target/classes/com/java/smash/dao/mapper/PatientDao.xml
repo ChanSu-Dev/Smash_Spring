@@ -6,10 +6,16 @@
 
 <mapper namespace="com.java.smash.dao.IPatientDao">
 	<select id="patientList" resultType="com.java.smash.dto.PatientDto">
-		SELECT * FROM PATIENT WHERE employeeNumber = #{param1}
+		SELECT * FROM PATIENT WHERE
+		employeeNumber = #{param1}
+	</select>
+<!-- 
+	<select id="patientListbyId" resultType="com.java.smash.dto.PatientDto">
+		SELECT * FROM PATIENT
+		LEFT JOIN MEDIC ON MEDIC.id = #{param1} AND PATIENT.employeeNumber = MEDIC.employeeNumber
 	</select>
 
-	<select id="patientEditList" resultType="com.java.smash.dto.PatientDto">
+ -->	<select id="patientEditList" resultType="com.java.smash.dto.PatientDto">
 		SELECT * FROM PATIENT
 		WHERE
 		patientNumber = #{param1}
@@ -17,16 +23,14 @@
 
 	<insert id="patientInsert">
 		INSERT INTO PATIENT VALUES ( #{param1}, #{param2},
-		#{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8},
-		#{param9}, #{param10})
+		#{param3}, #{param4}, #{param5}, #{param6})
 	</insert>
 
 	<update id="patientUpdate">
 		UPDATE PATIENT SET patientName = #{param1},
-		patientDisease = #{param2}, patientStatus = #{param3}, program_1 =
-		#{param4}, program_2 = #{param5}, program_3 = #{param6}, program_4 =
-		#{param7}, program_5 = #{param8} WHERE
-		patientNumber = #{param9}
+		patientDisease = #{param2}, patientStatus = #{param3}, patientProgram =
+		#{param4} WHERE
+		patientNumber = #{param5}
 	</update>
 
 	<delete id="patientDelete">
@@ -34,7 +38,8 @@
 	</delete>
 
 	<select id="patientSelectList" resultType="com.java.smash.dto.PatientDto">
-		SELECT * FROM PATIENT WHERE patientNumber = #{param1}
+		SELECT * FROM PATIENT
+		WHERE patientNumber = #{param1}
 	</select>
 
 </mapper>
