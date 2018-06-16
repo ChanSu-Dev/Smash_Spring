@@ -200,7 +200,7 @@ public class AdminController {
 		return "admin/admin_connection";
 	}
 
-	@RequestMapping("ConnectionStart")
+	@RequestMapping(value="ConnectionStart", method = RequestMethod.POST)
 	public String adminConnectionStart(HttpServletRequest request, Model model) {
 
 		String deviceNumber = request.getParameter("deviceNumber");

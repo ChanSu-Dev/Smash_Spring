@@ -28,7 +28,7 @@
 	function connection_start(deviceNumber) {
 		$.ajax({
 			type : 'post',
-			url : 'http://localhost:8081/smash/admin/ConnectionStart',
+			url : './ConnectionStart',
 			data : {
 				'deviceNumber' : deviceNumber
 			},
@@ -124,9 +124,19 @@
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
-							<td style="color: rgb(248, 181, 0);"><img
-								src="${pageContext.request.contextPath}/resources/img/poster_icon.png"
-								width="30px" height="30px">${dto.deviceNumber }</td>
+							<c:choose>
+								<c:when test="${dto.sort == '포스터 기기'}">
+									<td><img
+										src="${pageContext.request.contextPath}/resources/img/poster_icon.png"
+										width="30px" height="30px">${dto.deviceNumber }</td>
+								</c:when>
+								<c:otherwise>
+									<td><img
+										src="${pageContext.request.contextPath}/resources/img/man_icon.png"
+										width="30px" height="30px">${dto.deviceNumber }</td>
+								</c:otherwise>
+							</c:choose>
+
 							<td>${dto.ipv4_address}</td>
 							<c:choose>
 								<c:when test="${dto.activated == 1}">

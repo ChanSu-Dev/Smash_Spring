@@ -438,6 +438,7 @@ public class MedicController {
 		// 파일 이름 변경
 		String getFileName[] = file.getOriginalFilename().split("\\.");
 		String reName = "programImg_" + programNumber + "." + getFileName[getFileName.length - 1];
+		//String path = "/home/smash/STSWork/smash/src/main/webapp/resources/img/programimg/"
 		String path = "/Users/sophia/Desktop/workspace/java_eclipsse/SMASH_Spring/src/main/webapp/resources/img/programimg/";
 
 		try (FileOutputStream fos = new FileOutputStream(path + reName); InputStream is = file.getInputStream();) {
