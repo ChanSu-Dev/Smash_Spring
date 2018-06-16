@@ -5,6 +5,9 @@ public class ProgramDto {
 	private String name;
 	private String content;
 	private String corrDisease;
+	private String StartPoster;
+	private String ArrivePoster;
+	private int dist;
 
 	public String getProgramNumber() {
 		return programNumber;
@@ -36,6 +39,30 @@ public class ProgramDto {
 
 	public void setCorrDisease(String corrDisease) {
 		this.corrDisease = corrDisease;
+	}
+
+	public String getStartPoster() {
+		return StartPoster;
+	}
+
+	public void setStartPoster(String startPoster) {
+		StartPoster = startPoster;
+	}
+
+	public String getArrivePoster() {
+		return ArrivePoster;
+	}
+
+	public void setArrivePoster(String arrivePoster) {
+		ArrivePoster = arrivePoster;
+	}
+
+	public int getDist() {
+		return dist;
+	}
+
+	public void setDist(int dist) {
+		this.dist = dist;
 	}
 
 }

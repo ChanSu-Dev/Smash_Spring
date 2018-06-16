@@ -69,6 +69,22 @@ img {
 							<textarea class="form-control" rows="5" name="programContent"></textarea>
 						</div>
 					</div>
+					
+					<div class="row content_body">
+						<div class="col-lg-4">
+							<label for="patient_num">걷기 시작 위치</label>
+							<input type="text" class="form-control" name="startPoster">
+						</div>
+						<div class="col-lg-4">
+							<label for="patient_name">걷기 도착 위치</label>
+							<input type="text" class="form-control" name="arrivePoster">
+						</div>
+						<div class="col-lg-2">
+							<label for="patient_name">기기간의 거리</label>
+							<input type="text" class="form-control" name="dist">
+						</div>
+					</div>
+					
 					<div class="row">
 						<div class="col-lg-10">
 							<label for="patient_status">*관련 질병</label>

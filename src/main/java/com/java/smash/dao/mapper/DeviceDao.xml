@@ -10,8 +10,13 @@
 		FROM DEVICE WHERE patientNumber = #{param1}
 	</select>
 
+	<select id="deviceList" resultType="com.java.smash.dto.DeviceDto">
+		SELECT * FROM DEVICE
+	</select>
+
 	<select id="adminDeviceList" resultType="com.java.smash.dto.DeviceDto">
 		SELECT * FROM DEVICE
+		WHERE sort = "포스터 기기"
 	</select>
 
 	<select id="medicDeviceList" resultType="com.java.smash.dto.DeviceDto">

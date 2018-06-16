@@ -66,6 +66,20 @@
 								<textarea class="form-control" rows="5" name="programContent">${dto.content }</textarea>
 							</div>
 						</div>
+						<div class="row content_body">
+							<div class="col-lg-4">
+								<label for="patient_num">걷기 시작 위치</label> <input type="text"
+									class="form-control" name="startPoster" value="${dto.StartPoster }">
+							</div>
+							<div class="col-lg-4">
+								<label for="patient_name">걷기 도착 위치</label> <input type="text"
+									class="form-control" name="arrivePoster" value="${dto.ArrivePoster }">
+							</div>
+							<div class="col-lg-2">
+								<label for="patient_name">기기간의 거리</label> <input type="text"
+									class="form-control" name="dist" value="${dto.dist }">
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-lg-10">
 								<label for="patient_status">*관련 질병</label>

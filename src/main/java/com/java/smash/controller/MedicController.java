@@ -302,79 +302,6 @@ public class MedicController {
 		return formatter.format(agoDate);
 	}
 
-	@RequestMapping(value = "Device")
-	public String medicDevice(HttpServletRequest request, Model model) {
-
-		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		model.addAttribute("list", dao.medicDeviceList());
-
-		return "medic/medic_device";
-	}
-
-	@RequestMapping("DeviceAdd")
-	public String medicDeviceAdd(HttpSession session, HttpServletRequest request, Model model) {
-
-		// String employeeId = (String) session.getAttribute("id");
-		// IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		// model.addAttribute("list", dao.patientListbyId(employeeId));
-
-		return "medic/medic_device_add";
-	}
-
-	@RequestMapping(value = "DeviceAddOk", method = RequestMethod.POST)
-	public String medicDeviceAddOk(HttpServletRequest request, Model model) {
-
-		String deviceNo = request.getParameter("deviceNumber");
-		String sort = request.getParameter("sort");
-		String version = request.getParameter("version");
-		String ipv4 = request.getParameter("ipv4_address");
-		String ipv6 = request.getParameter("ipv6_address");
-		String place = request.getParameter("place");
-
-		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		dao.deviceInsert(deviceNo, version, sort, ipv4, ipv6, place);
-
-		return "redirect:Device";
-	}
-
-	@RequestMapping("DeviceEdit")
-	public String medicDeviceEdit(HttpServletRequest request, Model model) {
-		PdeviceNo = request.getParameter("deviceNumber");
-
-		String deviceNum = request.getParameter("deviceNumber");
-
-		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		model.addAttribute("list", dao.deviceEdit(deviceNum));
-
-		return "medic/medic_device_edit";
-	}
-
-	@RequestMapping("DeviceEditOk")
-	public String medicDeviceEditOk(HttpServletRequest request, Model model) {
-
-		String deviceNo = request.getParameter("deviceNumber");
-		String sort = request.getParameter("sort");
-		String version = request.getParameter("version");
-		String ipv4 = request.getParameter("ipv4_address");
-		String ipv6 = request.getParameter("ipv6_address");
-		String place = request.getParameter("place");
-
-		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		dao.deviceEditOk(deviceNo, version, sort, ipv4, ipv6, place, PdeviceNo);
-
-		return "redirect:Device";
-	}
-
-	@RequestMapping("DeviceDelete")
-	public String medicDeviceDelete(HttpServletRequest request, Model model) {
-		String deviceNum = request.getParameter("deviceNumber");
-
-		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		dao.deviceDelete(deviceNum);
-
-		return "redirect:Device";
-	}
-
 	@RequestMapping(value = "Connection", method = RequestMethod.GET)
 	public String medicConnection(HttpServletRequest request, Model model) {
 
@@ -431,9 +358,12 @@ public class MedicController {
 		String programName = request.getParameter("programName");
 		String programContent = request.getParameter("programContent");
 		String programDisease = request.getParameter("programDisease");
+		String startPoster = request.getParameter("startPoster");
+		String arrivePoster = request.getParameter("arrivePoster");
+		int dist = Integer.parseInt(request.getParameter("dist"));
 
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
-		dao.programInsert(programNumber, programName, programContent, programDisease);
+		dao.programInsert(programNumber, programName, programContent, programDisease, startPoster, arrivePoster, dist);
 
 		// 파일 이름 변경
 		String getFileName[] = file.getOriginalFilename().split("\\.");
@@ -472,9 +402,12 @@ public class MedicController {
 		String programName = request.getParameter("programName");
 		String programContent = request.getParameter("programContent");
 		String programDisease = request.getParameter("programDisease");
+		String startPoster = request.getParameter("startPoster");
+		String arrivePoster = request.getParameter("arrivePoster");
+		int dist = Integer.parseInt(request.getParameter("dist"));
 
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
-		dao.programEdit(programName, programContent, programDisease, programNumber);
+		dao.programEdit(programName, programContent, programDisease, startPoster, arrivePoster, dist, programNumber);
 
 		return "redirect:Program";
 	}

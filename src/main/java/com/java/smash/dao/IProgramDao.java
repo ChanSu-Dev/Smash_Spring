@@ -9,11 +9,11 @@ public interface IProgramDao {
 
 	public String getProgramName(String programNumber);
 
-	public void programInsert(String programNumber, String programName, String programContent, String programDisease);
+	public void programInsert(String programNumber, String programName, String programContent, String programDisease, String startPoster, String arrivePoster, int dist);
 
 	public void programDelete(String programNumber);
 
-	public void programEdit(String programName, String programContent, String programDisease, String programNumber);
+	public void programEdit(String programName, String programContent, String programDisease, String startPoster, String arrivePoster, int dist, String programNumber);
 
 	public ArrayList<ProgramDto> getDB(String programNumber);
 }

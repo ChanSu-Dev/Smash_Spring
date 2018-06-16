@@ -92,7 +92,7 @@
 							<!-- 기기 종류 선택 -->
 							<select name="sort" class="form-control">
 								<option>포스터 기기</option>
-								<!-- <option>환자 식별 기기</option> -->
+								<option>환자 식별 기기</option>
 							</select>
 						</div>
 						<div class="col-lg-5">

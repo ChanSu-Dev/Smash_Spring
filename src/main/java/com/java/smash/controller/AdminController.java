@@ -53,7 +53,7 @@ public class AdminController {
 	public String adminDevice(HttpServletRequest request, Model model) {
 
 		IDeviceDao dao = sqlSession.getMapper(IDeviceDao.class);
-		model.addAttribute("list", dao.adminDeviceList());
+		model.addAttribute("list", dao.deviceList());
 
 		return "admin/admin_device";
 	}
