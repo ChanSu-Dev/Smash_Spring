@@ -9,7 +9,7 @@ public class MedicDto {
 	private String contact;
 	private String address;
 	private String birth;
-	private String type;
+	private String regType;
 
 	public String getEmployeeNumber() {
 		return employeeNumber;
@@ -75,12 +75,12 @@ public class MedicDto {
 		this.birth = birth;
 	}
 
-	public String getType() {
-		return type;
+	public String getRegType() {
+		return regType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setRegType(String regType) {
+		this.regType = regType;
 	}
 
 }

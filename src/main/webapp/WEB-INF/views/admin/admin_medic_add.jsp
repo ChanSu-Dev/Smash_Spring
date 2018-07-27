@@ -36,7 +36,7 @@
 					'contact' : $('input[name=contact]').val(),
 					'address' : $('input[name=address]').val(),
 					'birth' : $('input[name=birth]').val(),
-					'type' : $('#regType').val()
+					'regType' : $('#regType').val()
 				},
 				success : function(data) {
 					window.location.href = "./Medic"
@@ -170,13 +170,12 @@
 							<input type="date" class="form-control" name="birth">
 						</div>
 						<div class="col-lg-5">
-							<label for="doctor_adress">*종류</label> <select id="regType" name="type"
-								class="form-control">
+							<label for="doctor_adress">*종류</label> <select id="regType"
+								name="type" class="form-control">
 								<option>주치의</option>
 								<option>운동 코디네이터</option>
 							</select>
 						</div>
-
 					</div>
 					<div class="row">
 						<div class="offset-10 col-lg-2">

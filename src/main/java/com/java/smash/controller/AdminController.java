@@ -144,10 +144,10 @@ public class AdminController {
 		String contact = request.getParameter("contact");
 		String address = request.getParameter("address");
 		String birth = request.getParameter("birth");
-		String type = request.getParameter("type");
-		
+		String regType = request.getParameter("regType");
+
 		IMedicDao dao = sqlSession.getMapper(IMedicDao.class);
-		dao.medicInsert(employeeNumber, id, password, name, belong, contact, address, birth, type);
+		dao.medicInsert(employeeNumber, id, password, name, belong, contact, address, birth, regType);
 
 		return "redirect:Medic";
 	}
@@ -174,10 +174,11 @@ public class AdminController {
 		String contact = request.getParameter("contact");
 		String address = request.getParameter("address");
 		String birth = request.getParameter("birth");
-		String type = request.getParameter("type");
+		String regType = request.getParameter("regType");
+		
 
 		IMedicDao dao = sqlSession.getMapper(IMedicDao.class);
-		dao.medicEditOk(employeeNumber, name, id, password, belong, contact, address, birth,type, PmedicNo);
+		dao.medicEditOk(employeeNumber, name, id, password, belong, contact, address, birth, regType, PmedicNo);
 
 		return "redirect:Medic";
 	}
@@ -202,7 +203,7 @@ public class AdminController {
 		return "admin/admin_connection";
 	}
 
-	@RequestMapping(value="ConnectionStart", method = RequestMethod.POST)
+	@RequestMapping(value = "ConnectionStart", method = RequestMethod.POST)
 	public String adminConnectionStart(HttpServletRequest request, Model model) {
 
 		String deviceNumber = request.getParameter("deviceNumber");

@@ -27,8 +27,8 @@
 		UPDATE MEDIC SET employeeNumber = #{param1}, name =
 		#{param2}, id =
 		#{param3}, password = #{param4}, belong = #{param5},
-		contact = #{param6}, address = #{param7}, birth = #{param8} WHERE
-		employeeNumber = #{param9}
+		contact = #{param6}, address = #{param7}, birth = #{param8}, regType = #{param9} WHERE
+		employeeNumber = #{param10}
 	</update>
 
 	<select id="getMedic" resultType="com.java.smash.dto.MedicDto">

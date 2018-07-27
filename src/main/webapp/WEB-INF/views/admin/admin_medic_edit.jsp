@@ -36,7 +36,8 @@
 					'belong' : $('input[name=belong]').val(),
 					'contact' : $('input[name=contact]').val(),
 					'address' : $('input[name=address]').val(),
-					'birth' : $('input[name=birth]').val()
+					'birth' : $('input[name=birth]').val(),
+					'regType' : $('#regType').val()
 				},
 				success : function(data) {
 					window.location.href = "./Medic"
@@ -65,7 +66,7 @@
 					debugger;
 					isPwdEquals(pwd1, pwd2);
 				});
-				
+
 				/* 검색창 포커스인 포커스 아웃 효과 */
 				$('input').focusin(
 						function() {
@@ -181,6 +182,22 @@
 								<!-- 의료진 주소 입력 -->
 								<input type="date" class="form-control" name="birth"
 									value="${dto.birth }">
+							</div>
+
+							<div class="col-lg-5">
+								<label for="doctor_adress">*종류</label> <select id="regType"
+									name="type" class="form-control">
+									<c:choose>
+										<c:when test="${dto.regType == '주치의'}">
+											<option selected="selected">주치의</option>
+											<option>운동 코디네이터</option>
+										</c:when>
+										<c:otherwise>
+											<option>주치의</option>
+											<option selected="selected">운동 코디네이터</option>
+										</c:otherwise>
+									</c:choose>
+								</select>
 							</div>
 						</div>
 						<div class="row">
