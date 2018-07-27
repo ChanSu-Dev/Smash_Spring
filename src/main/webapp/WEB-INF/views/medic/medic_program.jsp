@@ -90,8 +90,16 @@
 					</div>
 					<!-- 등록 -->
 					<div class="col-lg-2">
-						<button class="add_btn" onclick="location.href='ProgramAdd'">+
-							등록하기</button>
+						<c:choose>
+							<c:when test="${sessionScope.regType eq '주치의'}">
+								<button class="add_btn" onclick="this.disabled=true" disabled>+
+									등록하기</button>
+							</c:when>
+							<c:otherwise>
+								<button class="add_btn" onclick="location.href='ProgramAdd'">+
+									등록하기</button>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -116,9 +124,9 @@
 							<td>
 								<form method="post" action="ProgramEdit">
 									<input type="hidden" value="${dto.programNumber}"
-										name="programNumber"> <input type="hidden" value="edit"
-										name="type"> <input type='submit' class="btn_enable"
-										value="수정하기" />
+										name="programNumber"> <input type="hidden"
+										value="edit" name="type"> <input type='submit'
+										class="btn_enable" value="수정하기" />
 								</form>
 								<form id="delete" method="post" action="ProgramDelete">
 									<input type="hidden" value="${dto.programNumber}"

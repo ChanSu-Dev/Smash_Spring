@@ -36,7 +36,7 @@
 				<c:choose>
 					<c:when test="${regType == '주치의' }">
 						<c:set var="isReadonly" value="" />
-						<c:set var="isDisabled" value="disabled" />
+						<c:set var="isDisabled" value="" />
 					</c:when>
 					<c:when test="${regType == '운동 코디네이터' }">
 						<c:set var="isReadonly" value="readonly" />
@@ -86,14 +86,22 @@
 												<option value=${list.employeeNumber } selected>${list.name }</option>
 											</c:when>
 											<c:otherwise>
-												<option value=${list.employeeNumber }>${list.name }</option>
+												<option value=${list.employeeNumber } ${isDisabled }>${list.name }</option>
 											</c:otherwise>
-											
 										</c:choose>
 									</c:forEach>
 								</select>
 							</div>
 						</div>
+
+						<c:choose>
+							<c:when test="${regType == '주치의' }">
+								<c:set var="isDisabled" value="disabled" />
+							</c:when>
+							<c:when test="${regType == '운동 코디네이터' }">
+								<c:set var="isDisabled" value="" />
+							</c:when>
+						</c:choose>
 
 						<div class="row">
 							<div class="col-lg-4">

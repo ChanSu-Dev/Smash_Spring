@@ -88,10 +88,17 @@
 								value="">
 						</div>
 					</div>
-					<!-- 등록 -->
 					<div class="col-lg-2">
-						<button class="add_btn" onclick="location.href='PatientAdd'">+
-							등록하기</button>
+						<c:choose>
+							<c:when test="${sessionScope.regType eq '운동 코디네이터'}">
+								<button class="add_btn" onclick="this.disabled=true" disabled>+
+									등록하기</button>
+							</c:when>
+							<c:otherwise>
+								<button class="add_btn" onclick="location.href='PatientAdd'">+
+									등록하기</button>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -118,9 +125,9 @@
 							<td>
 								<form method="post" action="PatientEdit">
 									<input type="hidden" value="${dto.patientNumber}"
-										name="patientNumber"> <input type="hidden" value="edit"
-										name="type"> <input type='submit' class="btn_enable"
-										value="수정하기" />
+										name="patientNumber"> <input type="hidden"
+										value="edit" name="type"> <input type='submit'
+										class="btn_enable" value="수정하기" />
 								</form>
 								<form id="delete" method="post" action="PatientDelete">
 									<input type="hidden" value="${dto.patientNumber}"

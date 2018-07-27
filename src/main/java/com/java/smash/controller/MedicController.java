@@ -83,7 +83,12 @@ public class MedicController {
 		String eNum = (String) session.getAttribute("eNum");
 		
 		IPatientDao patientDao = sqlSession.getMapper(IPatientDao.class);
-		model.addAttribute("list", patientDao.patientList());
+		if (session.getAttribute("regType").equals("주치의")) {
+			model.addAttribute("list", patientDao.patientList());
+		} else {
+			model.addAttribute("list", patientDao.codiPatientList((String) session.getAttribute("eNum")));
+		}
+		
 
 		return "medic/medic_patient";
 	}
