@@ -6,6 +6,8 @@ import com.java.smash.dto.MedicDto;
 
 public interface IMedicDao {
 	public ArrayList<MedicDto> medicList();
+	
+	public ArrayList<MedicDto> codiList();
 
 	public void medicInsert(String employeeNumber, String id, String password, String name, String belong,
 			String contact, String address, String birth, String regType);
@@ -22,4 +24,6 @@ public interface IMedicDao {
 	public void changePwd(String pwd, String eId);
 
 	public String getEmployeeNum(String id);
+
+	public String getCodiName(String codiNumber);
 }

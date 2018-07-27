@@ -65,6 +65,7 @@ public class MedicController {
 		if (map != null) {
 			String id = (String) map.get("id");
 			String pwd = (String) map.get("pwd");
+			String regType = (String) map.get("regType");
 
 			IMedicDao dao = sqlSession.getMapper(IMedicDao.class);
 			String employeeNumber = dao.getEmployeeNum(id);
@@ -72,6 +73,7 @@ public class MedicController {
 			session.setAttribute("id", id);
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("eNum", employeeNumber);
+			session.setAttribute("regType", regType);
 		}
 		return "medic/medic_main";
 	}
@@ -79,19 +81,23 @@ public class MedicController {
 	@RequestMapping("Patient")
 	public String medicPatient(HttpSession session, HttpServletRequest request, Model model) {
 		String eNum = (String) session.getAttribute("eNum");
-
-		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		model.addAttribute("list", dao.patientList(eNum));
+		
+		IPatientDao patientDao = sqlSession.getMapper(IPatientDao.class);
+		model.addAttribute("list", patientDao.patientList());
 
 		return "medic/medic_patient";
 	}
 
 	@RequestMapping("PatientAdd")
-	public String medicPatientAdd(HttpServletRequest requset, Model model) {
-
-		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
-		model.addAttribute("list", dao.programList());
-
+	public String medicPatientAdd(HttpSession session, HttpServletRequest requset, Model model) {
+		
+		IMedicDao medicDao = sqlSession.getMapper(IMedicDao.class);
+		IProgramDao programDao = sqlSession.getMapper(IProgramDao.class);
+		
+		model.addAttribute("regType", (String) session.getAttribute("regType"));
+		model.addAttribute("list", programDao.programList());
+		model.addAttribute("codiList", medicDao.codiList());
+		
 		return "medic/medic_patient_add";
 	}
 
@@ -111,9 +117,10 @@ public class MedicController {
 		String patientProgram_5 = request.getParameter("program_5");
 		String patientProgram = patientProgram_1 + "," + patientProgram_2 + "," + patientProgram_3 + ","
 				+ patientProgram_4 + "," + patientProgram_5;
-
+		String patientCodi = request.getParameter("patientCodi");
+		
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		dao.patientInsert(patientNumber, patientName, patientDisease, patientStatus, patientProgram, eNum);
+		dao.patientInsert(patientNumber, patientName, patientDisease, patientStatus, patientProgram, eNum, patientCodi);
 
 		return "redirect:Patient";
 	}
@@ -129,6 +136,10 @@ public class MedicController {
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		ArrayList<PatientDto> dtos = dao.patientEditList(patientNumber);
 
+		IMedicDao medicDao = sqlSession.getMapper(IMedicDao.class);
+		
+		String codiName = medicDao.getCodiName(dtos.get(0).getCodiNumber());
+		
 		String patientProgram = dtos.get(0).getPatientProgram();
 		ArrayList<PatientProgramDto> PEdto = new ArrayList();
 
@@ -143,13 +154,17 @@ public class MedicController {
 
 		model.addAttribute("list", dtos);
 		model.addAttribute("PEdto", PEdto);
-
+		model.addAttribute("codiList", medicDao.codiList());
+		model.addAttribute("codiName", codiName);
+		
 		return "medic/medic_patient_edit";
 	}
 
 	@RequestMapping(value = "PatientEditOk", method = RequestMethod.POST)
-	public String medicPatientEditOk(HttpServletRequest request, Model model) {
+	public String medicPatientEditOk(HttpSession session, HttpServletRequest request, Model model) {
 
+		String eNum = (String) session.getAttribute("eNum");
+		
 		String patientNumber = request.getParameter("patientNumber");
 		String patientName = request.getParameter("patientName");
 		String patientDisease = request.getParameter("patientDisease");
@@ -161,9 +176,10 @@ public class MedicController {
 		String patientProgram_5 = request.getParameter("program_5");
 		String patientProgram = patientProgram_1 + "," + patientProgram_2 + "," + patientProgram_3 + ","
 				+ patientProgram_4 + "," + patientProgram_5;
-
+		String patientCodi = request.getParameter("patientCodi");
+		
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
-		dao.patientUpdate(patientName, patientDisease, patientStatus, patientProgram, patientNumber);
+		dao.patientUpdate(patientName, patientDisease, patientStatus, patientProgram, patientCodi, patientNumber);
 		return "redirect:Patient";
 	}
 

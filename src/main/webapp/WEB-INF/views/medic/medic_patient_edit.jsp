@@ -23,8 +23,8 @@
 
 		<%@include file="medic_nav.jsp"%>
 
-		<div class="content mx-auto">
-			<div class="container my-auto">
+		<div class="content mx-auto my-auto" style="width: 90%; height: 85%">
+			<div class="container">
 				<!-- Insert Head -->
 				<div class="row content_head">
 					<!-- 제목 -->
@@ -32,7 +32,18 @@
 						<p>환자 정보 수정</p>
 					</div>
 				</div>
-				<!-- 입력 폼 -->
+
+				<c:choose>
+					<c:when test="${regType == '주치의' }">
+						<c:set var="isReadonly" value="" />
+						<c:set var="isDisabled" value="disabled" />
+					</c:when>
+					<c:when test="${regType == '운동 코디네이터' }">
+						<c:set var="isReadonly" value="readonly" />
+						<c:set var="isDisabled" value="disabled" />
+					</c:when>
+				</c:choose>
+
 				<form method="post" action="PatientEditOk">
 					<c:forEach items="${list}" var="dto">
 						<div class="row content_body">
@@ -46,7 +57,7 @@
 								<label for="patient_name">*환자 이름</label>
 								<!-- 환자 이름 입력 -->
 								<input type="text" class="form-control" name="patientName"
-									value="${dto.patientName }">
+									value="${dto.patientName }" ${isReadonly }>
 							</div>
 						</div>
 						<div class="row">
@@ -54,7 +65,7 @@
 								<label for="patient_disease">*병명</label>
 								<!-- 병명 입력 -->
 								<input type="text" class="form-control" name="patientDisease"
-									value="${dto.patientDisease }">
+									value="${dto.patientDisease }" ${isReadonly }>
 							</div>
 						</div>
 						<div class="row">
@@ -62,14 +73,33 @@
 								<label for="patient_status">*상태</label>
 								<!-- 환자 상태 입력 -->
 								<input type="text" class="form-control" name="patientStatus"
-									value="${dto.patientStatus }">
+									value="${dto.patientStatus }" ${isReadonly }>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-lg-10">
+								<label for="patient_codi">*운동 코디네이터 지정</label> <select
+									name="patientCodi" class="form-control">
+									<c:forEach items="${codiList }" var="list">
+										<c:choose>
+											<c:when test="${list.name eq codiName }">
+												<option value=${list.employeeNumber } selected>${list.name }</option>
+											</c:when>
+											<c:otherwise>
+												<option value=${list.employeeNumber }>${list.name }</option>
+											</c:otherwise>
+											
+										</c:choose>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+
 						<div class="row">
 							<div class="col-lg-4">
 								<label for="patient_status">*1번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
-								<select name="program_1" class="form-control">
+								<select name="program_1" class="form-control" ${isDisabled }>
 									<option value="0">미선택</option>
 									<c:forEach items="${PEdto }" var="PEdto">
 										<c:forEach items="${Plist }" var="Pdto">
@@ -89,7 +119,7 @@
 							<div class="col-lg-4">
 								<label for="patient_status">*2번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
-								<select name="program_2" class="form-control">
+								<select name="program_2" class="form-control" ${isDisabled }>
 									<option value="0">미선택</option>
 									<c:forEach items="${PEdto }" var="PEdto">
 										<c:forEach items="${Plist }" var="Pdto">
@@ -109,7 +139,7 @@
 							<div class="col-lg-4">
 								<label for="patient_status">*3번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
-								<select name="program_3" class="form-control">
+								<select name="program_3" class="form-control" ${isDisabled }>
 									<option value="0">미선택</option>
 									<c:forEach items="${PEdto }" var="PEdto">
 										<c:forEach items="${Plist }" var="Pdto">
@@ -131,7 +161,7 @@
 							<div class="col-lg-4">
 								<label for="patient_status">*4번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
-								<select name="program_4" class="form-control">
+								<select name="program_4" class="form-control" ${isDisabled }>
 									<option value="0">미선택</option>
 									<c:forEach items="${PEdto }" var="PEdto">
 										<c:forEach items="${Plist }" var="Pdto">
@@ -151,7 +181,7 @@
 							<div class="col-lg-4">
 								<label for="patient_status">*5번 프로그램</label>
 								<!-- 환자 운동프로그램 입력 -->
-								<select name="program_5" class="form-control">
+								<select name="program_5" class="form-control" ${isDisabled }>
 									<option value="0">미선택</option>
 									<c:forEach items="${PEdto }" var="PEdto">
 										<c:forEach items="${Plist }" var="Pdto">

@@ -76,7 +76,7 @@ public class HomeController {
 
 		if (isChecked) {		//로그인 성공시에 medic으로 경로이동 
 			isChecked = false;
-			redirectAttr.addFlashAttribute("id", id).addFlashAttribute("pwd", pwd);
+			redirectAttr.addFlashAttribute("id", id).addFlashAttribute("pwd", pwd).addFlashAttribute("regType", dto.get(0).getRegType());
 			return "redirect:medic/Main";
 		}else {				//로그인 실패시에 같은화면으로 경로이동
 			return "redirect:/";

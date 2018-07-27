@@ -9,9 +9,15 @@
 		SELECT * FROM MEDIC
 	</select>
 
+	<select id="codiList" resultType="com.java.smash.dto.MedicDto">
+		SELECT * FROM MEDIC WHERE regType = "운동 코디네이터"
+	</select>
+
+	
 	<insert id="medicInsert">
 		INSERT INTO MEDIC VALUES(#{param1}, #{param2},
-		#{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9})
+		#{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8},
+		#{param9})
 	</insert>
 
 	<delete id="medicDelete">
@@ -27,7 +33,8 @@
 		UPDATE MEDIC SET employeeNumber = #{param1}, name =
 		#{param2}, id =
 		#{param3}, password = #{param4}, belong = #{param5},
-		contact = #{param6}, address = #{param7}, birth = #{param8}, regType = #{param9} WHERE
+		contact = #{param6}, address = #{param7}, birth = #{param8}, regType =
+		#{param9} WHERE
 		employeeNumber = #{param10}
 	</update>
 
@@ -40,8 +47,14 @@
 		UPDATE MEDIC SET PASSWORD = #{param1} where id =
 		#{param2}
 	</update>
-	
+
 	<select id="getEmployeeNum" resultType="String">
-		Select employeeNumber from Medic where id = #{param1}
+		Select employeeNumber
+		from Medic where id = #{param1}
+	</select>
+	
+	<select id="getCodiName" resultType="String">
+		Select name
+		from Medic where employeeNumber = #{param1}
 	</select>
 </mapper>

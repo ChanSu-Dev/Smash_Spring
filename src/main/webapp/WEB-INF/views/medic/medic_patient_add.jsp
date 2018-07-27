@@ -32,6 +32,7 @@
 						<p>환자 등록</p>
 					</div>
 				</div>
+
 				<!-- 입력 폼 -->
 				<form method="post" action="PatientAddOK">
 					<div class="row content_body">
@@ -60,11 +61,23 @@
 							<input type="text" class="form-control" name="patientStatus">
 						</div>
 					</div>
+
+					<div class="row">
+						<div class="col-lg-10">
+							<label for="patient_codi">*운동 코디네이터 지정</label> <select
+								name="patientCodi" class="form-control">
+								<c:forEach items="${codiList }" var="list">
+									<option value=${list.employeeNumber}>${list.name }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<%-- 
 					<div class="row">
 						<div class="col-lg-4">
 							<label for="patient_status">*1번 프로그램</label>
 							<!-- 환자 운동프로그램 입력 -->
-							<select name="program_1" class="form-control">
+							<select name="program_1" class="form-control" ${isDisabled }>
 								<option value="0">미선택</option>
 								<c:forEach items="${list }" var="Pno">
 									<option value=${Pno.programNumber}>${Pno.name }</option>
@@ -74,7 +87,7 @@
 						<div class="col-lg-4">
 							<label for="patient_status">*2번 프로그램</label>
 							<!-- 환자 운동프로그램 입력 -->
-							<select name="program_2" class="form-control">
+							<select name="program_2" class="form-control" ${isDisabled }>
 								<option value="0">미선택</option>
 								<c:forEach items="${list }" var="Pno">
 									<option value=${Pno.programNumber}>${Pno.name }</option>
@@ -84,7 +97,7 @@
 						<div class="col-lg-4">
 							<label for="patient_status">*3번 프로그램</label>
 							<!-- 환자 운동프로그램 입력 -->
-							<select name="program_3" class="form-control">
+							<select name="program_3" class="form-control" ${isDisabled }>
 								<option value="0">미선택</option>
 								<c:forEach items="${list }" var="Pno">
 									<option value=${Pno.programNumber}>${Pno.name }</option>
@@ -96,7 +109,7 @@
 						<div class="col-lg-4">
 							<label for="patient_status">*4번 프로그램</label>
 							<!-- 환자 운동프로그램 입력 -->
-							<select name="program_4" class="form-control">
+							<select name="program_4" class="form-control" ${isDisabled }>
 								<option value="0">미선택</option>
 								<c:forEach items="${list }" var="Pno">
 									<option value=${Pno.programNumber}>${Pno.name }</option>
@@ -106,14 +119,14 @@
 						<div class="col-lg-4">
 							<label for="patient_status">*5번 프로그램</label>
 							<!-- 환자 운동프로그램 입력 -->
-							<select name="program_5" class="form-control">
+							<select name="program_5" class="form-control" ${isDisabled }>
 								<option value="0">미선택</option>
 								<c:forEach items="${list }" var="Pno">
 									<option value=${Pno.programNumber}>${Pno.name }</option>
 								</c:forEach>
 							</select>
 						</div>
-					</div>
+					</div> --%>
 					<div class="row">
 						<div class="offset-10 col-lg-2">
 							<!-- 제출하기 -->

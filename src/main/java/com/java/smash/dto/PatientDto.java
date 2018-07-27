@@ -6,7 +6,8 @@ public class PatientDto {
 	private String patientDisease;
 	private String patientStatus;
 	private String patientProgram;
-	private String employeeNumber;
+	private String medicnNumber;
+	private String codiNumber;
 
 	public String getPatientNumber() {
 		return patientNumber;
@@ -47,13 +48,20 @@ public class PatientDto {
 	public void setPatientProgram(String patientProgram) {
 		this.patientProgram = patientProgram;
 	}
-	
-	public String getEmployeeNumber() {
-		return employeeNumber;
+
+	public String getMedicnNumber() {
+		return medicnNumber;
 	}
 
-	public void setEmployeeNumber(String employeeNumber) {
-		this.employeeNumber = employeeNumber;
+	public void setMedicnNumber(String medicnNumber) {
+		this.medicnNumber = medicnNumber;
 	}
 
+	public String getCodiNumber() {
+		return codiNumber;
+	}
+
+	public void setCodiNumber(String codiNumber) {
+		this.codiNumber = codiNumber;
+	}
 }
