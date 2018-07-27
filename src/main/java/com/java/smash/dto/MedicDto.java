@@ -9,6 +9,7 @@ public class MedicDto {
 	private String contact;
 	private String address;
 	private String birth;
+	private String type;
 
 	public String getEmployeeNumber() {
 		return employeeNumber;
@@ -72,6 +73,14 @@ public class MedicDto {
 
 	public void setBirth(String birth) {
 		this.birth = birth;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

@@ -144,9 +144,10 @@ public class AdminController {
 		String contact = request.getParameter("contact");
 		String address = request.getParameter("address");
 		String birth = request.getParameter("birth");
+		String type = request.getParameter("type");
 		
 		IMedicDao dao = sqlSession.getMapper(IMedicDao.class);
-		dao.medicInsert(employeeNumber, id, password, name, belong, contact, address, birth);
+		dao.medicInsert(employeeNumber, id, password, name, belong, contact, address, birth, type);
 
 		return "redirect:Medic";
 	}
@@ -173,9 +174,10 @@ public class AdminController {
 		String contact = request.getParameter("contact");
 		String address = request.getParameter("address");
 		String birth = request.getParameter("birth");
+		String type = request.getParameter("type");
 
 		IMedicDao dao = sqlSession.getMapper(IMedicDao.class);
-		dao.medicEditOk(employeeNumber, name, id, password, belong, contact, address, birth, PmedicNo);
+		dao.medicEditOk(employeeNumber, name, id, password, belong, contact, address, birth,type, PmedicNo);
 
 		return "redirect:Medic";
 	}

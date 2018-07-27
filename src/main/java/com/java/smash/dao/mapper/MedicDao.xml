@@ -11,7 +11,7 @@
 
 	<insert id="medicInsert">
 		INSERT INTO MEDIC VALUES(#{param1}, #{param2},
-		#{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8})
+		#{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9})
 	</insert>
 
 	<delete id="medicDelete">

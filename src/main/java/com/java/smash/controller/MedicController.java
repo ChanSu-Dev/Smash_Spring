@@ -130,7 +130,7 @@ public class MedicController {
 		ArrayList<PatientDto> dtos = dao.patientEditList(patientNumber);
 
 		String patientProgram = dtos.get(0).getPatientProgram();
-		ArrayList<PatientProgramDto> PEdto = new ArrayList<>();
+		ArrayList<PatientProgramDto> PEdto = new ArrayList();
 
 		PatientProgramDto strtmp = new PatientProgramDto();
 		strtmp.setProgram_1(patientProgram.split(",")[0]);
@@ -201,21 +201,21 @@ public class MedicController {
 		ArrayList<PatientDto> dtos = patientDao.patientEditList(patientNumber);
 
 		String patientProgram = dtos.get(0).getPatientProgram();
-		ArrayList<PatientProgramDto> PEdto = new ArrayList<>();
+		ArrayList<PatientProgramDto> PEdto = new ArrayList();
 
 		// 객체 생성
 		PatientProgramDto strtmp = new PatientProgramDto();
 
 		String[] patientProgramNum = { patientProgram.split(",")[0], patientProgram.split(",")[1],
 				patientProgram.split(",")[2], patientProgram.split(",")[3], patientProgram.split(",")[4] };
-		
+
 		int cnt = 0;
 		for (int i = 0; i < patientProgramNum.length; i++) {
 			if (!patientProgramNum[i].equals("0")) {
 				cnt += 1;
 			}
 		}
-		
+
 		strtmp.setProgram_1(programDao.getProgramName(patientProgramNum[0]));
 		strtmp.setProgram_2(programDao.getProgramName(patientProgramNum[1]));
 		strtmp.setProgram_3(programDao.getProgramName(patientProgramNum[2]));
@@ -259,7 +259,6 @@ public class MedicController {
 		model.addAttribute("totalExer", String.valueOf(totalExer));
 		model.addAttribute("doExer", String.valueOf(exerDto.size()));
 
-		
 		/////////////////////
 		// 지난 주간의 운동
 		LinkedHashMap<String, Integer> map = new LinkedHashMap<String, Integer>();
@@ -267,21 +266,21 @@ public class MedicController {
 		ArrayList<ExerciseDto> exerweekDto = exerciseList.getWeekExer(pNum);
 
 		for (int i = 0; i < 7; i++) {
-			agoDays.add(getPastDate(6-i)); // 오늘 날짜 - 7일까지 가져옴
+			agoDays.add(getPastDate(6 - i)); // 오늘 날짜 - 7일까지 가져옴
 			map.put(agoDays.get(i), 0); // HashMap 저장 ( 날짜 , 걸음수)
 		}
 
 		for (int i = 0; i < exerweekDto.size(); i++) {
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String date = transFormat.format(exerweekDto.get(i).getExerciseTime());
-			
-			if (exerweekDto.get(i).getProgramNum() == null) { 	// 해당 요일에 걷기 운동을 했다면
-				map.put(date, exerweekDto.get(i).getDailyStep());		// map의 값 업데이트
+
+			if (exerweekDto.get(i).getProgramNum() == null) { // 해당 요일에 걷기 운동을 했다면
+				map.put(date, exerweekDto.get(i).getDailyStep()); // map의 값 업데이트
 			}
-			
+
 		}
 		model.addAttribute("map", map);
-		
+
 		return "medic/medic_patient_info";
 	}
 
@@ -368,10 +367,13 @@ public class MedicController {
 		// 파일 이름 변경
 		String getFileName[] = file.getOriginalFilename().split("\\.");
 		String reName = "programImg_" + programNumber + "." + getFileName[getFileName.length - 1];
-		//String path = "/home/smash/STSWork/smash/src/main/webapp/resources/img/programimg/"
+		// String path =
+		// "/home/smash/STSWork/smash/src/main/webapp/resources/img/programimg/"
 		String path = "/Users/sophia/Desktop/workspace/java_eclipsse/SMASH_Spring/src/main/webapp/resources/img/programimg/";
 
-		try (FileOutputStream fos = new FileOutputStream(path + reName); InputStream is = file.getInputStream();) {
+		try {
+			FileOutputStream fos = new FileOutputStream(path + reName);
+			InputStream is = file.getInputStream();
 			int readCount = 0;
 			byte[] buffer = new byte[1024];
 			while ((readCount = is.read(buffer)) != -1) {
