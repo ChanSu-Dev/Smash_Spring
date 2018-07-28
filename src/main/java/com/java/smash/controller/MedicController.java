@@ -38,6 +38,7 @@ import com.java.smash.dto.ExerciseDto;
 import com.java.smash.dto.MedicDto;
 import com.java.smash.dto.PatientDto;
 import com.java.smash.dto.PatientProgramDto;
+import com.java.smash.dto.ProgramDto;
 
 @Controller
 @RequestMapping("medic")
@@ -51,9 +52,6 @@ public class MedicController {
 
 	@Autowired
 	private SqlSession sqlSession;
-
-	@Autowired
-	private HttpSession session;
 
 	String PdeviceNo = null;
 
@@ -81,28 +79,27 @@ public class MedicController {
 	@RequestMapping("Patient")
 	public String medicPatient(HttpSession session, HttpServletRequest request, Model model) {
 		String eNum = (String) session.getAttribute("eNum");
-		
+
 		IPatientDao patientDao = sqlSession.getMapper(IPatientDao.class);
 		if (session.getAttribute("regType").equals("주치의")) {
 			model.addAttribute("list", patientDao.patientList());
 		} else {
 			model.addAttribute("list", patientDao.codiPatientList((String) session.getAttribute("eNum")));
 		}
-		
 
 		return "medic/medic_patient";
 	}
 
 	@RequestMapping("PatientAdd")
 	public String medicPatientAdd(HttpSession session, HttpServletRequest requset, Model model) {
-		
+
 		IMedicDao medicDao = sqlSession.getMapper(IMedicDao.class);
 		IProgramDao programDao = sqlSession.getMapper(IProgramDao.class);
-		
+
 		model.addAttribute("regType", (String) session.getAttribute("regType"));
 		model.addAttribute("list", programDao.programList());
 		model.addAttribute("codiList", medicDao.codiList());
-		
+
 		return "medic/medic_patient_add";
 	}
 
@@ -123,7 +120,7 @@ public class MedicController {
 		String patientProgram = patientProgram_1 + "," + patientProgram_2 + "," + patientProgram_3 + ","
 				+ patientProgram_4 + "," + patientProgram_5;
 		String patientCodi = request.getParameter("patientCodi");
-		
+
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		dao.patientInsert(patientNumber, patientName, patientDisease, patientStatus, patientProgram, eNum, patientCodi);
 
@@ -142,9 +139,9 @@ public class MedicController {
 		ArrayList<PatientDto> dtos = dao.patientEditList(patientNumber);
 
 		IMedicDao medicDao = sqlSession.getMapper(IMedicDao.class);
-		
+
 		String codiName = medicDao.getCodiName(dtos.get(0).getCodiNumber());
-		
+
 		String patientProgram = dtos.get(0).getPatientProgram();
 		ArrayList<PatientProgramDto> PEdto = new ArrayList();
 
@@ -161,7 +158,7 @@ public class MedicController {
 		model.addAttribute("PEdto", PEdto);
 		model.addAttribute("codiList", medicDao.codiList());
 		model.addAttribute("codiName", codiName);
-		
+
 		return "medic/medic_patient_edit";
 	}
 
@@ -169,7 +166,7 @@ public class MedicController {
 	public String medicPatientEditOk(HttpSession session, HttpServletRequest request, Model model) {
 
 		String eNum = (String) session.getAttribute("eNum");
-		
+
 		String patientNumber = request.getParameter("patientNumber");
 		String patientName = request.getParameter("patientName");
 		String patientDisease = request.getParameter("patientDisease");
@@ -182,7 +179,7 @@ public class MedicController {
 		String patientProgram = patientProgram_1 + "," + patientProgram_2 + "," + patientProgram_3 + ","
 				+ patientProgram_4 + "," + patientProgram_5;
 		String patientCodi = request.getParameter("patientCodi");
-		
+
 		IPatientDao dao = sqlSession.getMapper(IPatientDao.class);
 		dao.patientUpdate(patientName, patientDisease, patientStatus, patientProgram, patientCodi, patientNumber);
 		return "redirect:Patient";
@@ -376,6 +373,7 @@ public class MedicController {
 
 		String programNumber = request.getParameter("programNumber");
 		String programName = request.getParameter("programName");
+		String programType = request.getParameter("programType");
 		String programContent = request.getParameter("programContent");
 		String programDisease = request.getParameter("programDisease");
 		String startPoster = request.getParameter("startPoster");
@@ -383,7 +381,8 @@ public class MedicController {
 		int dist = Integer.parseInt(request.getParameter("dist"));
 
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
-		dao.programInsert(programNumber, programName, programContent, programDisease, startPoster, arrivePoster, dist);
+		dao.programInsert(programNumber, programType, programName, programContent, programDisease, startPoster,
+				arrivePoster, dist);
 
 		// 파일 이름 변경
 		String getFileName[] = file.getOriginalFilename().split("\\.");
@@ -411,9 +410,11 @@ public class MedicController {
 	public String mediProgrameEdit(HttpServletRequest request, Model model) {
 
 		String programNumber = request.getParameter("programNumber");
+		System.out.println(programNumber);
 
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
-		model.addAttribute("list", dao.getDB(programNumber));
+		ArrayList<ProgramDto> dtos = dao.getDB(programNumber);
+		model.addAttribute("list", dtos);
 
 		return "medic/medic_program_edit";
 	}
@@ -421,6 +422,7 @@ public class MedicController {
 	@RequestMapping(value = "ProgramEditOK", method = RequestMethod.POST)
 	public String medicProgramEditOk(HttpServletRequest request, Model model) {
 
+		String programType = request.getParameter("programType");
 		String programNumber = request.getParameter("programNumber");
 		String programName = request.getParameter("programName");
 		String programContent = request.getParameter("programContent");
@@ -428,9 +430,16 @@ public class MedicController {
 		String startPoster = request.getParameter("startPoster");
 		String arrivePoster = request.getParameter("arrivePoster");
 		int dist = Integer.parseInt(request.getParameter("dist"));
+		
+		if (programType.equals("운동 프로그램")) {
+			startPoster = null;
+			arrivePoster = null;
+			dist = 0;
+		}
 
 		IProgramDao dao = sqlSession.getMapper(IProgramDao.class);
-		dao.programEdit(programName, programContent, programDisease, startPoster, arrivePoster, dist, programNumber);
+		dao.programEdit(programType, programName, programContent, programDisease, startPoster, arrivePoster, dist,
+				programNumber);
 
 		return "redirect:Program";
 	}

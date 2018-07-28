@@ -2,11 +2,12 @@ package com.java.smash.dto;
 
 public class ProgramDto {
 	private String programNumber;
+	private String programType;
 	private String name;
 	private String content;
 	private String corrDisease;
-	private String StartPoster;
-	private String ArrivePoster;
+	private String startPoster;
+	private String arrivePoster;
 	private int dist;
 
 	public String getProgramNumber() {
@@ -15,6 +16,14 @@ public class ProgramDto {
 
 	public void setProgramNumber(String programNumber) {
 		this.programNumber = programNumber;
+	}
+
+	public String getProgramType() {
+		return programType;
+	}
+
+	public void setProgramType(String programType) {
+		this.programType = programType;
 	}
 
 	public String getName() {
@@ -42,19 +51,19 @@ public class ProgramDto {
 	}
 
 	public String getStartPoster() {
-		return StartPoster;
+		return startPoster;
 	}
 
 	public void setStartPoster(String startPoster) {
-		StartPoster = startPoster;
+		this.startPoster = startPoster;
 	}
 
 	public String getArrivePoster() {
-		return ArrivePoster;
+		return arrivePoster;
 	}
 
 	public void setArrivePoster(String arrivePoster) {
-		ArrivePoster = arrivePoster;
+		this.arrivePoster = arrivePoster;
 	}
 
 	public int getDist() {

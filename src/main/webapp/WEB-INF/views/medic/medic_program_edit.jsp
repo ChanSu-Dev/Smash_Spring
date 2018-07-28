@@ -23,8 +23,8 @@
 
 		<%@include file="medic_nav.jsp"%>
 
-		<div class="content mx-auto">
-			<div class="container my-auto">
+		<div class="content mx-auto my-auto" style="width: 90%; height: 85%">
+			<div class="container">
 				<!-- Insert Head -->
 				<div class="row content_head">
 					<!-- 제목 -->
@@ -35,13 +35,26 @@
 				<!-- 입력 폼 -->
 				<form method="post" action="ProgramEditOK">
 					<c:forEach items="${list}" var="dto">
-
 						<div class="row">
 							<div class="col-lg-5">
-								<label for="program_name">*프로그램 종류</label> <select name="select"
+								<label for="program_name">*프로그램 종류</label> <select name="programType"
 									class="form-control">
-									<option>걷기 프로그램</option>
-									<option>운동 프로그램</option>
+									<c:choose>
+										<c:when test="${dto.programType eq '걷기 프로그램'}">
+											<option selected="selected">걷기 프로그램</option>
+											<option>운동 프로그램</option>
+											<c:set var="startPoster" value="${dto.startPoster }" />
+											<c:set var="arrivePoster" value="${dto.arrivePoster }" />
+											<c:set var="dist" value="${dto.dist }" />
+										</c:when>
+										<c:when test="${dto.programType eq '운동 프로그램'}">
+											<option>걷기 프로그램</option>
+											<option selected="selected">운동 프로그램</option>
+											<c:set var="StartPoster" value="" />
+											<c:set var="ArrivePoster" value="" />
+											<c:set var="dist" value="" />
+										</c:when>
+									</c:choose>
 								</select>
 							</div>
 						</div>
@@ -69,15 +82,16 @@
 						<div class="row content_body">
 							<div class="col-lg-4">
 								<label for="patient_num">걷기 시작 위치</label> <input type="text"
-									class="form-control" name="startPoster" value="${dto.StartPoster }">
+									class="form-control" name="startPoster" value="${startPoster }">
 							</div>
 							<div class="col-lg-4">
 								<label for="patient_name">걷기 도착 위치</label> <input type="text"
-									class="form-control" name="arrivePoster" value="${dto.ArrivePoster }">
+									class="form-control" name="arrivePoster"
+									value="${arrivePoster }">
 							</div>
 							<div class="col-lg-2">
-								<label for="patient_name">기기간의 거리</label> <input type="text"
-									class="form-control" name="dist" value="${dto.dist }">
+								<label for="patient_name">기기간의 거리(m)</label> <input type="text"
+									class="form-control" name="dist" value="${dist }">
 							</div>
 						</div>
 						<div class="row">

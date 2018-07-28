@@ -94,10 +94,12 @@
 							<c:when test="${sessionScope.regType eq '주치의'}">
 								<button class="add_btn" onclick="this.disabled=true" disabled>+
 									등록하기</button>
+								<c:set var="isDisabled" value="btn_disable" />
 							</c:when>
 							<c:otherwise>
 								<button class="add_btn" onclick="location.href='ProgramAdd'">+
 									등록하기</button>
+								<c:set var="isDisabled" value="btn_enable" />
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -126,13 +128,14 @@
 									<input type="hidden" value="${dto.programNumber}"
 										name="programNumber"> <input type="hidden"
 										value="edit" name="type"> <input type='submit'
-										class="btn_enable" value="수정하기" />
+										class=" ${isDisabled }" value="수정하기" ${isDisabled } />
 								</form>
 								<form id="delete" method="post" action="ProgramDelete">
 									<input type="hidden" value="${dto.programNumber}"
 										name="programNumber"> <input type="hidden"
 										value="delete" name="type"> <input type="submit"
-										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
+										class=" ${isDisabled }" value="삭제하기"
+										onClick="javascript:formChk()">
 								</form>
 							</td>
 						</tr>

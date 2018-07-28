@@ -43,7 +43,7 @@ img {
 					<div class="row">
 						<div class="col-lg-5">
 							<label for="program_name">*프로그램 종류</label>
-							<select name="select" class="form-control">
+							<select name="programType" class="form-control">
 								<option>걷기 프로그램</option>
 								<option>운동 프로그램</option>
 							</select>
@@ -80,7 +80,7 @@ img {
 							<input type="text" class="form-control" name="arrivePoster">
 						</div>
 						<div class="col-lg-2">
-							<label for="patient_name">기기간의 거리</label>
+							<label for="patient_name">기기간의 거리(m)</label>
 							<input type="text" class="form-control" name="dist">
 						</div>
 					</div>

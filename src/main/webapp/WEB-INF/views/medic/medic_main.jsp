@@ -31,9 +31,9 @@
 							<span>Doctor</span> loging
 						</p>
 						<p class="sub_title_1"><%=id%>님 환영합니다.
-							<%=id%>님께서는 현재 의료진으로 로그인 하셨습니다.
+							<%=id%>님께서는 현재 ${sessionScope.regType }로 로그인 하셨습니다.
 						</p>
-						<p class="sub_title_2">의료진으로 로그인한 계정에는 다음과 같은 권한이 허용됩니다. 원하시는
+						<p class="sub_title_2">${sessionScope.regType }로 로그인한 계정에는 다음과 같은 권한이 허용됩니다. 원하시는
 							기능을 클릭해주세요.</p>
 					</div>
 				</div>

@@ -5,7 +5,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.java.smash.dao.IProgramDao">
-	<select id="programList" resultType="com.java.smash.dto.ProgramDto">
+	<select id="programList"
+		resultType="com.java.smash.dto.ProgramDto">
 		SELECT * FROM PROGRAM WHERE
 		programNumber NOT IN ("0")
 	</select>
@@ -19,7 +20,7 @@
 		INSERT INTO
 		PROGRAM VALUES(#{param1},
 		#{param2},
-		#{param3}, #{param4},#{param5}, #{param6}, #{param7})
+		#{param3}, #{param4},#{param5}, #{param6}, #{param7}, #{param8})
 	</insert>
 
 	<delete id="programDelete">
@@ -27,10 +28,12 @@
 	</delete>
 
 	<update id="programEdit">
-		UPDATE PROGRAM SET name = #{param1}, content =
-		#{param2}, corrDisease = #{param3}, StartPoster = #{param4},
-		ArrivePoster=#{param5}, dist = #{param6} WHERE programNumber =
-		#{param7}
+		UPDATE PROGRAM SET programType = #{param1}, name =
+		#{param2}, content =
+		#{param3}, corrDisease = #{param4}, StartPoster =
+		#{param5},
+		ArrivePoster=#{param6}, dist = #{param7} WHERE programNumber
+		= #{param8}
 	</update>
 
 	<select id="getDB" resultType="com.java.smash.dto.ProgramDto">
