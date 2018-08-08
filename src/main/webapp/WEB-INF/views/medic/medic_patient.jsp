@@ -90,13 +90,11 @@
 					</div>
 					<div class="col-lg-2">
 						<c:choose>
-							<c:when test="${sessionScope.regType eq '운동 코디네이터'}">
-								<button class="add_btn" onclick="this.disabled=true" disabled>+
+							<c:when test="${sessionScope.regType eq '주치의'}">
+								<button class="add_btn" onclick="location.href='PatientAdd'">+
 									등록하기</button>
 							</c:when>
 							<c:otherwise>
-								<button class="add_btn" onclick="location.href='PatientAdd'">+
-									등록하기</button>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -128,13 +126,25 @@
 										name="patientNumber"> <input type="hidden"
 										value="edit" name="type"> <input type='submit'
 										class="btn_enable" value="수정하기" />
-								</form>
-								<form id="delete" method="post" action="PatientDelete">
-									<input type="hidden" value="${dto.patientNumber}"
-										name="patientNumber"> <input type="hidden"
-										value="delete" name="type"> <input type="submit"
-										class="btn_enable" value="삭제하기" onClick="javascript:formChk()">
-								</form>
+								</form> <c:choose>
+									<c:when test="${sessionScope.regType eq '주치의'}">
+										<form id="delete" method="post" action="PatientDelete">
+											<input type="hidden" value="${dto.patientNumber}"
+												name="patientNumber"> <input type="hidden"
+												value="delete" name="type"> <input type="submit"
+												class="btn_enable" value="삭제하기"
+												onClick="javascript:formChk()">
+
+										</form>
+									</c:when>
+									<c:otherwise>
+										<input type="submit" class="btn_disable" value="삭제하기">
+									</c:otherwise>
+								</c:choose>
+
+
+
+
 							</td>
 						</tr>
 					</c:forEach>

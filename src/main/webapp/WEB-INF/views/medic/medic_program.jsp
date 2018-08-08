@@ -91,15 +91,13 @@
 					<!-- 등록 -->
 					<div class="col-lg-2">
 						<c:choose>
-							<c:when test="${sessionScope.regType eq '주치의'}">
-								<button class="add_btn" onclick="this.disabled=true" disabled>+
-									등록하기</button>
-								<c:set var="isDisabled" value="btn_disable" />
-							</c:when>
-							<c:otherwise>
+							<c:when test="${sessionScope.regType eq '운동 코디네이터'}">
 								<button class="add_btn" onclick="location.href='ProgramAdd'">+
 									등록하기</button>
 								<c:set var="isDisabled" value="btn_enable" />
+							</c:when>
+							<c:otherwise>
+								<c:set var="isDisabled" value="btn_disable" />
 							</c:otherwise>
 						</c:choose>
 					</div>

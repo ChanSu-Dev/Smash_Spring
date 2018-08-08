@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <script>
 	function logout(id) {
 		alert(id + " 사용자가 로그아웃되었습니다.");
@@ -26,13 +28,18 @@
 					<!-- 계정 관리 링크 --> <a class="nav-link"
 					onclick="location.href='Patient'">환자 관리</a>
 				</li>
-				<li class="nav-item active">
-					<!-- 기기 개통 링크 --> <a class="nav-link"
-					onclick="location.href='Connection'">기기 개통</a>
-				</li>
-				<li class="nav-item active">
-					<a class="nav-link" onclick="location.href='Program'">프로그램 관리</a>
-				</li>
+				<c:choose>
+					<c:when test="${sessionScope.regType eq '주치의'}">
+						<li class="nav-item active">
+							<!-- 기기 개통 링크 --> <a class="nav-link"
+							onclick="location.href='Connection'">기기 개통</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item active"><a class="nav-link"
+							onclick="location.href='Program'">프로그램 관리</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 			<!-- 계정 아이디 -->
 			<div class="my-auto profile">

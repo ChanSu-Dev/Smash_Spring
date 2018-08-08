@@ -33,11 +33,12 @@
 						<p class="sub_title_1"><%=id%>님 환영합니다.
 							<%=id%>님께서는 현재 ${sessionScope.regType }로 로그인 하셨습니다.
 						</p>
-						<p class="sub_title_2">${sessionScope.regType }로 로그인한 계정에는 다음과 같은 권한이 허용됩니다. 원하시는
-							기능을 클릭해주세요.</p>
+						<p class="sub_title_2">${sessionScope.regType }로로그인한 계정에는 다음과
+							같은 권한이 허용됩니다. 원하시는 기능을 클릭해주세요.</p>
 					</div>
 				</div>
 				<div class="row">
+				<div class="col-lg-2"></div>
 					<div class="col-lg-4">
 						<div class="menu_item" onclick="location.href='Patient'">
 							<img
@@ -50,30 +51,36 @@
 							</p>
 						</div>
 					</div>
-					<div class="col-lg-4">
-						<div class="menu_item" onclick="location.href='Connection'">
-							<img
-								src="${pageContext.request.contextPath}/resources/img/home_icon3.png"
-								width="230px" height="230px">
-							<p class="item_title">기기 개통</p>
-							<p class="item_sub_title">Device Opening</p>
-							<p class="item_contents">
-								환자 식별 기기를 개통하여 사용<br>가능한 상태롤 만듭니다.
-							</p>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="menu_item" onclick="location.href='Program'">
-							<img
-								src="${pageContext.request.contextPath}/resources/img/home_icon1.png"
-								width="230px" height="230px">
-							<p class="item_title">프로그램 관리</p>
-							<p class="item_sub_title">Program Management</p>
-							<p class="item_contents">
-								환자 운동 프로그램을<br>등록, 수정, 삭제, 검색합니다.
-							</p>
-						</div>
-					</div>
+					<c:choose>
+						<c:when test="${sessionScope.regType eq '주치의'}">
+							<div class="col-lg-4">
+								<div class="menu_item" onclick="location.href='Connection'">
+									<img
+										src="${pageContext.request.contextPath}/resources/img/home_icon3.png"
+										width="230px" height="230px">
+									<p class="item_title">기기 개통</p>
+									<p class="item_sub_title">Device Opening</p>
+									<p class="item_contents">
+										환자 식별 기기를 개통하여 사용<br>가능한 상태롤 만듭니다.
+									</p>
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-lg-4">
+								<div class="menu_item" onclick="location.href='Program'">
+									<img
+										src="${pageContext.request.contextPath}/resources/img/home_icon1.png"
+										width="230px" height="230px">
+									<p class="item_title">프로그램 관리</p>
+									<p class="item_sub_title">Program Management</p>
+									<p class="item_contents">
+										환자 운동 프로그램을<br>등록, 수정, 삭제, 검색합니다.
+									</p>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
